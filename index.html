@@ -1,0 +1,675 @@
+<!DOCTYPE html> 
+<html lang="en">
+     <head>
+         <meta charset="utf-8"/>
+          <meta name="viewport" content="width=device-width, initial-scale=1"/>
+           <title>Telangana Commodity Flow Analysis — Batasingaram Market</title>
+            <link rel="stylesheet" href="style.css"/>
+             <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+              <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+              </script> 
+              <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js">
+              </script> 
+              </head> 
+              <body> 
+                <div class="app-container">
+              <header class="app-header">
+  <div class="container">
+    <h1>Telangana Commodity Flow Analysis</h1>
+    <p>Digital mapping of commodity flows and inter‑market linkages — Gaddiannaram/Batasingaram Market</p>
+    <div class="commodity-filter"></div>
+  </div>
+</header>
+
+<div class="main-content">
+  <section class="map-container">
+    <div id="map" aria-label="Commodity Flow Map"></div>
+
+    <div class="map-legend">
+      <h4>Legend</h4>
+      <div class="legend-item">
+        <span class="legend-marker primary-hub"></span>
+        <span>Primary Hub (31.05 acres)</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-marker destination"></span>
+        <span>Destination Markets</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-line mango-flow"></span>
+        <span>Mango Flows</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-line mosambi-flow"></span>
+        <span>Mosambi Flows</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-marker production"></span>
+        <span>Production Districts</span>
+      </div>
+      <div class="legend-note">Click markets to show/hide animated flow lines</div>
+    </div>
+    <!-- Screen Toggle Controls -->
+<div class="screen-controls">
+    <button id="panel-toggle-btn" class="screen-control-btn" data-mode="normal" title="Toggle Panel Size">
+        <span class="control-icon">⚏</span>
+        <span class="control-text">Panel</span>
+    </button>
+    <button id="fullscreen-toggle-btn" class="screen-control-btn" data-mode="normal" title="Toggle Fullscreen">
+        <span class="control-icon">⛶</span>
+        <span class="control-text">Full</span>
+    </button>
+</div>
+  </section>
+
+  <aside class="side-panel">
+    <div class="panel-tabs">
+      <button class="tab-btn active" data-target="tab-overview"data-priority="1">Market Overview</button>
+      <button class="tab-btn" data-target="tab-outbound"data-priority="2">Outbound</button>
+      <button class="tab-btn" data-target="tab-inbound"data-priority="3">Inbound</button>
+       <button class="tab-btn" data-tab="upstream-downstream"data-priority="4">Upstream/Downstream</button>
+      <button class="tab-btn" data-target="tab-flows"data-priority="5">Flow Patterns</button>
+      <button class="tab-btn" data-target="tab-seasonality"data-priority="6">Seasonality</button>
+      <button class="tab-btn" data-tab="price"data-priority="7">Price & Trends</button>
+      <button class="tab-btn" data-target="tab-state"data-priority="8">State Area & Production</button>
+    </div>
+
+    <div class="panel-content">
+      <div id="tab-overview" class="tab-content active">
+        <h3>Gaddiannaram/Batasingaram Market Hub</h3>
+
+        <div class="overview-stats">
+          <div class="stat-item"><div class="stat-label">Total Area</div><div class="stat-value">31.05 acres</div></div>
+          <div class="stat-item"><div class="stat-label">Mango Area</div><div class="stat-value">12.18 acres</div></div>
+          <div class="stat-item"><div class="stat-label">Commission Agents</div><div class="stat-value">341</div></div>
+          <div class="stat-item"><div class="stat-label">Commission Rate</div><div class="stat-value">4%</div></div>
+        </div>
+
+        <h4>Cold Storage Infrastructure</h4>
+        <div class="infrastructure-info">
+          <div class="info-item"><span class="info-label">On-site Storage</span><span class="info-value">1,800 MT</span></div>
+          <div class="info-item"><span class="info-label">Nearby Storage</span><span class="info-value">15,000 MT</span></div>
+          <div class="info-item"><span class="info-label">Total Capacity</span><span class="info-value">16,800 MT</span></div>
+          <div class="info-item"><span class="info-label">Daily Footfall</span><span class="info-value">2,000–2,500</span></div>
+        </div>
+
+        <h4>State Production Share</h4>
+        <div class="production-share">
+          <div class="share-item">
+            <div class="share-commodity">Mango</div>
+            <div class="share-bar"><div class="share-fill mango" style="width:0%"></div></div>
+            <div class="share-percent" data-share="mango">—</div>
+          </div>
+          <div class="share-item">
+            <div class="share-commodity">Mosambi</div>
+            <div class="share-bar"><div class="share-fill mosambi" style="width:0%"></div></div>
+            <div class="share-percent" data-share="mosambi">—</div>
+          </div>
+        </div>
+
+        <div class="production-share" id="market-share-extended">
+          <div class="share-item"><div class="share-commodity">Watermelon</div><div class="share-bar"><div class="share-fill watermelon" style="width:0%"></div></div><div class="share-percent" data-share="watermelon">—</div></div>
+          <div class="share-item"><div class="share-commodity">Musk Melon</div><div class="share-bar"><div class="share-fill muskmelon" style="width:0%"></div></div><div class="share-percent" data-share="muskmelon">—</div></div>
+          <div class="share-item"><div class="share-commodity">Papaya</div><div class="share-bar"><div class="share-fill papaya" style="width:0%"></div></div><div class="share-percent" data-share="papaya">—</div></div>
+          <div class="share-item"><div class="share-commodity">Guava</div><div class="share-bar"><div class="share-fill guava" style="width:0%"></div></div><div class="share-percent" data-share="guava">—</div></div>
+          <div class="share-item"><div class="share-commodity">Banana</div><div class="share-bar"><div class="share-fill banana" style="width:0%"></div></div><div class="share-percent" data-share="banana">—</div></div>
+          <div class="share-item"><div class="share-commodity">Pomegranate</div><div class="share-bar"><div class="share-fill pomegranate" style="width:0%"></div></div><div class="share-percent" data-share="pomegranate">—</div></div>
+          <div class="share-item"><div class="share-commodity">Grapes</div><div class="share-bar"><div class="share-fill grapes" style="width:0%"></div></div><div class="share-percent" data-share="grapes">—</div></div>
+          <div class="share-item"><div class="share-commodity">Dragon Fruit</div><div class="share-bar"><div class="share-fill dragon" style="width:0%"></div></div><div class="share-percent" data-share="dragon">—</div></div>
+          <div class="share-item"><div class="share-commodity">Apple</div><div class="share-bar"><div class="share-fill apple" style="width:0%"></div></div><div class="share-percent" data-share="apple">—</div></div>
+          <div class="share-item"><div class="share-commodity">Orange</div><div class="share-bar"><div class="share-fill orange" style="width:0%"></div></div><div class="share-percent" data-share="orange">—</div></div>
+        </div>
+
+        <h4>Average Number of Footfall per day in Batasingaram Fruit Market During Peak Mango Season</h4>
+<div class="dependency-table">
+  <table id="tbl-daily-footfall">
+    <thead>
+      <tr>
+        <th>Type of Functionary/Person</th>
+        <th>Average Number per Day</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Commission Agent</td><td>150</td></tr>
+      <tr><td>Accountant</td><td>450</td></tr>
+      <tr><td>Gumastha</td><td>600</td></tr>
+      <tr><td>Hamali</td><td>2,250</td></tr>
+      <tr><td>Seasonal Labour</td><td>3,000</td></tr>
+      <tr><td>Farmer</td><td>1,500</td></tr>
+      <tr><td>Farmer Vehicle</td><td>2,000</td></tr>
+      <tr><td>Number of Purchasers</td><td>2,500</td></tr>
+      <tr><td>Purchaser Vehicle Driver</td><td>4,000</td></tr>
+      <tr class="footfall-total"><td><strong>Total Average Footfall</strong></td><td><strong>16,450</strong></td></tr>
+    </tbody>
+  </table>
+</div>
+
+
+        <h4>Transport Infrastructure</h4>
+        <div class="transport-info">
+          <div class="transport-item"><span class="transport-type">Light Motor Vehicle</span><span class="transport-capacity">2.5 MT</span></div>
+          <div class="transport-item"><span class="transport-type">Mid-size Truck</span><span class="transport-capacity">8.0 MT</span></div>
+          <div class="transport-item"><span class="transport-type">Large Truck</span><span class="transport-capacity">15.0 MT</span></div>
+        </div>
+
+        <div class="dependency-table">
+          <table id="tbl-transport">
+            <thead><tr><th>Vehicle Type</th><th>Capacity (MT)</th><th>Typical Routes</th><th>Usage %</th></tr></thead>
+            <tbody>
+              <tr><td>Light Motor Vehicle</td><td>2.5</td><td>Local/District</td><td>30</td></tr>
+              <tr><td>Mid-size Truck</td><td>8.0</td><td>Inter-district</td><td>45</td></tr>
+              <tr><td>Large Truck</td><td>15.0</td><td>Interstate</td><td>25</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>Ranga Reddy District Profile</h4>
+        <div class="dependency-table">
+          <table id="tbl-rr-district">
+            <thead><tr><th>Fruit</th><th>Area (Acres)</th><th>Production (Tonnes)</th></tr></thead>
+            <tbody>
+              <tr><td>Mango</td><td>21,701</td><td>95,481</td></tr>
+              <tr><td>Guava</td><td>4,750</td><td>38,000</td></tr>
+              <tr><td>Sweet Orange</td><td>331</td><td>3,311</td></tr>
+              <tr><td>Watermelon</td><td>112</td><td>3,288</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+ <div id="tab-outbound" class="tab-content">
+  <h3>📤 Outbound Dependencies</h3>
+
+  <!-- Mango Dependencies (Consolidated) -->
+  <div class="commodity-section">
+    <h4>🥭 Mango Dependencies</h4>
+    <div class="dependency-table">
+      <table id="tbl-mango-outbound-dependencies">
+        <thead>
+          <tr>
+            <th>Destination Market</th>
+            <th>Dependency %</th>
+            <th>Volume (MT)</th>
+            <th>DRij</th>
+            <th>Classification</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Mosambi Dependencies (Consolidated) -->
+  <div class="commodity-section">
+    <h4>🍊 Mosambi Dependencies</h4>
+    <div class="dependency-table">
+      <table id="tbl-mosambi-outbound-dependencies">
+        <thead>
+          <tr>
+            <th>Destination Market</th>
+            <th>Dependency %</th>
+            <th>Volume (MT)</th>
+            <th>DRij</th>
+            <th>Classification</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Watermelon Dependencies (Consolidated) -->
+  <div class="commodity-section">
+    <h4>🍉 Watermelon Dependencies</h4>
+    <div class="dependency-table">
+      <table id="tbl-watermelon-outbound-dependencies">
+        <thead>
+          <tr>
+            <th>Destination Market</th>
+            <th>Dependency %</th>
+            <th>Volume (MT)</th>
+            <th>DRij</th>
+            <th>Classification</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Apple Dependencies (Consolidated) -->
+  <div class="commodity-section">
+    <h4>🍎 Apple Dependencies</h4>
+    <div class="dependency-table">
+      <table id="tbl-apple-outbound-dependencies">
+        <thead>
+          <tr>
+            <th>Destination Market</th>
+            <th>Dependency %</th>
+            <th>Volume (MT)</th>
+            <th>DRij</th>
+            <th>Classification</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Orange Dependencies (Consolidated) -->
+  <div class="commodity-section">
+    <h4>🍊 Orange Dependencies</h4>
+    <div class="dependency-table">
+      <table id="tbl-orange-outbound-dependencies">
+        <thead>
+          <tr>
+            <th>Destination Market</th>
+            <th>Dependency %</th>
+            <th>Volume (MT)</th>
+            <th>DRij</th>
+            <th>Classification</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div id="tab-inbound" class="tab-content">
+  <h3>📥 Inbound Dependencies</h3>
+
+  <!-- Mango Dependencies (Consolidated) -->
+  <div class="commodity-section">
+    <h4>🥭 Mango Dependencies</h4>
+    <div class="dependency-table">
+      <table id="tbl-mango-inbound-dependencies">
+        <thead>
+          <tr>
+            <th>Source Market</th>
+            <th>Dependency %</th>
+            <th>Volume (MT)</th>
+            <th>DRij</th>
+            <th>Classification</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Mosambi Dependencies (Consolidated) -->
+  <div class="commodity-section">
+    <h4>🍊 Mosambi Dependencies</h4>
+    <div class="dependency-table">
+      <table id="tbl-mosambi-inbound-dependencies">
+        <thead>
+          <tr>
+            <th>Source Market</th>
+            <th>Dependency %</th>
+            <th>Volume (MT)</th>
+            <th>DRij</th>
+            <th>Classification</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Watermelon Dependencies (Consolidated) -->
+  <div class="commodity-section">
+    <h4>🍉 Watermelon Dependencies</h4>
+    <div class="dependency-table">
+      <table id="tbl-watermelon-inbound-dependencies">
+        <thead>
+          <tr>
+            <th>Source Market</th>
+            <th>Dependency %</th>
+            <th>Volume (MT)</th>
+            <th>DRij</th>
+            <th>Classification</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Apple Dependencies (Consolidated) -->
+  <div class="commodity-section">
+    <h4>🍎 Apple Dependencies</h4>
+    <div class="dependency-table">
+      <table id="tbl-apple-inbound-dependencies">
+        <thead>
+          <tr>
+            <th>Source Market</th>
+            <th>Dependency %</th>
+            <th>Volume (MT)</th>
+            <th>DRij</th>
+            <th>Classification</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Orange Dependencies (Consolidated) -->
+  <div class="commodity-section">
+    <h4>🍊 Orange Dependencies</h4>
+    <div class="dependency-table">
+      <table id="tbl-orange-inbound-dependencies">
+        <thead>
+          <tr>
+            <th>Source Market</th>
+            <th>Dependency %</th>
+            <th>Volume (MT)</th>
+            <th>DRij</th>
+            <th>Classification</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<div id="tab-upstream-downstream" class="tab-content">
+  <h3>🔄 Upstream & Downstream Index</h3>
+  
+  <div class="analysis-section">
+    <h4>🔼 Upstream (Primary Sources)</h4>
+    <ul class="flat-list" id="list-upstream"></ul>
+  </div>
+
+  <div class="analysis-section">
+    <h4>🔽 Downstream (Primary Destinations)</h4>
+    <ul class="flat-list" id="list-downstream"></ul>
+  </div>
+</div>
+
+
+      <div id="tab-flows" class="tab-content">
+        <h3>4‑Level Flow Pattern Analysis</h3>
+
+        <div class="flow-analysis">
+          <h4>Mango Flows</h4>
+          <div class="flow-comparison">
+            <div class="flow-chart-container"><h5>Arrivals</h5><div class="chart-container"><canvas id="mango_arrivals_chart"></canvas></div></div>
+            <div class="flow-chart-container"><h5>Dispatches</h5><div class="chart-container"><canvas id="mango_dispatches_chart"></canvas></div></div>
+          </div>
+        </div>
+
+        <div class="flow-analysis">
+          <h4>Mosambi Flows</h4>
+          <div class="flow-comparison">
+            <div class="flow-chart-container"><h5>Arrivals</h5><div class="chart-container"><canvas id="mosambi_arrivals_chart"></canvas></div></div>
+            <div class="flow-chart-container"><h5>Dispatches</h5><div class="chart-container"><canvas id="mosambi_dispatches_chart"></canvas></div></div>
+          </div>
+        </div>
+
+        <div class="flow-analysis">
+          <h4>Watermelon Flows</h4>
+          <div class="flow-comparison">
+            <div class="flow-chart-container"><h5>Arrivals</h5><div class="chart-container"><canvas id="watermelon_arrivals_chart"></canvas></div></div>
+            <div class="flow-chart-container"><h5>Dispatches</h5><div class="chart-container"><canvas id="watermelon_dispatches_chart"></canvas></div></div>
+          </div>
+        </div>
+
+        <div class="flow-analysis">
+          <h4>Apple Flows</h4>
+          <div class="flow-comparison">
+            <div class="flow-chart-container"><h5>Arrivals</h5><div class="chart-container"><canvas id="apple_arrivals_chart"></canvas></div></div>
+            <div class="flow-chart-container"><h5>Dispatches</h5><div class="chart-container"><canvas id="apple_dispatches_chart"></canvas></div></div>
+          </div>
+        </div>
+
+        <div class="flow-analysis">
+          <h4>Orange Flows</h4>
+          <div class="flow-comparison">
+            <div class="flow-chart-container"><h5>Arrivals</h5><div class="chart-container"><canvas id="orange_arrivals_chart"></canvas></div></div>
+            <div class="flow-chart-container"><h5>Dispatches</h5><div class="chart-container"><canvas id="orange_dispatches_chart"></canvas></div></div>
+          </div>
+        </div>
+      </div>
+<div id="tab-seasonality" class="tab-content">
+  <h3>📅 Seasonal Analysis</h3>
+  
+  <!-- Commodity Selector -->
+  <div class="seasonality-controls">
+    <div class="form-group">
+      <label class="form-label" for="commodity-selector">Select Commodity:</label>
+      <select id="commodity-selector" class="form-control">
+        <option value="all">All Major Commodities (Overview)</option>
+        <option value="mango">🥭 Mango</option>
+        <option value="mosambi">🍊 Mosambi</option>
+        <option value="orange">🍊 Orange</option>
+        <option value="apple">🍎 Apple</option>
+        <option value="watermelon">🍉 Watermelon</option>
+        <option value="muskmelon">🍈 Muskmelon</option>
+        <option value="papaya">🥭 Papaya</option>
+        <option value="pineapple">🍍 Pineapple</option>
+        <option value="banana">🍌 Banana</option>
+        <option value="guava">🟢 Guava</option>
+        <option value="pomegranate">🔴 Pomegranate (Anar)</option>
+        <option value="grapes_white">🍇 Grapes (White)</option>
+        <option value="grapes_black">🍇 Grapes (Black)</option>
+        <option value="sapota">🟤 Sapota</option>
+        <option value="kiwi">🥝 Kiwi</option>
+        <option value="plum">🟣 Plum</option>
+        <option value="pear">🍐 Pear (Naspathi)</option>
+        <option value="strawberry">🍓 Strawberry</option>
+        <option value="ber">🟤 Ber</option>
+        <option value="kinnow">🍊 Kinnow</option>
+        <option value="custard_apple">🟢 Custard Apple</option>
+        <option value="dragon_fruit">🐲 Dragon Fruit</option>
+        <option value="fig">🟣 Fig</option>
+        <option value="jack_fruit">🟡 Jack Fruit</option>
+        <option value="lichi">🔴 Lichi</option>
+        <option value="jamun">🟣 Jamun</option>
+        <option value="dates">🟤 Dates</option>
+        <option value="cancer_fruit">🟠 Cancer Fruit</option>
+        <option value="cherry">🍒 Cherry</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Dynamic Chart Container -->
+  <div class="seasonality-chart-section">
+    <h4 id="seasonality-chart-title">Seasonal Pattern Analysis</h4>
+    <div class="seasonality-chart-container">
+      <canvas id="seasonality-chart"></canvas>
+    </div>
+  </div>
+
+  <!-- Commodity Details Panel -->
+  <div id="commodity-details" class="commodity-details">
+    <div class="details-grid">
+      <div class="detail-card season-info">
+        <h5>📅 Season Information</h5>
+        <div id="season-text">Select a commodity to view seasonal details</div>
+      </div>
+      <div class="detail-card peak-months">
+        <h5>📈 Peak Months</h5>
+        <div id="peak-months-text">-</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Seasonality Summary Table -->
+  <div class="seasonality-summary">
+    <h4>📊 Complete Seasonality Summary</h4>
+    <div class="dependency-table">
+      <table id="tbl-seasonality-summary">
+        <thead>
+          <tr>
+            <th>Commodity</th>
+            <th>Season Period</th>
+            <th>Peak Months</th>
+            <th>Availability Pattern</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Price & Trends Tab -->
+<div id="tab-price" class="tab-content">
+    <h3>Price Analysis & Market Trends</h3>
+    <!-- Price Commodity Selector -->
+<div class="price-controls">
+    <div class="form-group">
+        <label class="form-label" for="price-commodity-filter">🍎 Select Commodity for Price Analysis:</label>
+        <select id="price-commodity-filter" class="form-control">
+            <option value="all">🍇 All Commodities (Overview)</option>
+            <option value="mango">🥭 Mango</option>
+            <option value="mosambi">🍊 Mosambi</option>
+            <option value="watermelon">🍉 Watermelon</option>
+            <option value="muskmelon">🍈 Musk Melon</option>
+            <option value="papaya">🏉 Papaya</option>
+            <option value="pineapple">🍍 Pineapple</option>
+            <option value="orange">🍊 Orange</option>
+            <option value="apple">🍎 Apple</option>
+            <option value="pomegranate">🔴 Pomegranate (Anar)</option>
+            <option value="grapes_white">🍇 Grapes (White)</option>
+            <option value="grapes_black">🍇 Grapes (Black)</option>
+            <option value="ber">🟢 Ber</option>
+            <option value="guava">🟢 Guava</option>
+            <option value="plum">🟣 Plum</option>
+            <option value="naspathi">🍐 Naspathi (Pear)</option>
+            <option value="kiwi">🥝 Kiwi</option>
+            <option value="banana">🍌 Banana</option>
+            <option value="dragon_fruit">🐲 Dragon Fruit</option>
+            <option value="fig">🟣 Fig</option>
+            <option value="kinnow">🍊 Kinnow</option>
+            <option value="custard_apple">🍎 Custard Apple</option>
+            <option value="sapota">🟤 Sapota</option>
+            <option value="jack_fruit">🟢 Jack Fruit</option>
+            <option value="strawberry">🍓 Strawberry</option>
+            <option value="cherry">🍒 Cherry</option>
+            <option value="lichi">🔴 Lichi</option>
+            <option value="cancer_fruit">🟢 Cancer Fruit</option>
+            <option value="dates">🟤 Dates</option>
+        </select>
+    </div>
+</div>
+          <!-- NEW: Price Range Control Buttons -->
+        <div class="price-range-controls">
+            <label class="form-label">📈 Price Display Mode:</label>
+            <div class="range-button-group">
+                <button class="btn btn--sm price-range-btn" data-mode="minimum">📉 Minimum Prices</button>
+                <button class="btn btn--sm price-range-btn" data-mode="maximum">📈 Maximum Prices</button>
+                <button class="btn btn--sm price-range-btn active" data-mode="range">📊 Price Range</button>
+            </div>
+        </div>
+    
+  <!-- Price Chart Section -->
+    <div class="price-chart-section">
+        <h4>Price Trends Analysis</h4>
+        <div class="price-chart-container">
+            <canvas id="price-chart"></canvas>
+        </div>
+    </div>
+    
+    <!-- Price Details (same structure as seasonality) -->
+    <div class="price-details">
+        <h4>Price Range Details - All Commodities</h4>
+        <div id="price-details-container" class="price-details-grid">
+            <!-- Price cards for ALL commodities will be populated here -->
+        </div>
+    </div>
+    
+    <!-- Price Summary (same structure as seasonality) -->
+    <div class="price-summary">
+        <h4>Comprehensive Price Summary - All Commodities</h4>
+        <div id="price-summary-table-container">
+            <!-- Price summary table for ALL commodities will be populated here -->
+        </div>
+    </div>
+
+<!-- Year-wise Price Analysis Section -->
+<div class="yearwise-price-section">
+    <div id="yearwise-price-table-container">
+        <!-- Year-wise price table will be populated here -->
+    </div>
+</div>
+</div>
+      <div id="tab-state" class="tab-content">
+        <h3>Telangana State — Area and Production</h3>
+
+        <h4>Fruit Area (Acres)</h4>
+        <div class="dependency-table">
+          <table id="tbl-state-area">
+            <thead><tr><th>Fruit</th><th>2020-21</th><th>2021-22</th><th>2022-23</th><th>2023-24</th></tr></thead>
+            <tbody>
+              <tr><td>Mango</td><td>306,765.08</td><td>320,648.03</td><td>324,141.29</td><td>306,395.55</td></tr>
+              <tr><td>Sweet Orange</td><td>55,220.38</td><td>57,114.13</td><td>58,429.50</td><td>57,957.20</td></tr>
+              <tr><td>Watermelon</td><td>6,006.00</td><td>4,384.95</td><td>2,833.63</td><td>1,760.50</td></tr>
+              <tr><td>Musk Melon</td><td>281.00</td><td>336.41</td><td>464.13</td><td>235.73</td></tr>
+              <tr><td>Papaya</td><td>4,650.61</td><td>5,883.50</td><td>5,703.78</td><td>4,441.35</td></tr>
+              <tr><td>Sapota</td><td>2,417.11</td><td>2,638.68</td><td>2,628.43</td><td>2,350.80</td></tr>
+              <tr><td>Guava</td><td>13,417.14</td><td>14,769.00</td><td>14,554.05</td><td>14,247.28</td></tr>
+              <tr><td>Dragon Fruit</td><td>307.00</td><td>570.00</td><td>689.93</td><td>1,405.43</td></tr>
+              <tr><td>Apple Ber</td><td>533.00</td><td>468.00</td><td>430.83</td><td>302.03</td></tr>
+              <tr><td>Grapes</td><td>829.00</td><td>750.80</td><td>719.30</td><td>667.73</td></tr>
+              <tr><td>Pomegranate</td><td>3,188.01</td><td>2,909.83</td><td>2,684.15</td><td>2,162.03</td></tr>
+              <tr><td>Custard Apple</td><td>1,677.00</td><td>2,287.03</td><td>2,305.10</td><td>2,291.70</td></tr>
+              <tr><td>Banana</td><td>5,404.00</td><td>5,744.20</td><td>5,686.13</td><td>3,898.65</td></tr>
+              <tr><td>Other Fruits</td><td>23,592.00</td><td>22,210.00</td><td>22,453.00</td><td>17,454.00</td></tr>
+              <tr><td>Total Fruits</td><td>424,288.00</td><td>440,715.00</td><td>443,723.00</td><td>415,570.00</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>Fruit Production (Tonnes)</h4>
+        <div class="dependency-table">
+          <table id="tbl-state-production">
+            <thead><tr><th>Fruit</th><th>2020-21</th><th>2021-22</th><th>2022-23</th><th>2023-24</th></tr></thead>
+            <tbody>
+              <tr><td>Mango</td><td>1,148,996</td><td>1,165,125</td><td>1,168,105</td><td>939,230</td></tr>
+              <tr><td>Sweet Orange</td><td>517,031</td><td>603,718</td><td>614,830</td><td>395,338</td></tr>
+              <tr><td>Watermelon</td><td>164,400</td><td>88,654</td><td>78,104</td><td>41,220</td></tr>
+              <tr><td>Musk Melon</td><td>6,719</td><td>6,600</td><td>10,383</td><td>5,089</td></tr>
+              <tr><td>Papaya</td><td>130,997</td><td>184,163</td><td>132,750</td><td>127,682</td></tr>
+              <tr><td>Guava</td><td>85,223</td><td>117,411</td><td>117,855</td><td>91,574</td></tr>
+              <tr><td>Banana</td><td>97,272</td><td>84,953</td><td>109,613</td><td>100,245</td></tr>
+              <tr><td>Dragon Fruit</td><td>1,736</td><td>2,286</td><td>3,188</td><td>7,174</td></tr>
+              <tr><td>Apple Ber</td><td>9,651</td><td>7,573</td><td>5,257</td><td>4,130</td></tr>
+              <tr><td>Grapes</td><td>11,145</td><td>9,643</td><td>9,476</td><td>8,283</td></tr>
+              <tr><td>Pomegranate</td><td>17,720</td><td>22,176</td><td>15,500</td><td>11,008</td></tr>
+              <tr><td>Custard Apple</td><td>8,957</td><td>9,864</td><td>9,480</td><td>10,315</td></tr>
+              <tr><td>Sapota</td><td>21,505</td><td>22,512</td><td>21,415</td><td>16,603</td></tr>
+              <tr><td>Other Fruits</td><td>167,832</td><td>154,068</td><td>136,728</td><td>106,921</td></tr>
+              <tr><td>Total Fruits</td><td>2,389,185</td><td>2,478,745</td><td>2,432,682</td><td>1,864,812</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </aside>
+</div>
+</div> 
+<script> document.addEventListener('DOMContentLoaded', function () { const tabBtns = document.querySelectorAll('.tab-btn'); 
+const showTab = (id) => { tabBtns.forEach(b => b.classList.remove('active')); 
+document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active')); 
+const btn = Array.from(tabBtns).find(b => b.getAttribute('data-target') === id); 
+if (btn) btn.classList.add('active'); const tab = document.getElementById(id); 
+if (tab) tab.classList.add('active'); }; 
+const flows = document.getElementById('btn-commodity-flows'); 
+const stateArea = document.getElementById('btn-state-area'); 
+const stateProd = document.getElementById('btn-state-production'); 
+const marketShare = document.getElementById('btn-market-share'); 
+if (flows) flows.addEventListener('click', () => showTab('tab-flows')); 
+if (stateArea) stateArea.addEventListener('click', () => showTab('tab-state')); 
+if (stateProd) stateProd.addEventListener('click', () => showTab('tab-state')); 
+if (marketShare) marketShare.addEventListener('click', () => showTab('tab-overview')); });
+ </script>
+  <script src="app.js">
+
+  </script>
+   </body>
+    </html>
