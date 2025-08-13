@@ -6058,3 +6058,148 @@ p {
   background: var(--dot-color, #6b7280);
   box-shadow: 0 0 0 1px rgba(0,0,0,0.08);
 }
+/* Mobile-responsive layout polish */
+@media (max-width: 768px) {
+  /* Stack map above panel */
+  .main-content {
+    flex-direction: column;
+    height: auto;
+  }
+
+  /* Map takes 55–65% height; adjust as preferred */
+  .map-container {
+    height: 55vh !important;
+    min-height: 320px;
+  }
+
+  /* Panel takes remaining height */
+  .side-panel {
+    height: auto;
+    max-height: 45vh;
+    overflow-y: auto;
+  }
+
+  /* Keep legend readable and uncluttered */
+  .map-legend {
+    position: static;
+    margin: 8px;
+    min-width: auto;
+    width: auto;
+    padding: 10px;
+  }
+
+  /* Tabs: compact, scrollable row */
+  .panel-tabs {
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .tab-btn {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+
+  /* Commodity/category buttons wrap nicely */
+  .category-toggle-row,
+  #commodity-button-row,
+  #commodity-buttons-container {
+    justify-content: center;
+  }
+
+  /* Buttons scale for thumb use */
+  .category-btn,
+  #commodity-button-row .filter-btn,
+  #commodity-buttons-container .filter-btn {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  /* Tooltips: narrower on small screens */
+  .leaflet-tooltip {
+    max-width: 220px !important;
+    font-size: 11px !important;
+    line-height: 1.35 !important;
+  }
+
+  /* Reduce heavy shadows to improve performance */
+  .card, .dependency-table, .map-legend {
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+/* Prevent body from causing double scroll on iOS */
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+.app-container {
+  height: 100%;
+  overflow: hidden;
+}
+
+.main-content {
+  height: calc(100% - 120px); /* header height approx */
+  overflow: hidden;
+}
+
+/* Allow inner areas to scroll */
+.side-panel .panel-content {
+  overflow-y: auto;
+}
+
+/* Map occupies its container fully */
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+/* Improve Leaflet control tap size on mobile */
+.leaflet-control-zoom a {
+  width: 34px;
+  height: 34px;
+  line-height: 34px;
+  font-size: 16px;
+}
+/* Compact Leaflet popups on mobile */
+@media (max-width: 768px) {
+  .leaflet-popup-content-wrapper, .leaflet-popup-tip {
+    max-width: 260px;
+  }
+  .leaflet-popup-content {
+    margin: 8px 10px;
+    font-size: 12px;
+    line-height: 1.35;
+  }
+}
+
+/* General compact popup style already used by your markers */
+.compact-popup-content {
+  padding: 10px;
+  min-width: 220px;
+}
+/* Better tap size for custom markers */
+.destination-marker-enhanced, .source-marker-enhanced {
+  width: 28px;
+  height: 28px;
+}
+/* Reduce animation load on mobile */
+@media (max-width: 768px) {
+  .arrival-flow, .dispatch-flow {
+    animation-duration: 3.2s !important;
+    stroke-opacity: 0.9;
+  }
+}
+/* Horizontal scroll for crowded button bars */
+@media (max-width: 768px) {
+  #commodity-button-row, #commodity-buttons-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    gap: 4px;
+    padding-bottom: 4px;
+  }
+  #commodity-button-row .filter-btn,
+  #commodity-buttons-container .filter-btn {
+    display: inline-flex;
+  }
+}
