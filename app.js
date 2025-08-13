@@ -1025,6 +1025,30 @@ function initializeMap() {
   
   hubMarker.bindPopup(buildHubPopup());
   hubMarker.on("click", () => renderFlows());
+// Ensure map resizes correctly on mobile after layout/rotation
+window.addEventListener('resize', () => {
+  try { map && map.invalidateSize(); } catch (e) {}
+});
+
+// On orientation change (iOS/Android)
+window.addEventListener('orientationchange', () => {
+  setTimeout(() => {
+    try { map && map.invalidateSize(); } catch (e) {}
+  }, 250);
+});
+
+// If your app toggles layouts/tabs, call this after the DOM changes:
+function refreshMapSize() {
+  setTimeout(() => {
+    try { map && map.invalidateSize(); } catch (e) {}
+  }, 150);
+}
+icon: L.divIcon({
+  className: 'destination-marker-enhanced',
+  html: '',
+  iconSize: [28, 28],
+  iconAnchor: [14, 14]
+})
 
   // Enhanced table interactions
 document.addEventListener('DOMContentLoaded', function() {
