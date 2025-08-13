@@ -1037,18 +1037,21 @@ window.addEventListener('orientationchange', () => {
   }, 250);
 });
 
-// If your app toggles layouts/tabs, call this after the DOM changes:
+// Ensure Leaflet resizes correctly on mobile
 function refreshMapSize() {
   setTimeout(() => {
     try { map && map.invalidateSize(); } catch (e) {}
   }, 150);
 }
-icon: L.divIcon({
-  className: 'destination-marker-enhanced',
-  html: '',
-  iconSize: [28, 28],
-  iconAnchor: [14, 14]
-})
+
+// Recalculate on window resize and orientation change
+window.addEventListener('resize', () => {
+  refreshMapSize();
+});
+window.addEventListener('orientationchange', () => {
+  setTimeout(refreshMapSize, 250);
+});
+
 
   // Enhanced table interactions
 document.addEventListener('DOMContentLoaded', function() {
@@ -1088,10 +1091,10 @@ addSourceMarkers();
 addProductionMarkers();
 
   
-  setTimeout(() => {
-    map.invalidateSize();
+ setTimeout(() => {
+    refreshMapSize();
     renderFlows();
-  }, 100);
+}, 120);
   
   console.log("Map initialized successfully");
 }
@@ -1166,8 +1169,8 @@ function addSourceMarkers() {
       icon: L.divIcon({
         className: 'source-marker-enhanced',
         html: '<div class="source-icon">🌾</div>',
-        iconSize: [24, 24],
-        iconAnchor: [12, 12]
+        iconSize: [28, 28],
+        iconAnchor: [14, 14]
       })
     });
     
@@ -1372,8 +1375,8 @@ function addCommoditySourceMarkers(commodity) {
             icon: L.divIcon({
                 className: 'source-marker-commodity',
                 html: `<div class="marker-inner source-${commodity}">📍</div>`,
-                iconSize: [24, 24],
-                iconAnchor: [12, 12]
+                iconSize: [28, 28],
+                iconAnchor: [14, 14]
             })
         });
         
@@ -1901,6 +1904,8 @@ function initializeCommodityFilter() {
             btn.classList.add('active');
             currentFlowCategory = cat.id;
             buildCommodityButtons(cat.list);
+            renderFlows && renderFlows();
+refreshMapSize(); // add this
         });
         categoryRow.appendChild(btn);
     });
@@ -1930,6 +1935,7 @@ function buildCommodityButtons(list) {
     allBtn.addEventListener('click', () => {
         currentCommodityFilter = 'all';
         renderFlows();
+         refreshMapSize();
     });
     row.appendChild(allBtn);
 
