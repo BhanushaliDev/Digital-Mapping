@@ -860,65 +860,67 @@ consolidated_inbound_dependencies: {
 
 // Complete upstream and downstream lists from DPR data - ALL commodities
 upstream_list: [
-    "Mango, Mosambi — Local Production (Telangana districts)",
-    "Orange — Maharashtra (Nagpur, Hingoli, Nashik, Aurangabad, Pune); Chile (Imported)",
-    "Apple — Domestic: Shimla, Kashmir, Delhi, Chandigarh; International: Chile, Washington, New Zealand",
-    "Watermelon — Telangana (Warangal, Mahabubnagar, Nalgonda); Karnataka (Raichur, Gulbarga); AP (Ananthapur)",
-    "Papaya — Telangana districts (Mahabubnagar, Nalgonda, Ranga Reddy, Medak, Nizamabad, Nagar Kurnool, Gadwal)",
-    "Banana — Maharashtra (Nanded); Andhra Pradesh (Rajahmundry, Eluru, Kakinada, Tanuku)",
-    "Pomegranate (Anar) — Maharashtra (Solapur, Pandharpur, Sangli); Karnataka; AP (Medak)",
-    "Grapes (White) — Australia, China; Maharashtra; Karnataka",
-    "Grapes (Black) — Karnataka (Bangalore); Maharashtra (Solapur, Tuljapur, Osmanabad, Pandharpur)",
-    "Pineapple — Kerala (Primary source)",
-    "Guava — Telangana (Ibrahimpatnam, Turkapalli, Khammam); AP (Nuzvid, West Godavari); Maharashtra",
-    "Sapota — Andhra Pradesh (Ulavapadu, Ananthapur); Maharashtra",
-    "Kiwi — International: New Zealand, Italy, France, Iran",
-    "Plum — International: Spain, USA, China, South Africa; Domestic: Delhi",
-    "Pear (Naspathi) — International: South Africa, USA, China; Domestic: Delhi",
-    "Strawberry — Odisha (Bhubaneswar); Maharashtra (Mahabaleshwar)",
-    "Ber — Telangana (Ananthapur); Karnataka; Maharashtra",
-    "Kinnow — Punjab; Haryana; Uttar Pradesh (Lucknow)",
-    "Custard Apple — Telangana (Nalgonda, Mahabubnagar, Ranga Reddy, Vikarabad)",
-    "Dragon Fruit — International: New Zealand, Italy, France, Iran",
-    "Fig — Karnataka (Primary source)",
-    "Jack Fruit — Andhra Pradesh (Visakhapatnam); Karnataka",
-    "Lichi — West Bengal/Bihar",
-    "Jamun — Andhra Pradesh (Madanapalle); Maharashtra",
-    "Dates — International: Iran/Saudi Arabia",
-    "Cancer Fruit — Karnataka/Kerala/Tamil Nadu/Burma",
-    "Cherry — Chile (Imported)",
-    "Musk Melon — Telangana (Mahabubnagar, Warangal); Karnataka; Maharashtra; AP (Ananthapur)"
+    "Mosambi: Local",
+    "Mango: Local",
+    "Orange: South Africa, Chile, (Aurangabad Dist., Pune Dist, Nagpur, Hingoli ), of Maharashtra",
+    "Apple: New Zealand, Washington, Iran, South Africa, Chile for Imported, Delhi, Shimla, Himachal Pradesh, and Kashmir for Local",
+    "Anar: Maharashtra ( Solapur Dist, Pandaripur, Sangli), Karnataka, A.P. (Medak)",
+    "Grapes (Black): Karnataka (Bangalore), Maharashtra (Solapur Dist, Tuljapur, Osmanabad, Pandaripur).",
+    "Grapes (White): Australia, China, Maharashtra, Karnataka.",
+    "Pineapple: Kerala.",
+    "Papaya: (Mahaboob Nagar, Nalgonda, R.R. Dist., Medak, Nizamabad, Nagar Kurnool, Gadwal) i.e. Other districts of Telangana.",
+    "Banana: (Nanded) of Maharashtra, (Rajamundry, Eluru, Kakinada and Tanuku) of Andhra Pradesh",
+    "Watermelon: (Mahaboob Nagar, Warangal, Nalgonda) of Telangana, Maharashtra, Karnataka, (Anantapur) of Andhra Pradesh",
+    "Muskmelon: (Mahaboob Nagar, Warangal) of Telangana, Karnataka, Maharashtra, (Anantapur) of Andhra Pradesh",
+    "Sapota: (Ulavapadu, Ananthapur) of Andhra Pradesh, Maharashtra",
+    "Guava: (Ibrahimpatnam, Turkapalli, Khammam) of Telangana, (Nuzvid, West Godavari) of Andhra Pradesh, Maharashtra",
+    "Kiwi: New Zealand, Italy, France, Iran",
+    "Plum: Spain, USA, China, South Africa, Delhi",
+    "Pear: South Africa, USA, China, Delhi",
+    "Strawberry: Bhubaneshwar of Odhisha, Mahabaleshwar of Maharashtra",
+    "Ber: Ananthapur of Telangana, Karnataka, Maharashtra",
+    "Kinnow: Punjab, Haryana, Lucknow of Uttar Pradesh",
+    "Custard Apple: (Nalgonda, Mahbubnagar, Ranga Reddy, Vikarabad) of Telangana",
+    "Dragon: New Zealand, Italy, France, Iran",
+    "Fig: Karnataka",
+    "Jack Fruit: Visakhapatnam of Andhra Pradesh, Karnataka",
+    "Lichi: Bengal/Bihar",
+    "Jamun: Madanapalle of Andhra Pradesh, Maharashtra",
+    "Dates: Iran/Saudi Countries",
+    "Cancer Fruit: Karnataka/Kerala/Tamil Nadu/Burma",
+    "Cherry: Chile"
 ],
 
 downstream_list: [
-    "Mango — Interstate: Delhi (9.2%), Jaipur (7.5%), Mumbai (5.7%), Lucknow (4.4%), Surat (5.3%), Ahmedabad (4.6%), Chandigarh (5.9%); Intrastate: Telangana Local (57.2%)",
-    "Mosambi — Interstate: Delhi (18%), Jaipur (12.1%), Mathura (12.1%), Bhopal (10.9%), Ujjain (10.9%); Intrastate: Telangana Local (36%)",
-    "Watermelon — Exclusively Local Distribution: Hyderabad Local (35%), Warangal District (25%), Karimnagar District (20%), Nizamabad District (15%), Khammam District (5%)",
-    "Apple — Exclusively Local Distribution: Hyderabad Metro (45%), Secunderabad (22.4%), Warangal City (15.6%), Nizamabad City (10.5%), Khammam City (6.5%)",
-    "Orange — Exclusively Local Distribution: Hyderabad Local (40.6%), Warangal District (24.8%), Bangalore Market (15%), Chennai Market (9.4%), Vijayawada Market (5%), Vizag Market (5.2%)",
-    "Pomegranate (Anar) — Local Sales Only (100% within Telangana and neighboring regions)",
-    "Grapes (White & Black) — Local Sales Only (100% within Telangana markets)",
-    "Pineapple — Local Sales Only (100% Telangana distribution)",
-    "Papaya — Local Sales Only (100% within Telangana districts)",
-    "Banana — Local Sales Only (100% local distribution)",
-    "Guava — Local Sales Only (100% within state)",
-    "Sapota — Local Sales Only (100% local markets)",
-    "Kiwi — Local Sales Only (100% premium local distribution)",
-    "Plum — Local Sales Only (100% within Telangana)",
-    "Pear (Naspathi) — Local Sales Only (100% local markets)",
-    "Strawberry — Local Sales Only (100% within state)",
-    "Ber — Local Sales Only (100% local distribution)",
-    "Kinnow — Local Sales Only (100% within Telangana)",
-    "Custard Apple — Local Sales Only (100% within state districts)",
-    "Dragon Fruit — Local Sales Only (100% premium local markets)",
-    "Fig — Local Sales Only (100% within Telangana)",
-    "Jack Fruit — Local Sales Only (100% local consumption)",
-    "Lichi — Local Sales Only (100% within state)",
-    "Jamun — Local Sales Only (100% local distribution)",
-    "Dates — Local Sales Only (100% within Telangana)",
-    "Cancer Fruit — Local Sales Only (100% local markets)",
-    "Cherry — Local Sales Only (100% premium local distribution)",
-    "Musk Melon — Local Sales Only (100% within state)"
+    "Mosambi: Delhi, Uttar Pradesh, Gujarat, Haryana, Jaipur, Mathura & Bhopal, Lucknow, Ujjain & Baroda.",
+    "Mango: Maharashtra, Jaipur, Delhi, Haryana, Uttar Pradesh, Punjab, Bombay, Delhi, & Gujarat Etc., and Local Sales",
+    "Orange: Local Sales",
+    "Apple: Local Sales",
+    "Anar: Local Sales",
+    "Grapes (Black): Local Sales",
+    "Grapes (White): Local Sales",
+    "Pineapple: Local Sales",
+    "Papaya: Local Sales",
+    "Banana: Local Sales",
+    "Watermelon: Local Sales",
+    "Muskmelon: Local Sales",
+    "Sapota: Local Sales",
+    "Guava: Local Sales",
+    "Kiwi: Local Sales",
+    "Plum: Local Sales",
+    "Pear: Local Sales",
+    "Strawberry: Local Sales",
+    "Ber: Local Sales",
+    "Kinnow: Local Sales",
+    "Custard Apple: Local Sales",
+    "Dragon: Local Sales",
+    "Fig: Local Sales",
+    "Jack Fruit: Local Sales",
+    "Lichi: Local Sales",
+    "Jamun: Local Sales",
+    "Dates: Local Sales",
+    "Cancer Fruit: Local Sales",
+    "Cherry: Local Sales"
 ]
 };
 // Global variables
@@ -938,7 +940,8 @@ let charts = {};
 let sourceMarkersLayer = L.layerGroup();        // ADD THIS LINE
 let destinationMarkersLayer = L.layerGroup();   // ADD THIS LINE
 let productionMarkersLayer = L.layerGroup();    // ADD THIS LINE
-let currentFlowFilter = 'both';  
+let currentFlowFilter = 'both';
+let areFlowsVisible = true;
 document.addEventListener("DOMContentLoaded", function() {
     console.log("Initializing Telangana Commodity Flow Dashboard...");
     
@@ -956,9 +959,116 @@ document.addEventListener("DOMContentLoaded", function() {
             initializeCharts();
         }, 500);
         
+        initializeFlowVisibilityToggle();
     } catch (error) {
         console.error("Error during initialization:", error);
     }
+    initializeTabNavigation();
+});
+
+function initializeTabNavigation() {
+    const tabBtns = [...document.querySelectorAll('.tab-btn')];
+    const prevBtn = document.getElementById('prev-tab-btn');
+    const nextBtn = document.getElementById('next-tab-btn');
+    const tabIndicator = document.getElementById('tab-indicator');
+
+    let currentIndex = 0;
+
+    function updateButtons() {
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex === tabBtns.length - 1;
+        tabIndicator.textContent = tabBtns[currentIndex].textContent;
+    }
+
+    function showTab(index) {
+        tabBtns.forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+        const tabToActivate = tabBtns[index];
+        tabToActivate.classList.add('active');
+        const targetId = tabToActivate.getAttribute('data-target') || `tab-${tabToActivate.getAttribute('data-tab')}`;
+        document.getElementById(targetId)?.classList.add('active');
+        
+        currentIndex = index;
+        updateButtons();
+    }
+
+    prevBtn.addEventListener('click', () => {
+        if (currentIndex > 0) {
+            showTab(currentIndex - 1);
+        }
+    });
+
+    nextBtn.addEventListener('click', () => {
+        if (currentIndex < tabBtns.length - 1) {
+            showTab(currentIndex + 1);
+        }
+    });
+
+    tabBtns.forEach((btn, index) => {
+        btn.addEventListener('click', () => {
+            showTab(index);
+        });
+    });
+
+    // Initialize
+    updateButtons();
+}
+// FULL LEGEND BOX HIDE/SHOW
+document.addEventListener('DOMContentLoaded', () => {
+  const legend = document.getElementById('map-legend');
+  const toggleBtn = document.getElementById('legend-toggle');
+
+  if (!legend) return;
+
+  // Collapse entirely by default on mobile
+  if (window.innerWidth <= 768) {
+    legend.style.display = 'none';
+  }
+
+  const toggleLegend = () => {
+    if (legend.style.display === 'none') {
+      legend.style.display = 'block';
+    } else {
+      legend.style.display = 'none';
+    }
+    setTimeout(() => {
+      try { map.invalidateSize(); } catch (e) {}
+    }, 150);
+  };
+
+  // If you have a button
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', toggleLegend);
+  } else {
+    // If no button, click anywhere on box to hide
+    legend.addEventListener('click', toggleLegend);
+  }
+});
+// Completely hide/show Legend with ability to restore it
+document.addEventListener('DOMContentLoaded', () => {
+    const legend = document.getElementById('map-legend');
+    const showBtn = document.getElementById('show-legend-btn');
+
+    if (!legend || !showBtn) return;
+
+    const hideLegend = () => {
+        legend.style.display = 'none';
+        showBtn.style.display = 'block';
+        setTimeout(() => { try { map.invalidateSize(); } catch(e) {} }, 150);
+    };
+
+    const showLegend = () => {
+        legend.style.display = 'block';
+        showBtn.style.display = 'none';
+        setTimeout(() => { try { map.invalidateSize(); } catch(e) {} }, 150);
+    };
+
+    // Click on legend hides it entirely
+    legend.addEventListener('click', hideLegend);
+
+    // Click on floating "Show Legend" button brings it back
+    showBtn.addEventListener('click', showLegend);
 });
 
 // Map a consistent color for each commodity (used for dot if no emoji)
@@ -1087,8 +1197,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Add all market markers
 addDestinationMarkers();
-addSourceMarkers(); 
-addProductionMarkers();
+addSourceMarkers();
+// addProductionMarkers();
 
   
  setTimeout(() => {
@@ -1129,16 +1239,57 @@ function addDestinationMarkers() {
     // Store commodity info and market data on marker
     marker.commodities = market.commodities;
     marker.marketData = market;
-    marker.addTo(map);
+    marker.addTo(destinationMarkersLayer);
     
-    marker.on('click', () => {
-      const popupContent = buildMarketOverviewPopup(market, 'destination');
-      marker.bindPopup(popupContent, {
-        maxWidth: 300,
-        className: 'enhanced-popup-style'
-      }).openPopup();
+// SAFE hover tooltip + optional click popup (destination)
+try {
+    const data = marker.marketData || market;
+    const ttHtml = (typeof buildMarkerTooltip === 'function')
+        ? buildMarkerTooltip(data, 'destination')
+        : `<div class="marker-tooltip"><strong>${data?.name || 'Destination'}</strong></div>`;
+
+    marker.bindTooltip(ttHtml, {
+        permanent: false,
+        direction: 'top',
+        offset: [0, -10],
+        className: 'marker-tooltip',
+        sticky: false,
+        opacity: 0.98
     });
-  });
+
+    marker.on('mouseover', () => {
+        try {
+            marker.openTooltip();
+        } catch (e) {}
+    });
+    marker.on('mouseout', () => {
+        try {
+            marker.closeTooltip();
+        } catch (e) {}
+    });
+
+    marker.on('click', () => {
+        try {
+            const data = marker.marketData || market;
+            if (typeof buildMarketOverviewPopup === 'function') {
+                const popupContent = buildMarketOverviewPopup(data, 'destination');
+                if (marker.getPopup()) {
+                    marker.setPopupContent(popupContent).openPopup();
+                } else {
+                    marker.bindPopup(popupContent, {
+                        maxWidth: 300,
+                        className: 'enhanced-popup-style'
+                    }).openPopup();
+                }
+            }
+        } catch (e) {
+            console.warn('Popup bind failed:', e);
+        }
+    });
+} catch (e) {
+    console.warn('Tooltip bind failed:', e);
+}
+  })
 }
 
 // Add source markets function - ADD THIS NEW FUNCTION
@@ -1176,15 +1327,56 @@ function addSourceMarkers() {
     
     marker.commodities = source.commodities;
     marker.marketData = source;
-    marker.addTo(map);
+    marker.addTo(sourceMarkersLayer);
     
-    marker.on('click', () => {
-      const popupContent = buildMarketOverviewPopup(source, 'source');
-      marker.bindPopup(popupContent, {
-        maxWidth: 300,
-        className: 'enhanced-popup-style'
-      }).openPopup();
+   // SAFE hover tooltip + optional click popup (source)
+try {
+    const data = marker.marketData || market;
+    const ttHtml = (typeof buildMarkerTooltip === 'function')
+        ? buildMarkerTooltip(data, 'source')
+        : `<div class="marker-tooltip"><strong>${data?.name || 'source'}</strong></div>`;
+
+    marker.bindTooltip(ttHtml, {
+        permanent: false,
+        direction: 'top',
+        offset: [0, -10],
+        className: 'marker-tooltip',
+        sticky: false,
+        opacity: 0.98
     });
+
+    marker.on('mouseover', () => {
+        try {
+            marker.openTooltip();
+        } catch (e) {}
+    });
+    marker.on('mouseout', () => {
+        try {
+            marker.closeTooltip();
+        } catch (e) {}
+    });
+
+    marker.on('click', () => {
+        try {
+            const data = marker.marketData || market;
+            if (typeof buildMarketOverviewPopup === 'function') {
+                const popupContent = buildMarketOverviewPopup(data, 'source');
+                if (marker.getPopup()) {
+                    marker.setPopupContent(popupContent).openPopup();
+                } else {
+                    marker.bindPopup(popupContent, {
+                        maxWidth: 300,
+                        className: 'enhanced-popup-style'
+                    }).openPopup();
+                }
+            }
+        } catch (e) {
+            console.warn('Popup bind failed:', e);
+        }
+    });
+} catch (e) {
+    console.warn('Tooltip bind failed:', e);
+}
   });
 } 
 
@@ -1198,7 +1390,7 @@ function renderCommoditySpecificFlows(commodity) {
         showCommodityMarkers(commodity);
         renderArrivalFlows(commodity, true);
         renderDispatchFlows(commodity, true);
-    } 
+    }
     else if (locationOnlyCommodities.includes(commodity)) {
         renderBasicUpstreamFlows(commodity);
         renderBasicDownstreamFlows(commodity);
@@ -1243,7 +1435,7 @@ function renderArrivalFlows(commodity, detailed = false) {
             weight: lineWeight,
             opacity: 0.8,
             dashArray: '10,5',
-            className: 'arrival-flow'
+            className: 'arrival-flow flow-line'
         });
 
         const tooltipHtml = detailed && source.volume
@@ -1273,7 +1465,7 @@ function renderDispatchFlows(commodity, detailed = false) {
             weight: lineWeight,
             opacity: 0.8,
             dashArray: '15,10,5,10',
-            className: 'dispatch-flow'
+            className: 'dispatch-flow flow-line'
         });
 
         const tooltipHtml = detailed && destination.volume
@@ -1592,6 +1784,25 @@ function buildHubPopup() {
     </div>
   `;
 }
+// Build compact tooltip HTML (re-usable for markers)
+function buildCompactMarkerTooltip(data, role = 'source') {
+  // role: 'source' | 'dest' | 'prod'
+  const title = role === 'source' ? 'Source' : role === 'dest' ? 'Destination' : 'Production';
+  const primary = data.name || data.source || data.destination || data.market || 'Location';
+  const type = data.type || data.state || data.country || '';
+  const dep = (data.dependency !== undefined && data.dependency !== null) ? `${data.dependency}%` : '—';
+  const vol = data.volume ? (typeof data.volume === 'number' ? `${Number(data.volume).toLocaleString()} MT` : data.volume) : '—';
+
+  return `
+    <div class="marker-tt ${role}">
+      <div class="tt-h">${title}</div>
+      <div class="tt-row"><span class="tt-l">Place:</span><span class="tt-v">${primary}</span></div>
+      <div class="tt-row"><span class="tt-l">Type:</span><span class="tt-v">${type || '—'}</span></div>
+      <div class="tt-row"><span class="tt-l">Dependency:</span><span class="tt-v">${dep}</span></div>
+      <div class="tt-row"><span class="tt-l">Volume:</span><span class="tt-v">${vol}</span></div>
+    </div>
+  `;
+}
 
 function addProductionMarkers() {
   const districts = [
@@ -1617,6 +1828,9 @@ function renderFlows() {
     flowLayers.forEach(layer => map.removeLayer(layer));
     flowLayers = [];
     
+    if (!areFlowsVisible) {
+        return;
+    }
     const commodity = currentCommodityFilter;
     
     if (commodity === "all") {
@@ -1626,6 +1840,19 @@ function renderFlows() {
     }
 }
 
+function renderAllCommodityFlows() {
+    console.log("Rendering flows for all major commodities");
+    clearAllMarkers();
+    sourceMarkersLayer.addTo(map);
+    destinationMarkersLayer.addTo(map);
+    productionMarkersLayer.addTo(map);
+
+    majorCommodities.forEach(commodity => {
+        renderArrivalFlows(commodity);
+        renderDispatchFlows(commodity);
+    });
+}
+
 
 
 // Enhanced screen layout controls
@@ -1633,19 +1860,27 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentLayout = 'normal';
     let isFullscreen = false;
     
+    const appContainer = document.querySelector('.app-container');
     const mainContent = document.querySelector('.main-content');
     const panelToggleBtn = document.getElementById('panel-toggle-btn');
     const fullscreenToggleBtn = document.getElementById('fullscreen-toggle-btn');
+    const exitPanelFullscreenBtn = document.getElementById('exit-panel-fullscreen-btn');
     
     // Panel layout cycling
     if (panelToggleBtn) {
         panelToggleBtn.addEventListener('click', function() {
-            const layouts = ['normal', 'map-focus', 'panel-focus'];
+            const layouts = ['normal', 'map-focus', 'panel-focus', 'panel-fullscreen'];
             const currentIndex = layouts.indexOf(currentLayout);
             const nextIndex = (currentIndex + 1) % layouts.length;
             currentLayout = layouts[nextIndex];
             
             mainContent.setAttribute('data-layout', currentLayout);
+            
+            if (currentLayout === 'panel-fullscreen') {
+                appContainer.classList.add('panel-fullscreen');
+            } else {
+                appContainer.classList.remove('panel-fullscreen');
+            }
             
             // Update button state
             updatePanelButtonState();
@@ -1655,6 +1890,38 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (window.map) {
                     map.invalidateSize();
                 }
+                Object.values(charts).forEach(chart => {
+                    try {
+                        if (chart && typeof chart.resize === 'function') {
+                            chart.resize();
+                        }
+                    } catch (e) {
+                        console.warn("Chart resize on layout change failed:", e);
+                    }
+                });
+            }, 300);
+        });
+    }
+
+    if (exitPanelFullscreenBtn) {
+        exitPanelFullscreenBtn.addEventListener('click', function() {
+            currentLayout = 'normal';
+            mainContent.setAttribute('data-layout', currentLayout);
+            appContainer.classList.remove('panel-fullscreen');
+            updatePanelButtonState();
+            setTimeout(() => {
+                if (window.map) {
+                    map.invalidateSize();
+                }
+                Object.values(charts).forEach(chart => {
+                    try {
+                        if (chart && typeof chart.resize === 'function') {
+                            chart.resize();
+                        }
+                    } catch (e) {
+                        console.warn("Chart resize on layout change failed:", e);
+                    }
+                });
             }, 300);
         });
     }
@@ -1745,6 +2012,11 @@ document.addEventListener('DOMContentLoaded', function() {
             case 'panel-focus':
                 controlText.textContent = 'Data+';
                 controlIcon.textContent = '☰';
+                panelToggleBtn.title = 'Switch to Fullscreen Panel';
+                break;
+            case 'panel-fullscreen':
+                controlText.textContent = 'Exit Full';
+                controlIcon.textContent = '↔️';
                 panelToggleBtn.title = 'Switch to Normal View';
                 break;
         }
@@ -2781,6 +3053,25 @@ function createPriceDetailsCard(commodity, data) {
     
     return card;
 }
+// Build compact tooltip HTML for markers
+function buildMarkerTooltip(data, type) {
+  // type: 'source', 'destination', 'production'
+  const titleMap = { 
+    source: 'Source', 
+    destination: 'Destination', 
+    production: 'Production District'
+  };
+  return `
+    <div class="marker-tooltip">
+      <div class="tt-title">${titleMap[type] || 'Location'}</div>
+      <div class="tt-row"><span class="tt-label">Name:</span><span class="tt-val">${data.name || data.source || data.destination || ''}</span></div>
+      ${data.type ? `<div class="tt-row"><span class="tt-label">Type:</span><span class="tt-val">${data.type}</span></div>` : ""}
+      ${data.state ? `<div class="tt-row"><span class="tt-label">State:</span><span class="tt-val">${data.state}</span></div>` : ""}
+      ${data.dependency !== undefined ? `<div class="tt-row"><span class="tt-label">Dependency:</span><span class="tt-val">${data.dependency}%</span></div>` : ""}
+      ${data.volume ? `<div class="tt-row"><span class="tt-label">Volume:</span><span class="tt-val">${Number(data.volume).toLocaleString()} MT</span></div>` : ""}
+    </div>
+  `;
+}
 
 
 // Helper function to create individual price detail cards
@@ -3259,7 +3550,7 @@ function populatePriceControls() {
     }
     
     // Clear existing options
-    commoditySelect.innerHTML = '<option value="all">All Major Commodities</option>';
+    commoditySelect.innerHTML = '<option value="all">...Select Commodity</option>';
     
     // Add all commodities from price data
     Object.keys(applicationData.complete_price_trends).forEach(commodity => {
@@ -3267,7 +3558,13 @@ function populatePriceControls() {
         if (priceData && priceData.name) {
             const option = document.createElement('option');
             option.value = commodity;
-            option.textContent = priceData.name;
+            const emoji = commodityEmojis[commodity];
+            if (emoji) {
+                option.innerHTML = `${emoji} ${priceData.name}`;
+            } else {
+                const color = commodityColors[commodity] || '#6b7280';
+                option.innerHTML = `<span class="dot" style="--dot-color:${color}"></span> ${priceData.name}`;
+            }
             commoditySelect.appendChild(option);
         }
     });
@@ -3396,42 +3693,40 @@ function createPriceChart(selectedCommodity = 'all', displayMode = 'range') {
                         });
                     }
                 } else {
-                    // Show both minimum and maximum (range mode)
-                    const minPrices = priceData.yearly_data.map(yearData => 
+                    // Show both minimum and maximum (range mode) with fill
+                    const minPrices = priceData.yearly_data.map(yearData =>
                         yearData.min > 0 ? yearData.min : null
                     );
-                    const maxPrices = priceData.yearly_data.map(yearData => 
+                    const maxPrices = priceData.yearly_data.map(yearData =>
                         yearData.max > 0 ? yearData.max : null
                     );
-                    
-                    // Maximum price line
-                    if (maxPrices.some(price => price !== null)) {
-                        datasets.push({
-                            label: `${commodityIcon} ${priceData.name} - Maximum Price`,
-                            data: maxPrices,
-                            borderColor: priceData.color || getDefaultColor(selectedCommodity),
-                            backgroundColor: (priceData.color || getDefaultColor(selectedCommodity)) + '30',
-                            borderWidth: 4,
-                            fill: false,
-                            tension: 0.4,
-                            pointRadius: 8,
-                            pointHoverRadius: 12
-                        });
-                    }
-                    
-                    // Minimum price line
-                    if (minPrices.some(price => price !== null)) {
+
+                    if (minPrices.some(price => price !== null) && maxPrices.some(price => price !== null)) {
+                        // Minimum price line (bottom boundary)
                         datasets.push({
                             label: `${commodityIcon} ${priceData.name} - Minimum Price`,
                             data: minPrices,
                             borderColor: (priceData.color || getDefaultColor(selectedCommodity)),
-                            backgroundColor: (priceData.color || getDefaultColor(selectedCommodity)) + '20',
+                            backgroundColor: 'transparent',
                             borderWidth: 3,
                             fill: false,
                             tension: 0.4,
                             borderDash: [8, 4],
                             pointRadius: 6,
-                            pointHoverRadius: 10
+                            pointHoverRadius: 10,
+                        });
+
+                        // Maximum price line (top boundary) with fill to previous dataset
+                        datasets.push({
+                            label: `${commodityIcon} ${priceData.name} - Maximum Price`,
+                            data: maxPrices,
+                            borderColor: priceData.color || getDefaultColor(selectedCommodity),
+                            backgroundColor: (priceData.color || getDefaultColor(selectedCommodity)) + '30', // 30% transparency
+                            borderWidth: 4,
+                            fill: '-1', // Fill to previous dataset
+                            tension: 0.4,
+                            pointRadius: 8,
+                            pointHoverRadius: 12,
                         });
                     }
                 }
@@ -4255,4 +4550,55 @@ function updateButtons(active) {
   document.querySelectorAll('.fullscreen-btn')[activeBtn].classList.add('active');
 }
 }
+
+function initializeFlowVisibilityToggle() {
+    const flowToggleBtn = document.getElementById('flow-toggle-btn');
+
+    if (flowToggleBtn) {
+        flowToggleBtn.addEventListener('click', () => {
+            areFlowsVisible = !areFlowsVisible;
+            if (areFlowsVisible) {
+                flowToggleBtn.classList.add('active');
+                flowToggleBtn.title = "Hide Flow Arrows";
+                flowToggleBtn.querySelector('.control-icon').textContent = '🌿';
+                flowToggleBtn.querySelector('.control-text').textContent = 'Flows';
+            } else {
+                flowToggleBtn.classList.remove('active');
+                flowToggleBtn.title = "Show Flow Arrows";
+                flowToggleBtn.querySelector('.control-icon').textContent = '🚫';
+                flowToggleBtn.querySelector('.control-text').textContent = 'Off';
+            }
+            renderFlows();
+        });
+    }
+}
+// Helper function to parse upstream/downstream data and get coordinates (a bit simplified)
+function getBasicUpstreamLocations(commodity) {
+    // This is a simplified parser. A more robust solution would use a predefined location mapping.
+    const locations = [];
+    const upstreamEntry = applicationData.upstream_list.find(item => item.toLowerCase().startsWith(commodity.replace(/_/g, " ")));
+    if (upstreamEntry) {
+        const parts = upstreamEntry.split(':')[1];
+        if (parts) {
+            const places = parts.split(',').map(p => p.trim());
+            // In a real app, you'd look up coordinates for these places. We'll use some dummy coordinates for now.
+            if (places.includes("Local")) locations.push({ source: "Local Production", coordinates: [17.8, 78.9] });
+            if (places.find(p => p.includes("Maharashtra"))) locations.push({ source: "Maharashtra", coordinates: [19.8762, 75.3433] });
+            if (places.find(p => p.includes("Karnataka"))) locations.push({ source: "Karnataka", coordinates: [15.3173, 75.7139] });
+            if (places.find(p => p.includes("Andhra Pradesh"))) locations.push({ source: "Andhra Pradesh", coordinates: [15.9129, 79.7400] });
+        }
+    }
+    return locations;
+}
+
+function getBasicDownstreamLocations(commodity) {
+    const locations = [];
+    const downstreamEntry = applicationData.downstream_list.find(item => item.toLowerCase().startsWith(commodity.replace(/_/g, " ")));
+    if (downstreamEntry && downstreamEntry.toLowerCase().includes("local sales")) {
+        // For "Others", most go to local sales, which we can represent as a flow within the state.
+        locations.push({ destination: "Telangana (Local)", coordinates: [18.1124, 79.0193] });
+    }
+    return locations;
+}
+
 console.log("App.js loaded successfully");
