@@ -24,31 +24,64 @@
 <div class="main-content">
   <section class="map-container">
     <div id="map" aria-label="Commodity Flow Map"></div>
+<!-- Show Legend button (hidden by default) -->
+<button id="show-legend-btn" style="display:none;">Show Legend</button>
 
-    <div class="map-legend">
-      <h4>Legend</h4>
+    <div class="map-legend compact" id="map-legend">
+  <button class="legend-toggle" id="legend-toggle" aria-label="Toggle legend">Legend</button>
+  
+  <div class="legend-body">
+
+    <!-- Flows -->
+    <div class="legend-section">
+      <div class="legend-subtitle"></div>
       <div class="legend-item">
-        <span class="legend-marker primary-hub"></span>
-        <span>Primary Hub (31.05 acres)</span>
+        <span class="legend-line arrival-flow"></span> Arrival
       </div>
       <div class="legend-item">
-        <span class="legend-marker destination"></span>
-        <span>Destination Markets</span>
+        <span class="legend-line dispatch-flow"></span> Dispatch
       </div>
-      <div class="legend-item">
-        <span class="legend-line mango-flow"></span>
-        <span>Mango Flows</span>
-      </div>
-      <div class="legend-item">
-        <span class="legend-line mosambi-flow"></span>
-        <span>Mosambi Flows</span>
-      </div>
-      <div class="legend-item">
-        <span class="legend-marker production"></span>
-        <span>Production Districts</span>
-      </div>
-      <div class="legend-note">Click markets to show/hide animated flow lines</div>
+      <div class="legend-note">Line thickness shows dependency/volume.</div>
     </div>
+
+    <!-- Major Commodities -->
+    <div class="legend-section">
+      <div class="legend-subtitle">Major Commodities</div>
+      <div class="legend-item">
+        <span class="legend-swatch" style="background:#ff8c00;"></span> Mango
+      </div>
+      <div class="legend-item">
+        <span class="legend-swatch" style="background:#32cd32;"></span> Mosambi
+      </div>
+      <div class="legend-item">
+        <span class="legend-swatch" style="background:#0fb9b1;"></span> Watermelon
+      </div>
+      <div class="legend-item">
+        <span class="legend-swatch" style="background:#c0392b;"></span> Apple
+      </div>
+      <div class="legend-item">
+        <span class="legend-swatch" style="background:#f39c12;"></span> Orange
+      </div>
+    </div>
+
+    <!-- Markers -->
+    <div class="legend-section">
+      <div class="legend-subtitle">Markers</div>
+      <div class="legend-item">
+        <span class="legend-marker primary-hub"></span> 🎯 Hub
+      </div>
+      <div class="legend-item">
+        <span class="legend-marker production"></span> 🌾 Source
+      </div>
+      <div class="legend-item">
+        <span class="legend-marker destination"></span> 🏪 Destination
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Show Legend button (hidden by default) -->
+<button id="show-legend-btn" style="display:none;">Show Legend</button>
+
     <!-- Screen Toggle Controls -->
 <div class="screen-controls">
     <button id="panel-toggle-btn" class="screen-control-btn" data-mode="normal" title="Toggle Panel Size">
@@ -59,10 +92,18 @@
         <span class="control-icon">⛶</span>
         <span class="control-text">Full</span>
     </button>
+    <button id="flow-toggle-btn" class="screen-control-btn active" title="Hide Flow Arrows">
+        <span class="control-icon">🌿</span>
+        <span class="control-text">Flows</span>
+    </button>
 </div>
   </section>
 
   <aside class="side-panel">
+    <button id="exit-panel-fullscreen-btn" class="screen-control-btn" title="Exit Fullscreen Panel">
+        <span class="control-icon">✕</span>
+        <span class="control-text">Exit</span>
+    </button>
     <div class="panel-tabs">
       <button class="tab-btn active" data-target="tab-overview"data-priority="1">Market Overview</button>
       <button class="tab-btn" data-target="tab-outbound"data-priority="2">Outbound</button>
@@ -72,6 +113,15 @@
       <button class="tab-btn" data-target="tab-seasonality"data-priority="6">Seasonality</button>
       <button class="tab-btn" data-tab="price"data-priority="7">Price & Trends</button>
       <button class="tab-btn" data-target="tab-state"data-priority="8">State Area & Production</button>
+    </div>
+    <div class="tab-navigation">
+      <button id="prev-tab-btn" class="nav-button prev-btn" title="Previous Tab">
+        <span class="nav-icon">←</span> Prev
+      </button>
+      <div id="tab-indicator" class="tab-indicator">Market Overview</div>
+      <button id="next-tab-btn" class="nav-button next-btn" title="Next Tab">
+        Next <span class="nav-icon">→</span>
+      </button>
     </div>
 
     <div class="panel-content">
