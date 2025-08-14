@@ -5212,7 +5212,7 @@ p {
     display: flex;
     flex-direction: column;
     gap: var(--space-8);
-    z-index: 1001;
+    z-index: 9999; /* Set a very high z-index to ensure it's always on top */
 }
 
 .screen-control-btn {
@@ -5303,6 +5303,49 @@ p {
 
 .main-content[data-layout="fullscreen"] .side-panel {
     display: none;
+}
+
+/* Panel Fullscreen Mode */
+.main-content[data-layout="panel-fullscreen"] .map-container {
+    display: none;
+}
+
+.main-content[data-layout="panel-fullscreen"] .side-panel {
+    flex: 1;
+    width: 100vw;
+    min-width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+}
+
+.app-container.panel-fullscreen .app-header {
+    display: none;
+}
+
+.app-container.panel-fullscreen .main-content {
+    height: 100vh;
+}
+
+#exit-panel-fullscreen-btn {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+    width: 50px;
+    height: 50px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+}
+
+.main-content[data-layout="panel-fullscreen"] #exit-panel-fullscreen-btn {
+    display: flex; /* Visible only in panel-fullscreen */
 }
 
 /* Optimized Side Panel Layout */
@@ -6323,4 +6366,305 @@ html, body, .app-container {
 .side-panel .panel-content {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+}
+/* ================= Legend Professional Styling ================= */
+
+.map-legend {
+  background: rgba(255,255,255,0.95);
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  border-radius: 12px;
+  padding: var(--space-16);
+  min-width: 240px;
+  backdrop-filter: blur(6px);
+}
+
+.map-legend h4 {
+  margin: 0 0 var(--space-10);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.legend-section {
+  margin-bottom: var(--space-12);
+  padding-bottom: var(--space-12);
+  border-bottom: 1px dashed var(--color-border);
+}
+.legend-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.legend-subtitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-8);
+}
+
+.legend-row {
+  display: flex;
+  gap: var(--space-12);
+  margin-bottom: var(--space-6);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  font-size: 12px;
+  color: var(--color-text);
+}
+
+.legend-line {
+  width: 24px;
+  height: 3px;
+  border-radius: 2px;
+}
+.legend-line.arrival-flow {
+  background-color: #1b9e77; /* same as arrival flow color */
+}
+.legend-line.dispatch-flow {
+  background-color: #d95f02; /* same as dispatch flow color */
+}
+
+.legend-swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.08);
+}
+
+.legend-marker {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.15);
+}
+.legend-marker.primary-hub { background-color: #c0392b; }
+.legend-marker.production { background-color: #27ae60; }
+.legend-marker.destination { background-color: #3498db; }
+
+.legend-note {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  margin-top: var(--space-6);
+  font-style: italic;
+}
+
+/* Mobile layout tweak */
+@media (max-width: 768px) {
+  .map-legend {
+    position: static !important;
+    width: auto;
+    min-width: 0;
+    margin: 8px;
+    padding: var(--space-12);
+  }
+  .legend-row { flex-wrap: wrap; gap: var(--space-8); }
+}
+/* ===== Compact Floating Legend ===== */
+.map-legend.compact {
+  position: absolute;
+  bottom: 145px;
+  right: 35px;
+  z-index: 1100;
+  width: 230px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.12);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  overflow: hidden;
+  font-size: 12px;
+}
+
+.map-legend h4 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.legend-body {
+  padding: 12px;
+  max-height: 55vh;
+  overflow-y: auto;
+}
+
+.legend-section {
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed rgba(0,0,0,0.15);
+}
+.legend-section:last-child {
+  border-bottom: none;
+}
+
+.legend-subtitle {
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: rgba(0,0,0,0.6);
+  text-transform: uppercase;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+  gap: 8px;
+}
+
+.legend-line {
+  width: 22px;
+  height: 3px;
+  border-radius: 2px;
+}
+.legend-line.arrival-flow { background: #1b9e77; }
+.legend-line.dispatch-flow { background: #d95f02; }
+
+.legend-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+.legend-marker {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.12);
+}
+.legend-marker.primary-hub { background:#c0392b; }
+.legend-marker.production { background:#27ae60; }
+.legend-marker.destination { background:#2f80ed; }
+
+.legend-note {
+  font-size: 10.5px;
+  color: rgba(0,0,0,0.6);
+  font-style: italic;
+  margin-top: 4px;
+}
+
+/* Toggle Button */
+.legend-toggle {
+  appearance: none;
+  border: none;
+  background: rgba(255,255,255,0.92);
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+.legend-toggle:hover {
+  background: #fff;
+}
+
+/* Collapsed State */
+.map-legend.is-collapsed .legend-body {
+  display: none;
+}
+.map-legend.is-collapsed {
+  width: auto;
+  height: auto;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+/* Mobile Defaults: start collapsed */
+@media (max-width: 768px) {
+  .map-legend.compact {
+    bottom: 12px;
+    right: 12px;
+    width: auto;
+  }
+  .map-legend.compact .legend-body {
+    max-height: 50vh;
+  }
+}
+/* No CSS needed for hide/show, but optional transition */
+#map-legend {
+  transition: opacity 0.2s ease;
+}
+#map-legend[style*="display: none"] {
+  opacity: 0;
+}
+#show-legend-btn {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;  /* 👈 Changed from right: 16px */
+  z-index: 1200;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transition: background 0.2s ease;
+}
+.leaflet-tooltip.marker-tooltip {
+  padding: 6px 8px !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(0,0,0,0.1) !important;
+  background: rgba(255,255,255,0.95) !important;
+  color: #1f2937 !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+  font-size: 11px !important;
+  line-height: 1.35 !important;
+  max-width: 220px !important;
+  pointer-events: none;
+}
+.marker-tooltip .tt-title { font-weight: 700; margin-bottom: 4px; font-size: 11.5px; }
+.marker-tooltip .tt-row { display: flex; justify-content: space-between; gap: 8px; }
+.marker-tooltip .tt-label { color: #6b7280; }
+.marker-tooltip .tt-val { color: #111827; font-weight: 600; }
+@media (max-width: 768px){
+  .leaflet-tooltip.marker-tooltip { max-width: 180px !important; font-size: 10.5px !important; }
+}
+
+.tab-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.nav-button {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 12px;
+  color: #495057;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-button:hover {
+  background: #f8f9fa;
+  border-color: #adb5bd;
+}
+
+.nav-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tab-indicator {
+  font-size: 14px;
+  font-weight: 600;
+  color: #495057;
 }
