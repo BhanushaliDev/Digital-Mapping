@@ -47,6 +47,7 @@ outbound_dependencies: {
   ],
   mosambi: [
     { market: "Delhi", dependency: 18.0, volume: 576, coordinates: [28.6139, 77.2090] },
+    { market: "Delhi", dependency: 18.0, volume: 576, coordinates: [28.6139, 77.2090] },
     { market: "Jaipur", dependency: 12.1, volume: 387, coordinates: [26.9124, 75.7873] },
     { market: "Mathura", dependency: 12.1, volume: 387, coordinates: [27.4924, 77.6737] },
     { market: "Bhopal", dependency: 10.9, volume: 349, coordinates: [23.2599, 77.4126] },
@@ -1143,7 +1144,7 @@ let sourceMarkersLayer = L.layerGroup();        // ADD THIS LINE
 let destinationMarkersLayer = L.layerGroup();   // ADD THIS LINE
 let productionMarkersLayer = L.layerGroup();    // ADD THIS LINE
 let currentFlowFilter = 'both';
-let areFlowsVisible = true;
+let areFlowsVisible = false;
 document.addEventListener("DOMContentLoaded", function() {
     console.log("Initializing Telangana Commodity Flow Dashboard...");
     
@@ -1166,6 +1167,7 @@ document.addEventListener("DOMContentLoaded", function() {
     } catch (error) {
         console.error("Error during initialization:", error);
     }
+    initializeExcelUpload();
     initializeTabNavigation();
 });
 
@@ -1315,8 +1317,8 @@ function initializeMap() {
   
   // Create map
   map = L.map("map", {
-    center: applicationData.market.coordinates,
-    zoom: 7,
+    center: [20.5937, 78.9629], // Centered on India
+    zoom: 5, // Zoom level to show most of India
     zoomControl: true
   });
   
@@ -1414,7 +1416,7 @@ addSourceMarkers();
 // Add destination markets with enhanced popups - ADD THIS NEW FUNCTION
 function addDestinationMarkers() {
     const allCommodities = Object.keys(applicationData.outbound_dependencies);
-    const addedMarkets = new Set();
+    const addedMarkets = new Map();
 
     allCommodities.forEach(commodity => {
         const dependencies = applicationData.outbound_dependencies[commodity] || [];
@@ -1424,38 +1426,51 @@ function addDestinationMarkers() {
                 const marker = L.marker(market.coordinates, {
                     icon: L.divIcon({
                         className: 'destination-marker-enhanced',
-                        html: '<div class="dest-icon">🏪</div>',
+                        html: `<div class="dest-icon">${commodityEmojis[commodity] || '🏪'}</div>`,
                         iconSize: [28, 28],
                         iconAnchor: [14, 14]
                     })
                 });
-
-                marker.marketData = { name: market.market, type: 'Destination' };
+                marker.marketData = { name: market.market, type: 'Destination', commodities: [commodity] };
                 marker.addTo(destinationMarkersLayer);
-                addedMarkets.add(marketId);
-
-                try {
-                    const ttHtml = buildMarkerTooltip(marker.marketData, 'destination');
-                    marker.bindTooltip(ttHtml, {
-                        permanent: false,
-                        direction: 'top',
-                        offset: [0, -10],
-                        className: 'marker-tooltip',
-                        sticky: false,
-                        opacity: 0.98
-                    });
-                } catch (e) {
-                    console.warn('Tooltip bind failed:', e);
-                }
+                addedMarkets.set(marketId, marker);
+            } else {
+                addedMarkets.get(marketId).marketData.commodities.push(commodity);
             }
         });
+    });
+
+    addedMarkets.forEach(marker => {
+        const popupHtml = `
+            <div class="compact-popup-content">
+                <div class="popup-header" style="background: #3498db;">
+                    🏪 Destination Market
+                </div>
+                <div class="popup-body">
+                    <div class="popup-row">
+                        <span class="popup-label">Market:</span>
+                        <span class="popup-value">${marker.marketData.name}</span>
+                    </div>
+                    <div class="popup-row">
+                        <span class="popup-label">Commodities:</span>
+                        <span class="popup-value">${marker.marketData.commodities.join(', ')}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+        marker.bindPopup(popupHtml, {
+            maxWidth: 280,
+            className: 'compact-popup'
+        });
+        const tooltipHtml = `<b>🏪 ${marker.marketData.name}</b><br>Destination for ${marker.marketData.commodities.length} commodities`;
+        marker.bindTooltip(tooltipHtml);
     });
 }
 
 // Add source markets function - ADD THIS NEW FUNCTION
 function addSourceMarkers() {
     const allCommodities = Object.keys(applicationData.inbound_dependencies);
-    const addedMarkets = new Set();
+    const addedMarkets = new Map();
 
     allCommodities.forEach(commodity => {
         const dependencies = applicationData.inbound_dependencies[commodity] || [];
@@ -1465,48 +1480,68 @@ function addSourceMarkers() {
                 const marker = L.marker(source.coordinates, {
                     icon: L.divIcon({
                         className: 'source-marker-enhanced',
-                        html: '<div class="source-icon">🌾</div>',
+                        html: `<div class="source-icon">${commodityEmojis[commodity] || '🌾'}</div>`,
                         iconSize: [28, 28],
                         iconAnchor: [14, 14]
                     })
                 });
-
-                marker.marketData = { name: source.source, type: 'Source' };
+                marker.marketData = { name: source.source, type: 'Source', commodities: [commodity] };
                 marker.addTo(sourceMarkersLayer);
-                addedMarkets.add(marketId);
-
-                try {
-                    const ttHtml = buildMarkerTooltip(marker.marketData, 'source');
-                    marker.bindTooltip(ttHtml, {
-                        permanent: false,
-                        direction: 'top',
-                        offset: [0, -10],
-                        className: 'marker-tooltip',
-                        sticky: false,
-                        opacity: 0.98
-                    });
-                } catch (e) {
-                    console.warn('Tooltip bind failed:', e);
-                }
+                addedMarkets.set(marketId, marker);
+            } else {
+                addedMarkets.get(marketId).marketData.commodities.push(commodity);
             }
         });
+    });
+
+    addedMarkets.forEach(marker => {
+        const popupHtml = `
+            <div class="compact-popup-content">
+                <div class="popup-header" style="background: #27ae60;">
+                    🌾 Source Market
+                </div>
+                <div class="popup-body">
+                    <div class="popup-row">
+                        <span class="popup-label">Market:</span>
+                        <span class="popup-value">${marker.marketData.name}</span>
+                    </div>
+                    <div class="popup-row">
+                        <span class="popup-label">Commodities:</span>
+                        <span class="popup-value">${marker.marketData.commodities.join(', ')}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+        marker.bindPopup(popupHtml, {
+            maxWidth: 280,
+            className: 'compact-popup'
+        });
+        const tooltipHtml = `<b>🌾 ${marker.marketData.name}</b><br>Source for ${marker.marketData.commodities.length} commodities`;
+        marker.bindTooltip(tooltipHtml);
     });
 }
 
 // ADD ALL THESE NEW FUNCTIONS RIGHT HERE:
 
 function renderCommoditySpecificFlows(commodity) {
-    console.log(`Rendering flows for: ${commodity}`);
-    clearAllMarkers();
-
-    if (majorCommodities.includes(commodity)) {
-        showCommodityMarkers(commodity);
-        renderArrivalFlows(commodity, true);
-        renderDispatchFlows(commodity, true);
-    }
-    else if (locationOnlyCommodities.includes(commodity)) {
-        renderBasicUpstreamFlows(commodity);
-        renderBasicDownstreamFlows(commodity);
+    console.log(`renderCommoditySpecificFlows called for: ${commodity}`);
+    // This function will now ONLY render the flow lines, not manage markers.
+    if (areFlowsVisible) {
+        if (majorCommodities.includes(commodity)) {
+            if (currentFlowFilter === 'inbound' || currentFlowFilter === 'both') {
+                renderArrivalFlows(commodity, true);
+            }
+            if (currentFlowFilter === 'outbound' || currentFlowFilter === 'both') {
+                renderDispatchFlows(commodity, true);
+            }
+        } else if (locationOnlyCommodities.includes(commodity)) {
+            if (currentFlowFilter === 'inbound' || currentFlowFilter === 'both') {
+                renderBasicUpstreamFlows(commodity);
+            }
+            if (currentFlowFilter === 'outbound' || currentFlowFilter === 'both') {
+                renderBasicDownstreamFlows(commodity);
+            }
+        }
     }
 }
 
@@ -1680,30 +1715,40 @@ function getDispatchFlowColor(commodity) {
 }
 
 function clearAllMarkers() {
+    console.log('Clearing all markers...');
     sourceMarkersLayer.clearLayers();
     destinationMarkersLayer.clearLayers();
     productionMarkersLayer.clearLayers();
-    
-    map.removeLayer(sourceMarkersLayer);
-    map.removeLayer(destinationMarkersLayer);
-    map.removeLayer(productionMarkersLayer);
 }
 
 function showCommodityMarkers(commodity) {
+    console.log(`Showing markers for commodity: ${commodity}`);
     clearAllMarkers();
     
-    addCommoditySourceMarkers(commodity);
-    addCommodityDestinationMarkers(commodity);
+    // Add source and destination markers for the specific commodity
+    // Add source and destination markers for the specific commodity
+    if (majorCommodities.includes(commodity)) {
+        addCommoditySourceMarkers(commodity);
+        addCommodityDestinationMarkers(commodity);
+    } else if (locationOnlyCommodities.includes(commodity)) {
+        addBasicSourceMarkers(commodity);
+        addBasicDestinationMarkers(commodity);
+    }
     addCommodityProductionMarkers(commodity);
     
     sourceMarkersLayer.addTo(map);
     destinationMarkersLayer.addTo(map);
-    productionMarkersLayer.addTo(map);
+    productionMarkersLayer.addTo(map); // Keep this to show production districts if any
 }
 
 function addCommoditySourceMarkers(commodity) {
+    console.log(`Adding source markers for: ${commodity}`);
     const inboundData = applicationData.consolidated_inbound_dependencies[commodity];
-    if (!inboundData) return;
+    if (!inboundData) {
+        console.warn(`No inbound data for ${commodity}`);
+        return;
+    }
+    console.log(`Found ${inboundData.length} inbound sources for ${commodity}.`);
     
     inboundData.forEach(source => {
         const marker = L.marker(source.coordinates, {
@@ -1725,8 +1770,13 @@ function addCommoditySourceMarkers(commodity) {
 }
 
 function addCommodityDestinationMarkers(commodity) {
+    console.log(`Adding destination markers for: ${commodity}`);
     const outboundData = applicationData.consolidated_outbound_dependencies[commodity];
-    if (!outboundData) return;
+    if (!outboundData) {
+        console.warn(`No outbound data for ${commodity}`);
+        return;
+    }
+    console.log(`Found ${outboundData.length} outbound destinations for ${commodity}.`);
     
     outboundData.forEach(destination => {
         const marker = L.marker(destination.coordinates, {
@@ -1809,14 +1859,127 @@ function getCommodityIcon(commodity) {
 }
 
 function addCommodityProductionMarkers(commodity) {
-    // This function can be expanded later if you have production data
-    // For now, it's just a placeholder
+    const districts = [
+        { name: "Nalgonda", coordinates: [17.0574, 79.2686], commodities: ["watermelon", "papaya", "custard_apple"] },
+        { name: "Ranga Reddy", coordinates: [17.385, 78.4867], commodities: ["papaya", "custard_apple"] },
+        { name: "Mahbubnagar", coordinates: [16.7496, 77.9981], commodities: ["watermelon", "muskmelon", "papaya", "custard_apple"] },
+        { name: "Khammam", coordinates: [17.2473, 80.1514], commodities: ["guava"] },
+        { name: "Warangal", coordinates: [17.9689, 79.5941], commodities: ["watermelon", "muskmelon"] }
+    ];
+
+    districts.forEach(district => {
+        if (district.commodities.includes(commodity)) {
+            const marker = L.marker(district.coordinates, {
+                icon: L.divIcon({
+                    className: 'source-marker-enhanced',
+                    html: `<div class="source-icon">🌱</div>`,
+                    iconSize: [28, 28],
+                    iconAnchor: [14, 14]
+                })
+            }).addTo(productionMarkersLayer);
+
+            marker.marketData = { name: district.name, type: 'Production District', commodities: district.commodities.join(', ') };
+            
+            const tooltipHtml = `<b>🌱 ${district.name}</b><br>Production District for ${commodity}`;
+            marker.bindTooltip(tooltipHtml);
+
+            const popupHtml = `
+                <div class="compact-popup-content">
+                    <div class="popup-header" style="background: #27ae60;">
+                        🌱 Production District
+                    </div>
+                    <div class="popup-body">
+                        <div class="popup-row">
+                            <span class="popup-label">District:</span>
+                            <span class="popup-value">${district.name}</span>
+                        </div>
+                        <div class="popup-row">
+                            <span class="popup-label">Commodity:</span>
+                            <span class="popup-value">${commodity}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            marker.bindPopup(popupHtml, {
+                maxWidth: 280,
+                className: 'compact-popup'
+            });
+        }
+    });
+}
+
+function addBasicSourceMarkers(commodity) {
+    console.log(`Adding basic source markers for: ${commodity}`);
+    const locations = getBasicUpstreamLocations(commodity);
+    locations.forEach(loc => {
+        const marker = L.marker(loc.coordinates, {
+            icon: L.divIcon({
+                className: 'source-marker-commodity',
+                html: `<div class="marker-inner source-${commodity}">📍</div>`,
+                iconSize: [28, 28],
+                iconAnchor: [14, 14]
+            })
+        });
+        const popupHtml = `
+            <div class="compact-popup-content">
+                <div class="popup-header" style="background: #27ae60;">
+                    🌾 ${commodity.replace(/_/g, ' ').toUpperCase()} SOURCE
+                </div>
+                <div class="popup-body">
+                    <div class="popup-row">
+                        <span class="popup-label">Location:</span>
+                        <span class="popup-value">${loc.source}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+        marker.bindPopup(popupHtml, {
+            maxWidth: 280,
+            className: 'compact-popup'
+        });
+        sourceMarkersLayer.addLayer(marker);
+    });
+}
+
+function addBasicDestinationMarkers(commodity) {
+    console.log(`Adding basic destination markers for: ${commodity}`);
+    const locations = getBasicDownstreamLocations(commodity);
+    locations.forEach(loc => {
+        if (loc.destination !== "Telangana (Local)") {
+            const marker = L.marker(loc.coordinates, {
+                icon: L.divIcon({
+                    className: 'destination-marker-commodity',
+                    html: `<div class="marker-inner destination-${commodity}">🎯</div>`,
+                    iconSize: [24, 24],
+                    iconAnchor: [12, 12]
+                })
+            });
+            const popupHtml = `
+                <div class="compact-popup-content">
+                    <div class="popup-header" style="background: #3498db;">
+                        🎯 ${commodity.replace(/_/g, ' ').toUpperCase()} DESTINATION
+                    </div>
+                    <div class="popup-body">
+                        <div class="popup-row">
+                            <span class="popup-label">Market:</span>
+                            <span class="popup-value">${loc.destination}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            marker.bindPopup(popupHtml, {
+                maxWidth: 280,
+                className: 'compact-popup'
+            });
+            destinationMarkersLayer.addLayer(marker);
+        }
+    });
 }
 
 
 // Enhanced popup builder function - ADD THIS NEW FUNCTION
 function buildMarketOverviewPopup(marketData, marketType = 'hub') {
-  const filterText = currentCommodityFilter === 'all' ? 'All Commodities' : 
+  const filterText = currentCommodityFilter === 'all' ? 'All Commodities' :
     currentCommodityFilter.charAt(0).toUpperCase() + currentCommodityFilter.slice(1);
   
   if (marketType === 'hub') {
@@ -1949,37 +2112,84 @@ function buildCompactMarkerTooltip(data, role = 'source') {
 
 function addProductionMarkers() {
   const districts = [
-    { name: "Nalgonda", coordinates: [17.0574, 79.2686] },
-    { name: "Ranga Reddy", coordinates: [17.385, 78.4867] },
-    { name: "Mahbubnagar", coordinates: [16.7496, 77.9981] },
-    { name: "Khammam", coordinates: [17.2473, 80.1514] },
-    { name: "Warangal", coordinates: [17.9689, 79.5941] }
+    { name: "Nalgonda", coordinates: [17.0574, 79.2686], commodities: "Watermelon, Papaya, Custard Apple" },
+    { name: "Ranga Reddy", coordinates: [17.385, 78.4867], commodities: "Papaya, Custard Apple" },
+    { name: "Mahbubnagar", coordinates: [16.7496, 77.9981], commodities: "Watermelon, Muskmelon, Papaya, Custard Apple" },
+    { name: "Khammam", coordinates: [17.2473, 80.1514], commodities: "Guava" },
+    { name: "Warangal", coordinates: [17.9689, 79.5941], commodities: "Watermelon, Muskmelon" }
   ];
   
   districts.forEach(district => {
-    L.circleMarker(district.coordinates, {
-      radius: 6,
-      color: "#27ae60",
-      weight: 2,
-      fillColor: "#27ae60",
-      fillOpacity: 0.6
-    }).addTo(map).bindTooltip(district.name);
+    const marker = L.marker(district.coordinates, {
+        icon: L.divIcon({
+            className: 'source-marker-enhanced',
+            html: '<div class="source-icon">🌱</div>',
+            iconSize: [28, 28],
+            iconAnchor: [14, 14]
+        })
+    }).addTo(productionMarkersLayer);
+
+    marker.marketData = { name: district.name, type: 'Production District', commodities: district.commodities };
+    
+    const tooltipHtml = `<b>🌱 ${district.name}</b><br>Production District`;
+    marker.bindTooltip(tooltipHtml);
+
+    const popupHtml = `
+        <div class="compact-popup-content">
+            <div class="popup-header" style="background: #27ae60;">
+                🌱 Production District
+            </div>
+            <div class="popup-body">
+                <div class="popup-row">
+                    <span class="popup-label">District:</span>
+                    <span class="popup-value">${district.name}</span>
+                </div>
+                <div class="popup-row">
+                    <span class="popup-label">Commodities:</span>
+                    <span class="popup-value">${district.commodities}</span>
+                </div>
+            </div>
+        </div>
+    `;
+    marker.bindPopup(popupHtml, {
+        maxWidth: 280,
+        className: 'compact-popup'
+    });
   });
 }
 
 function renderFlows() {
+    console.log(`Rendering flows. Commodity: ${currentCommodityFilter}, Flow visibility: ${areFlowsVisible}`);
     flowLayers.forEach(layer => map.removeLayer(layer));
     flowLayers = [];
+    clearAllMarkers(); // Clear everything first
 
-    if (!areFlowsVisible) {
-        return;
-    }
     const commodity = currentCommodityFilter;
 
     if (commodity === "all") {
-        renderAllCommodityFlows();
+        // Show all markers
+        addSourceMarkers();
+        addDestinationMarkers();
+        addProductionMarkers();
+        sourceMarkersLayer.addTo(map);
+        destinationMarkersLayer.addTo(map);
+        productionMarkersLayer.addTo(map);
+        
+        // Then render flows if visible
+        if (areFlowsVisible) {
+            renderAllCommodityFlows();
+        }
     } else {
-        renderCommoditySpecificFlows(commodity);
+        // Show markers for the specific commodity
+        showCommodityMarkers(commodity);
+        sourceMarkersLayer.addTo(map);
+        destinationMarkersLayer.addTo(map);
+        productionMarkersLayer.addTo(map);
+        
+        // Then render flows for that commodity if visible
+        if (areFlowsVisible) {
+            renderCommoditySpecificFlows(commodity);
+        }
     }
 }
 
@@ -1997,23 +2207,22 @@ function initializeFlowFilter() {
 
 function renderAllCommodityFlows() {
     console.log("Rendering flows for all commodities");
-    clearAllMarkers();
-    
-    // Add all markers to the map initially
-    addSourceMarkers();
-    addDestinationMarkers();
-    
-    sourceMarkersLayer.addTo(map);
-    destinationMarkersLayer.addTo(map);
-    productionMarkersLayer.addTo(map);
-
+    // This function will now ONLY render the flow lines, not manage markers.
     const allCommodities = [...majorCommodities, ...locationOnlyCommodities];
     allCommodities.forEach(commodity => {
         if (currentFlowFilter === 'inbound' || currentFlowFilter === 'both') {
-            renderArrivalFlows(commodity);
+            if (majorCommodities.includes(commodity)) {
+                renderArrivalFlows(commodity);
+            } else {
+                renderBasicUpstreamFlows(commodity);
+            }
         }
         if (currentFlowFilter === 'outbound' || currentFlowFilter === 'both') {
-            renderDispatchFlows(commodity);
+            if (majorCommodities.includes(commodity)) {
+                renderDispatchFlows(commodity);
+            } else {
+                renderBasicDownstreamFlows(commodity);
+            }
         }
     });
 }
@@ -2318,6 +2527,7 @@ function initializeTabs() {
 
 
 function initializeCommodityFilter() {
+    console.log('Initializing commodity filter...');
     const filterContainer = document.querySelector('.commodity-filter');
     if (!filterContainer) return;
 
@@ -2341,8 +2551,10 @@ function initializeCommodityFilter() {
             btn.classList.add('active');
             currentFlowCategory = cat.id;
             buildCommodityButtons(cat.list);
+            // Reset to 'all' within the new category and render
+            currentCommodityFilter = 'all';
             renderFlows && renderFlows();
-refreshMapSize(); // add this
+            refreshMapSize(); // add this
         });
         categoryRow.appendChild(btn);
     });
@@ -2362,6 +2574,7 @@ refreshMapSize(); // add this
 }
 
 function buildCommodityButtons(list) {
+    console.log(`Building commodity buttons for category: ${currentFlowCategory}`);
     const row = document.getElementById('commodity-button-row');
     row.innerHTML = '';
 
@@ -2370,9 +2583,12 @@ function buildCommodityButtons(list) {
     allBtn.className = 'filter-btn active';
     allBtn.textContent = 'All';
     allBtn.addEventListener('click', () => {
+        document.querySelectorAll('#commodity-button-row .filter-btn').forEach(b => b.classList.remove('active'));
+        allBtn.classList.add('active');
         currentCommodityFilter = 'all';
+        console.log(`"All" button clicked for category: ${currentFlowCategory}`);
         renderFlows();
-         refreshMapSize();
+        refreshMapSize();
     });
     row.appendChild(allBtn);
 
@@ -2384,6 +2600,7 @@ function buildCommodityButtons(list) {
             document.querySelectorAll('#commodity-button-row .filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             currentCommodityFilter = c;
+            console.log(`Commodity button clicked: ${c}`);
             renderFlows();
         });
         row.appendChild(btn);
@@ -2693,8 +2910,8 @@ function populateUpstreamDownstream() {
         const [commodity, ...sources] = item.split(':');
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${sources.join(':')}</td>
             <td>${commodity}</td>
+            <td>${sources.join(':')}</td>
             <td>-</td>
         `;
         upstreamTable.appendChild(row);
@@ -2706,8 +2923,8 @@ function populateUpstreamDownstream() {
         const [commodity, ...destinations] = item.split(':');
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${destinations.join(':')}</td>
             <td>${commodity}</td>
+            <td>${destinations.join(':')}</td>
             <td>-</td>
         `;
         downstreamTable.appendChild(row);
@@ -4705,8 +4922,8 @@ function initializeFlowVisibilityToggle() {
     const flowToggleBtn = document.getElementById('flow-toggle-btn');
 
     if (flowToggleBtn) {
-        flowToggleBtn.addEventListener('click', () => {
-            areFlowsVisible = !areFlowsVisible;
+        const setFlowVisibility = (isVisible) => {
+            areFlowsVisible = isVisible;
             if (areFlowsVisible) {
                 flowToggleBtn.classList.add('active');
                 flowToggleBtn.title = "Hide Flow Arrows";
@@ -4719,7 +4936,14 @@ function initializeFlowVisibilityToggle() {
                 flowToggleBtn.querySelector('.control-text').textContent = 'Off';
             }
             renderFlows();
+        };
+
+        flowToggleBtn.addEventListener('click', () => {
+            setFlowVisibility(!areFlowsVisible);
         });
+
+        // Set initial state
+        setFlowVisibility(false);
     }
 }
 // Helper function to parse upstream/downstream data and get coordinates (a bit simplified)
@@ -4861,4 +5085,157 @@ function getBasicDownstreamLocations(commodity) {
 
 console.log("App.js loaded successfully");
 
+function initializeExcelUpload() {
+    const fileInput = document.getElementById('excel-file');
+    if (fileInput) {
+        fileInput.addEventListener('change', handleFile, false);
+    }
+}
+
+function handleFile(e) {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const data = new Uint8Array(e.target.result);
+        const workbook = XLSX.read(data, {type: 'array'});
+        processWorkbook(workbook);
+    };
+    reader.readAsArrayBuffer(file);
+}
+
+function processWorkbook(workbook) {
+    try {
+        // Process Outbound Dependencies
+        const outboundSheet = workbook.Sheets['outbound_dependencies'];
+        if (outboundSheet) {
+            const outboundData = XLSX.utils.sheet_to_json(outboundSheet);
+            const newOutbound = {};
+            outboundData.forEach(row => {
+                if (!newOutbound[row.commodity]) {
+                    newOutbound[row.commodity] = [];
+                }
+                newOutbound[row.commodity].push({
+                    market: row.market,
+                    dependency: row.dependency,
+                    volume: row.volume,
+                    coordinates: [row.lat, row.lon]
+                });
+            });
+            applicationData.outbound_dependencies = newOutbound;
+        }
+
+        // Process Inbound Dependencies
+        const inboundSheet = workbook.Sheets['inbound_dependencies'];
+        if (inboundSheet) {
+            const inboundData = XLSX.utils.sheet_to_json(inboundSheet);
+            const newInbound = {};
+            inboundData.forEach(row => {
+                if (!newInbound[row.commodity]) {
+                    newInbound[row.commodity] = [];
+                }
+                newInbound[row.commodity].push({
+                    source: row.source,
+                    dependency: row.dependency,
+                    volume: row.volume,
+                    coordinates: [row.lat, row.lon]
+                });
+            });
+            applicationData.inbound_dependencies = newInbound;
+        }
+
+        // Process Seasonality
+        const seasonalitySheet = workbook.Sheets['complete_seasonality'];
+        if (seasonalitySheet) {
+            const seasonalityData = XLSX.utils.sheet_to_json(seasonalitySheet);
+            const newSeasonality = {};
+            seasonalityData.forEach(row => {
+                newSeasonality[row.commodity] = {
+                    name: row.name,
+                    season: row.season,
+                    peak_months: row.peak_months.split(',').map(m => m.trim()),
+                    indices: [row.jan, row.feb, row.mar, row.apr, row.may, row.jun, row.jul, row.aug, row.sep, row.oct, row.nov, row.dec],
+                    color: row.color
+                };
+            });
+            applicationData.complete_seasonality = newSeasonality;
+        }
+
+        // Process Price Trends
+        const priceSheet = workbook.Sheets['complete_price_trends'];
+        if (priceSheet) {
+            const priceData = XLSX.utils.sheet_to_json(priceSheet);
+            const newPriceTrends = {};
+            priceData.forEach(row => {
+                newPriceTrends[row.commodity] = {
+                    name: row.name,
+                    icon: row.icon,
+                    min_price: row.min_price,
+                    max_price: row.max_price,
+                    price_variation: row.price_variation,
+                    trend: row.trend,
+                    yearly_data: [
+                        { year: "2020-21", min: row.min_price_20_21, max: row.max_price_20_21 },
+                        { year: "2021-22", min: row.min_price_21_22, max: row.max_price_21_22 },
+                        { year: "2022-23", min: row.min_price_22_23, max: row.max_price_22_23 }
+                    ],
+                    volatility: row.volatility,
+                    color: row.color
+                };
+            });
+            applicationData.complete_price_trends = newPriceTrends;
+        }
+
+        // Re-render the entire dashboard with the new data
+        renderFlows();
+        populateDataTables();
+        updateStateShareBars();
+        populateUpstreamDownstream();
+        initializeCharts();
+        initializeSeasonality();
+        initializePriceAndTrends();
+
+        alert("Dashboard updated successfully with new data!");
+
+    } catch (error) {
+        console.error("Error processing Excel file:", error);
+        alert("There was an error processing the Excel file. Please check the console for details.");
+    }
+}
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const resizer = document.getElementById('resizer');
+    const leftPanel = document.querySelector('.map-container');
+    const rightPanel = document.querySelector('.side-panel');
+
+    let x = 0;
+    let leftWidth = 0;
+
+    const mouseDownHandler = function (e) {
+        x = e.clientX;
+        leftWidth = leftPanel.getBoundingClientRect().width;
+
+        document.addEventListener('mousemove', mouseMoveHandler);
+        document.addEventListener('mouseup', mouseUpHandler);
+    };
+
+    const mouseMoveHandler = function (e) {
+        const dx = e.clientX - x;
+        const newLeftWidth = ((leftWidth + dx) * 100) / resizer.parentNode.getBoundingClientRect().width;
+        if (newLeftWidth > 10 && newLeftWidth < 90) { // Add bounds to prevent collapsing
+            leftPanel.style.width = `${newLeftWidth}%`;
+            rightPanel.style.width = `${100 - newLeftWidth}%`;
+            if (map) {
+                map.invalidateSize();
+            }
+        }
+    };
+
+    const mouseUpHandler = function () {
+        document.removeEventListener('mousemove', mouseMoveHandler);
+        document.removeEventListener('mouseup', mouseUpHandler);
+    };
+
+    resizer.addEventListener('mousedown', mouseDownHandler);
+});
 
