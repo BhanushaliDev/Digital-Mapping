@@ -53,11 +53,16 @@ outbound_dependencies: {
     { market: "Ujjain", dependency: 10.9, volume: 349, coordinates: [23.1765, 75.7885] }
   ],
   watermelon: [
-    { market: "Hyderabad Local", dependency: 35.0, volume: 2200, coordinates: [17.3850, 78.4867] },
-    { market: "Warangal District", dependency: 25.0, volume: 1800, coordinates: [17.9689, 79.5941] },
-    { market: "Karimnagar District", dependency: 20.0, volume: 1400, coordinates: [18.4386, 79.1288] },
-    { market: "Nizamabad District", dependency: 15.0, volume: 1000, coordinates: [18.6725, 78.0941] },
-    { market: "Khammam District", dependency: 5.0, volume: 400, coordinates: [17.2473, 80.1514] }
+    { market: "Hyderabad Local", dependency: 100, volume: 50000, coordinates: [17.3850, 78.4867] }
+  ],
+  muskmelon: [
+    { market: "Hyderabad Local", dependency: 100, volume: 25000, coordinates: [17.3850, 78.4867] }
+  ],
+  sapota: [
+    { market: "Hyderabad Local", dependency: 100, volume: 25000, coordinates: [17.3850, 78.4867] }
+  ],
+  guava: [
+    { market: "Hyderabad Local", dependency: 100, volume: 25000, coordinates: [17.3850, 78.4867] }
   ],
   apple: [
     { market: "Hyderabad Metro", dependency: 45.0, volume: 1800, coordinates: [17.3850, 78.4867] },
@@ -73,6 +78,69 @@ outbound_dependencies: {
     { market: "Chennai Market", dependency: 9.4, volume: 365, coordinates: [13.0827, 80.2707] },
     { market: "Vijayawada Market", dependency: 5.0, volume: 195, coordinates: [16.5062, 80.6480] },
     { market: "Vizag Market", dependency: 5.2, volume: 200, coordinates: [17.6868, 83.2185] }
+  ],
+  pomegranate: [
+    { market: "Hyderabad Local", coordinates: [17.3850, 78.4867] }
+  ],
+  grapes_black: [
+    { market: "Hyderabad Local", coordinates: [17.3850, 78.4867] }
+  ],
+  grapes_white: [
+    { market: "Hyderabad Local", coordinates: [17.3850, 78.4867] }
+  ],
+  pineapple: [
+    { market: "Hyderabad Local", coordinates: [17.3850, 78.4867] }
+  ],
+  papaya: [
+    { market: "Hyderabad Local", coordinates: [17.3850, 78.4867] }
+  ],
+  banana: [
+    { market: "Hyderabad Local", coordinates: [17.3850, 78.4867] }
+  ],
+  kiwi: [
+    { market: "Hyderabad Local", coordinates: [17.3850, 78.4867] }
+  ],
+  plum: [
+    { market: "Hyderabad Local", coordinates: [17.3850, 78.4867] }
+  ],
+  pear: [
+    { market: "Hyderabad Local", coordinates: [17.3850, 78.4867] }
+  ],
+  strawberry: [
+    { market: "Hyderabad Local", coordinates: [17.3850, 78.4867] }
+  ],
+  ber: [
+    { market: "Hyderabad Local", coordinates: [17.3850, 78.4867] }
+  ],
+  kinnow: [
+    { market: "Hyderabad Local", coordinates: [17.3850, 78.4867] }
+  ],
+  custard_apple: [
+    { market: "Hyderabad Local", coordinates: [17.3850, 78.4867] }
+  ],
+  dragon_fruit: [
+    { market: "Hyderabad Local", coordinates: [17.3850, 78.4867] }
+  ],
+  fig: [
+    { market: "Hyderabad Local", coordinates: [17.3850, 78.4867] }
+  ],
+  jack_fruit: [
+    { market: "Hyderabad Local", coordinates: [17.3850, 78.4867] }
+  ],
+  lichi: [
+    { market: "Hyderabad Local", coordinates: [17.3850, 78.4867] }
+  ],
+  jamun: [
+    { market: "Hyderabad Local", coordinates: [17.3850, 78.4867] }
+  ],
+  dates: [
+    { market: "Hyderabad Local", coordinates: [17.3850, 78.4867] }
+  ],
+  cancer_fruit: [
+    { market: "Hyderabad Local", coordinates: [17.3850, 78.4867] }
+  ],
+  cherry: [
+    { market: "Hyderabad Local", coordinates: [17.3850, 78.4867] }
   ]
 },
 
@@ -87,10 +155,32 @@ inbound_dependencies: {
     { source: "Andhra Pradesh", dependency: 27.6, volume: 17835, coordinates: [15.9129, 79.7400] }
   ],
   watermelon: [
-    { source: "Warangal", state: "Telangana", dependency: 74, volume: 47107, coordinates: [17.9689, 79.5941] },
-    { source: "Raichur", state: "Karnataka", dependency: 10, volume: 6370, coordinates: [16.2066, 77.3463] },
-    { source: "Gulbarga", state: "Karnataka", dependency: 9, volume: 5733, coordinates: [17.3297, 76.8343] },
-    { source: "Ananthapur", state: "Andhra Pradesh", dependency: 7, volume: 4459, coordinates: [14.6819, 77.6006] }
+    { source: "Mahabubnagar", state: "Telangana", dependency: 30, volume: 15000, coordinates: [16.7480, 78.0036] },
+    { source: "Warangal", state: "Telangana", dependency: 25, volume: 12500, coordinates: [17.9689, 79.5941] },
+    { source: "Nalgonda", state: "Telangana", dependency: 20, volume: 10000, coordinates: [17.0575, 79.2684] },
+    { source: "Maharashtra", dependency: 10, volume: 5000, coordinates: [19.7515, 75.7139] },
+    { source: "Karnataka", dependency: 10, volume: 5000, coordinates: [15.3173, 75.7139] },
+    { source: "Anantapur", state: "Andhra Pradesh", dependency: 5, volume: 2500, coordinates: [14.6819, 77.6006] }
+  ],
+  muskmelon: [
+    { source: "Mahabubnagar", state: "Telangana", dependency: 40, volume: 10000, coordinates: [16.7480, 78.0036] },
+    { source: "Warangal", state: "Telangana", dependency: 30, volume: 7500, coordinates: [17.9689, 79.5941] },
+    { source: "Karnataka", dependency: 15, volume: 3750, coordinates: [15.3173, 75.7139] },
+    { source: "Maharashtra", dependency: 10, volume: 2500, coordinates: [19.7515, 75.7139] },
+    { source: "Anantapur", state: "Andhra Pradesh", dependency: 5, volume: 1250, coordinates: [14.6819, 77.6006] }
+  ],
+  sapota: [
+    { source: "Ulavapadu", state: "Andhra Pradesh", dependency: 60, volume: 15000, coordinates: [15.1624, 80.0770] },
+    { source: "Ananthapur", state: "Andhra Pradesh", dependency: 30, volume: 7500, coordinates: [14.6819, 77.6006] },
+    { source: "Maharashtra", dependency: 10, volume: 2500, coordinates: [19.7515, 75.7139] }
+  ],
+  guava: [
+    { source: "Ibrahimpatnam", state: "Telangana", dependency: 30, volume: 7500, coordinates: [17.2574, 78.7047] },
+    { source: "Turkapalli", state: "Telangana", dependency: 25, volume: 6250, coordinates: [17.6089, 78.6370] },
+    { source: "Khammam", state: "Telangana", dependency: 20, volume: 5000, coordinates: [17.2473, 80.1514] },
+    { source: "Nuzvid", state: "Andhra Pradesh", dependency: 15, volume: 3750, coordinates: [16.7885, 80.8450] },
+    { source: "West Godavari", state: "Andhra Pradesh", dependency: 5, volume: 1250, coordinates: [16.7107, 81.0952] },
+    { source: "Maharashtra", dependency: 5, volume: 1250, coordinates: [19.7515, 75.7139] }
   ],
   apple: [
     { source: "Shimla", dependency: 34, volume: 11709, coordinates: [31.1048, 77.1734] },
@@ -108,6 +198,118 @@ inbound_dependencies: {
     { source: "Aurangabad", state: "Maharashtra", dependency: 19, volume: 7476, coordinates: [19.8762, 75.3433] },
     { source: "Pune", state: "Maharashtra", dependency: 14, volume: 5509, coordinates: [18.5204, 73.8567] },
     { source: "Chile", dependency: 7, volume: 2754, coordinates: [-33.4489, -70.6693] }
+  ],
+  pomegranate: [
+    { source: "Solapur", state: "Maharashtra", coordinates: [17.6599, 75.9064] },
+    { source: "Pandharpur", state: "Maharashtra", coordinates: [17.6805, 75.3305] },
+    { source: "Sangli", state: "Maharashtra", coordinates: [16.8524, 74.5815] },
+    { source: "Karnataka", coordinates: [15.3173, 75.7139] },
+    { source: "Medak", state: "Telangana", coordinates: [18.0460, 78.2699] }
+  ],
+  grapes_black: [
+    { source: "Bangalore", state: "Karnataka", coordinates: [12.9716, 77.5946] },
+    { source: "Solapur", state: "Maharashtra", coordinates: [17.6599, 75.9064] },
+    { source: "Tuljapur", state: "Maharashtra", coordinates: [18.0061, 76.0695] },
+    { source: "Osmanabad", state: "Maharashtra", coordinates: [18.1719, 76.0411] },
+    { source: "Pandharpur", state: "Maharashtra", coordinates: [17.6805, 75.3305] }
+  ],
+  grapes_white: [
+    { source: "Australia", coordinates: [-25.2744, 133.7751] },
+    { source: "China", coordinates: [35.8617, 104.1954] },
+    { source: "Maharashtra", coordinates: [19.7515, 75.7139] },
+    { source: "Karnataka", coordinates: [15.3173, 75.7139] }
+  ],
+  pineapple: [
+    { source: "Kerala", coordinates: [10.8505, 76.2711] }
+  ],
+  papaya: [
+    { source: "Mahabubnagar", state: "Telangana", coordinates: [16.7480, 78.0036] },
+    { source: "Nalgonda", state: "Telangana", coordinates: [17.0575, 79.2684] },
+    { source: "Ranga Reddy", state: "Telangana", coordinates: [17.3890, 78.0796] },
+    { source: "Medak", state: "Telangana", coordinates: [18.0460, 78.2699] },
+    { source: "Nizamabad", state: "Telangana", coordinates: [18.6725, 78.0941] },
+    { source: "Nagar Kurnool", state: "Telangana", coordinates: [16.4827, 78.3247] },
+    { source: "Gadwal", state: "Telangana", coordinates: [16.2335, 77.7950] }
+  ],
+  banana: [
+    { source: "Nanded", state: "Maharashtra", coordinates: [19.1383, 77.3210] },
+    { source: "Rajahmundry", state: "Andhra Pradesh", coordinates: [17.0005, 81.8040] },
+    { source: "Eluru", state: "Andhra Pradesh", coordinates: [16.7107, 81.0952] },
+    { source: "Kakinada", state: "Andhra Pradesh", coordinates: [16.9891, 82.2475] },
+    { source: "Tanuku", state: "Andhra Pradesh", coordinates: [16.7533, 81.6815] }
+  ],
+  kiwi: [
+    { source: "New Zealand", coordinates: [-40.9006, 174.8860] },
+    { source: "Italy", coordinates: [41.8719, 12.5674] },
+    { source: "France", coordinates: [46.2276, 2.2137] },
+    { source: "Iran", coordinates: [32.4279, 53.6880] }
+  ],
+  plum: [
+    { source: "Spain", coordinates: [40.4637, -3.7492] },
+    { source: "USA", coordinates: [37.0902, -95.7129] },
+    { source: "China", coordinates: [35.8617, 104.1954] },
+    { source: "South Africa", coordinates: [-30.5595, 22.9375] },
+    { source: "Delhi", coordinates: [28.6139, 77.2090] }
+  ],
+  pear: [
+    { source: "South Africa", coordinates: [-30.5595, 22.9375] },
+    { source: "USA", coordinates: [37.0902, -95.7129] },
+    { source: "China", coordinates: [35.8617, 104.1954] },
+    { source: "Delhi", coordinates: [28.6139, 77.2090] }
+  ],
+  strawberry: [
+    { source: "Bhubaneswar", state: "Odisha", coordinates: [20.2961, 85.8245] },
+    { source: "Mahabaleshwar", state: "Maharashtra", coordinates: [17.9307, 73.6477] }
+  ],
+  ber: [
+    { source: "Ananthapur", state: "Telangana", coordinates: [14.6819, 77.6006] },
+    { source: "Karnataka", coordinates: [15.3173, 75.7139] },
+    { source: "Maharashtra", coordinates: [19.7515, 75.7139] }
+  ],
+  kinnow: [
+    { source: "Punjab", coordinates: [31.1471, 75.3412] },
+    { source: "Haryana", coordinates: [29.0588, 76.0856] },
+    { source: "Lucknow", state: "Uttar Pradesh", coordinates: [26.8467, 80.9462] }
+  ],
+  custard_apple: [
+    { source: "Nalgonda", state: "Telangana", coordinates: [17.0575, 79.2684] },
+    { source: "Mahbubnagar", state: "Telangana", coordinates: [16.7480, 78.0036] },
+    { source: "Ranga Reddy", state: "Telangana", coordinates: [17.3890, 78.0796] },
+    { source: "Vikarabad", state: "Telangana", coordinates: [17.3383, 77.9048] }
+  ],
+  dragon_fruit: [
+    { source: "New Zealand", coordinates: [-40.9006, 174.8860] },
+    { source: "Italy", coordinates: [41.8719, 12.5674] },
+    { source: "France", coordinates: [46.2276, 2.2137] },
+    { source: "Iran", coordinates: [32.4279, 53.6880] }
+  ],
+  fig: [
+    { source: "Karnataka", coordinates: [15.3173, 75.7139] }
+  ],
+  jack_fruit: [
+    { source: "Visakhapatnam", state: "Andhra Pradesh", coordinates: [17.6868, 83.2185] },
+    { source: "Karnataka", coordinates: [15.3173, 75.7139] }
+  ],
+  lichi: [
+    { source: "West Bengal", coordinates: [22.9868, 87.8550] },
+    { source: "Bihar", coordinates: [25.0961, 85.3131] }
+  ],
+  jamun: [
+    { source: "Madanapalle", state: "Andhra Pradesh", coordinates: [13.5503, 78.5029] },
+    { source: "Maharashtra", coordinates: [19.7515, 75.7139] }
+  ],
+  dates: [
+    { source: "Iran", coordinates: [32.4279, 53.6880] },
+    { source: "Saudi Arabia", coordinates: [23.8859, 45.0792] }
+  ],
+  cancer_fruit: [
+    { source: "Karnataka", coordinates: [15.3173, 75.7139] },
+    { source: "Kerala", coordinates: [10.8505, 76.2711] },
+    { source: "Tamil Nadu", coordinates: [11.1271, 78.6569] },
+    { source: "Myanmar", coordinates: [21.9162, 95.9560] }
+  ],
+  cherry: [
+    { source: "Chile", coordinates: [-35.6751, -71.5430] }
   ]
 },
 
@@ -949,6 +1151,7 @@ document.addEventListener("DOMContentLoaded", function() {
         initializeMap();
         initializeTabs(); // This handles the price tab
         initializeCommodityFilter();
+        initializeFlowFilter();
         populateDataTables();
         updateStateShareBars();
         populateUpstreamDownstream();
@@ -1210,175 +1413,85 @@ addSourceMarkers();
 }
 // Add destination markets with enhanced popups - ADD THIS NEW FUNCTION
 function addDestinationMarkers() {
-  const destinationMarkets = [
-    // Mango destinations from your DPR data
-    { name: "Delhi Market", coords: [28.6139, 77.2090], type: "Major Hub", commodities: ["mango"], dependency: 9.2, volume: "1,620 MT/year", distance: "1,370 km" },
-    { name: "Mumbai Market", coords: [19.0760, 72.8777], type: "Port City", commodities: ["mango"], dependency: 5.7, volume: "1,800 MT/year", distance: "620 km" },
-    { name: "Jaipur Market", coords: [26.9124, 75.7873], type: "Regional Hub", commodities: ["mango", "mosambi"], dependency: 7.5, volume: "1,089 MT/year", distance: "895 km" },
-    { name: "Lucknow Market", coords: [26.8467, 80.9462], type: "Regional Hub", commodities: ["mango"], dependency: 4.4, volume: "1,350 MT/year", distance: "1,280 km" },
-    { name: "Surat Market", coords: [21.1702, 72.8311], type: "Commercial Hub", commodities: ["mango"], dependency: 5.3, volume: "950 MT/year", distance: "485 km" },
-    { name: "Ahmedabad Market", coords: [23.0225, 72.5714], type: "Commercial Hub", commodities: ["mango"], dependency: 4.6, volume: "820 MT/year", distance: "520 km" },
-    { name: "Chandigarh Market", coords: [30.7333, 76.7794], type: "Regional Hub", commodities: ["mango"], dependency: 5.9, volume: "1,100 MT/year", distance: "1,450 km" },
-    
-    // Mosambi destinations
-    { name: "Mathura Market", coords: [27.4924, 77.6737], type: "Regional Hub", commodities: ["mosambi"], dependency: 12.1, volume: "387 MT/year", distance: "1,320 km" },
-    { name: "Bhopal Market", coords: [23.2599, 77.4126], type: "Regional Hub", commodities: ["mosambi"], dependency: 10.9, volume: "349 MT/year", distance: "640 km" },
-    { name: "Ujjain Market", coords: [23.1765, 75.7885], type: "Regional Hub", commodities: ["mosambi"], dependency: 10.9, volume: "349 MT/year", distance: "720 km" }
-  ];
-  
-  destinationMarkets.forEach(market => {
-    const marker = L.marker(market.coords, {
-      icon: L.divIcon({
-        className: 'destination-marker-enhanced',
-        html: '<div class="dest-icon">🏪</div>',
-        iconSize: [28, 28],
-        iconAnchor: [14, 14]
-      })
-    });
-    
-    // Store commodity info and market data on marker
-    marker.commodities = market.commodities;
-    marker.marketData = market;
-    marker.addTo(destinationMarkersLayer);
-    
-// SAFE hover tooltip + optional click popup (destination)
-try {
-    const data = marker.marketData || market;
-    const ttHtml = (typeof buildMarkerTooltip === 'function')
-        ? buildMarkerTooltip(data, 'destination')
-        : `<div class="marker-tooltip"><strong>${data?.name || 'Destination'}</strong></div>`;
+    const allCommodities = Object.keys(applicationData.outbound_dependencies);
+    const addedMarkets = new Set();
 
-    marker.bindTooltip(ttHtml, {
-        permanent: false,
-        direction: 'top',
-        offset: [0, -10],
-        className: 'marker-tooltip',
-        sticky: false,
-        opacity: 0.98
-    });
+    allCommodities.forEach(commodity => {
+        const dependencies = applicationData.outbound_dependencies[commodity] || [];
+        dependencies.forEach(market => {
+            const marketId = market.coordinates.join(',');
+            if (!addedMarkets.has(marketId)) {
+                const marker = L.marker(market.coordinates, {
+                    icon: L.divIcon({
+                        className: 'destination-marker-enhanced',
+                        html: '<div class="dest-icon">🏪</div>',
+                        iconSize: [28, 28],
+                        iconAnchor: [14, 14]
+                    })
+                });
 
-    marker.on('mouseover', () => {
-        try {
-            marker.openTooltip();
-        } catch (e) {}
-    });
-    marker.on('mouseout', () => {
-        try {
-            marker.closeTooltip();
-        } catch (e) {}
-    });
+                marker.marketData = { name: market.market, type: 'Destination' };
+                marker.addTo(destinationMarkersLayer);
+                addedMarkets.add(marketId);
 
-    marker.on('click', () => {
-        try {
-            const data = marker.marketData || market;
-            if (typeof buildMarketOverviewPopup === 'function') {
-                const popupContent = buildMarketOverviewPopup(data, 'destination');
-                if (marker.getPopup()) {
-                    marker.setPopupContent(popupContent).openPopup();
-                } else {
-                    marker.bindPopup(popupContent, {
-                        maxWidth: 300,
-                        className: 'enhanced-popup-style'
-                    }).openPopup();
+                try {
+                    const ttHtml = buildMarkerTooltip(marker.marketData, 'destination');
+                    marker.bindTooltip(ttHtml, {
+                        permanent: false,
+                        direction: 'top',
+                        offset: [0, -10],
+                        className: 'marker-tooltip',
+                        sticky: false,
+                        opacity: 0.98
+                    });
+                } catch (e) {
+                    console.warn('Tooltip bind failed:', e);
                 }
             }
-        } catch (e) {
-            console.warn('Popup bind failed:', e);
-        }
+        });
     });
-} catch (e) {
-    console.warn('Tooltip bind failed:', e);
-}
-  })
 }
 
 // Add source markets function - ADD THIS NEW FUNCTION
 function addSourceMarkers() {
-  const sourceMarkets = [
-    // Apple sources
-    { name: "Shimla", coords: [31.1048, 77.1734], type: "Hill Station", commodities: ["apple"], dependency: 34, country: "India" },
-    { name: "Kashmir", coords: [34.0837, 74.7973], type: "Valley Region", commodities: ["apple"], dependency: 27, country: "India" },
-    { name: "Delhi Hub", coords: [28.6139, 77.2090], type: "Distribution Hub", commodities: ["apple"], dependency: 13, country: "India" },
-    { name: "Chandigarh Hub", coords: [30.7333, 76.7794], type: "Regional Hub", commodities: ["apple"], dependency: 9, country: "India" },
-    
-    // Orange sources
-    { name: "Nagpur", coords: [21.1458, 79.0882], type: "Citrus Hub", commodities: ["orange"], dependency: 22, state: "Maharashtra" },
-    { name: "Hingoli", coords: [19.7179, 77.1494], type: "Production Center", commodities: ["orange"], dependency: 19, state: "Maharashtra" },
-    { name: "Nashik", coords: [19.9975, 73.7898], type: "Production Center", commodities: ["orange"], dependency: 19, state: "Maharashtra" },
-    { name: "Aurangabad", coords: [19.8762, 75.3433], type: "Production Center", commodities: ["orange"], dependency: 19, state: "Maharashtra" },
-    { name: "Pune", coords: [18.5204, 73.8567], type: "Production Center", commodities: ["orange"], dependency: 14, state: "Maharashtra" },
-    
-    // Watermelon sources
-    { name: "Warangal", coords: [17.9689, 79.5941], type: "Production District", commodities: ["watermelon"], dependency: 74, state: "Telangana" },
-    { name: "Raichur", coords: [16.2066, 77.3463], type: "Production Hub", commodities: ["watermelon"], dependency: 10, state: "Karnataka" },
-    { name: "Gulbarga", coords: [17.3297, 76.8343], type: "Production Hub", commodities: ["watermelon"], dependency: 9, state: "Karnataka" },
-    { name: "Ananthapur", coords: [14.6819, 77.6006], type: "Production Hub", commodities: ["watermelon"], dependency: 7, state: "Andhra Pradesh" }
-  ];
-  
-  sourceMarkets.forEach(source => {
-    const marker = L.marker(source.coords, {
-      icon: L.divIcon({
-        className: 'source-marker-enhanced',
-        html: '<div class="source-icon">🌾</div>',
-        iconSize: [28, 28],
-        iconAnchor: [14, 14]
-      })
-    });
-    
-    marker.commodities = source.commodities;
-    marker.marketData = source;
-    marker.addTo(sourceMarkersLayer);
-    
-   // SAFE hover tooltip + optional click popup (source)
-try {
-    const data = marker.marketData || market;
-    const ttHtml = (typeof buildMarkerTooltip === 'function')
-        ? buildMarkerTooltip(data, 'source')
-        : `<div class="marker-tooltip"><strong>${data?.name || 'source'}</strong></div>`;
+    const allCommodities = Object.keys(applicationData.inbound_dependencies);
+    const addedMarkets = new Set();
 
-    marker.bindTooltip(ttHtml, {
-        permanent: false,
-        direction: 'top',
-        offset: [0, -10],
-        className: 'marker-tooltip',
-        sticky: false,
-        opacity: 0.98
-    });
+    allCommodities.forEach(commodity => {
+        const dependencies = applicationData.inbound_dependencies[commodity] || [];
+        dependencies.forEach(source => {
+            const marketId = source.coordinates.join(',');
+            if (!addedMarkets.has(marketId)) {
+                const marker = L.marker(source.coordinates, {
+                    icon: L.divIcon({
+                        className: 'source-marker-enhanced',
+                        html: '<div class="source-icon">🌾</div>',
+                        iconSize: [28, 28],
+                        iconAnchor: [14, 14]
+                    })
+                });
 
-    marker.on('mouseover', () => {
-        try {
-            marker.openTooltip();
-        } catch (e) {}
-    });
-    marker.on('mouseout', () => {
-        try {
-            marker.closeTooltip();
-        } catch (e) {}
-    });
+                marker.marketData = { name: source.source, type: 'Source' };
+                marker.addTo(sourceMarkersLayer);
+                addedMarkets.add(marketId);
 
-    marker.on('click', () => {
-        try {
-            const data = marker.marketData || market;
-            if (typeof buildMarketOverviewPopup === 'function') {
-                const popupContent = buildMarketOverviewPopup(data, 'source');
-                if (marker.getPopup()) {
-                    marker.setPopupContent(popupContent).openPopup();
-                } else {
-                    marker.bindPopup(popupContent, {
-                        maxWidth: 300,
-                        className: 'enhanced-popup-style'
-                    }).openPopup();
+                try {
+                    const ttHtml = buildMarkerTooltip(marker.marketData, 'source');
+                    marker.bindTooltip(ttHtml, {
+                        permanent: false,
+                        direction: 'top',
+                        offset: [0, -10],
+                        className: 'marker-tooltip',
+                        sticky: false,
+                        opacity: 0.98
+                    });
+                } catch (e) {
+                    console.warn('Tooltip bind failed:', e);
                 }
             }
-        } catch (e) {
-            console.warn('Popup bind failed:', e);
-        }
+        });
     });
-} catch (e) {
-    console.warn('Tooltip bind failed:', e);
 }
-  });
-} 
 
 // ADD ALL THESE NEW FUNCTIONS RIGHT HERE:
 
@@ -1396,23 +1509,40 @@ function renderCommoditySpecificFlows(commodity) {
         renderBasicDownstreamFlows(commodity);
     }
 }
+
 function renderBasicUpstreamFlows(commodity) {
-    const list = getBasicUpstreamLocations(commodity);
-    list.forEach(src => {
-        const line = L.polyline([src.coordinates, applicationData.market.coordinates], {
-            color: '#3498db', weight: 2, dashArray: '6,3'
-        }).bindTooltip(`<div class="upstream-tooltip"><b>📥 ${commodity.toUpperCase()} Source</b><br>${src.source}</div>`);
-        map.addLayer(line); flowLayers.push(line);
+    const locations = getBasicUpstreamLocations(commodity);
+    locations.forEach(loc => {
+        const flowLine = L.polyline([
+            loc.coordinates,
+            applicationData.market.coordinates
+        ], {
+            color: '#3498db',
+            weight: 2,
+            opacity: 0.7,
+            dashArray: '8,4'
+        }).bindTooltip(`<b>📥 UPSTREAM (${commodity})</b><br>From: ${loc.source}`);
+        
+        map.addLayer(flowLine);
+        flowLayers.push(flowLine);
     });
 }
 
 function renderBasicDownstreamFlows(commodity) {
-    const list = getBasicDownstreamLocations(commodity);
-    list.forEach(dest => {
-        const line = L.polyline([applicationData.market.coordinates, dest.coordinates], {
-            color: '#e67e22', weight: 2, dashArray: '8,4'
-        }).bindTooltip(`<div class="downstream-tooltip"><b>📤 ${commodity.toUpperCase()} Destination</b><br>${dest.destination}</div>`);
-        map.addLayer(line); flowLayers.push(line);
+    const locations = getBasicDownstreamLocations(commodity);
+    locations.forEach(loc => {
+        const flowLine = L.polyline([
+            applicationData.market.coordinates,
+            loc.coordinates
+        ], {
+            color: '#e74c3c',
+            weight: 2,
+            opacity: 0.7,
+            dashArray: '8,4'
+        }).bindTooltip(`<b>📤 DOWNSTREAM (${commodity})</b><br>To: ${loc.destination}`);
+        
+        map.addLayer(flowLine);
+        flowLayers.push(flowLine);
     });
 }
 
@@ -1498,18 +1628,31 @@ function renderBasicUpstreamFlows(commodity) {
 function renderBasicDownstreamFlows(commodity) {
     const locations = getBasicDownstreamLocations(commodity);
     locations.forEach(loc => {
-        const flowLine = L.polyline([
-            applicationData.market.coordinates,
-            loc.coordinates
-        ], {
-            color: '#e74c3c',
-            weight: 2,
-            opacity: 0.7,
-            dashArray: '8,4'
-        }).bindTooltip(`<b>📤 DOWNSTREAM (${commodity})</b><br>To: ${loc.destination}`);
-        
-        map.addLayer(flowLine);
-        flowLayers.push(flowLine);
+        if (loc.destination === "Telangana (Local)") {
+            const circle = L.circle(applicationData.market.coordinates, {
+                radius: 50000, // 50km radius
+                color: '#e74c3c',
+                weight: 2,
+                opacity: 0.7,
+                fillOpacity: 0.1,
+                dashArray: '8,4'
+            }).bindTooltip(`<b>📤 DOWNSTREAM (${commodity})</b><br>To: Local Sales`);
+            map.addLayer(circle);
+            flowLayers.push(circle);
+        } else {
+            const flowLine = L.polyline([
+                applicationData.market.coordinates,
+                loc.coordinates
+            ], {
+                color: '#e74c3c',
+                weight: 2,
+                opacity: 0.7,
+                dashArray: '8,4'
+            }).bindTooltip(`<b>📤 DOWNSTREAM (${commodity})</b><br>To: ${loc.destination}`);
+            
+            map.addLayer(flowLine);
+            flowLayers.push(flowLine);
+        }
     });
 }
 
@@ -1827,12 +1970,12 @@ function addProductionMarkers() {
 function renderFlows() {
     flowLayers.forEach(layer => map.removeLayer(layer));
     flowLayers = [];
-    
+
     if (!areFlowsVisible) {
         return;
     }
     const commodity = currentCommodityFilter;
-    
+
     if (commodity === "all") {
         renderAllCommodityFlows();
     } else {
@@ -1840,16 +1983,38 @@ function renderFlows() {
     }
 }
 
+function initializeFlowFilter() {
+    const flowBtns = document.querySelectorAll('.flow-btn');
+    flowBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            flowBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentFlowFilter = btn.dataset.flow;
+            renderFlows();
+        });
+    });
+}
+
 function renderAllCommodityFlows() {
-    console.log("Rendering flows for all major commodities");
+    console.log("Rendering flows for all commodities");
     clearAllMarkers();
+    
+    // Add all markers to the map initially
+    addSourceMarkers();
+    addDestinationMarkers();
+    
     sourceMarkersLayer.addTo(map);
     destinationMarkersLayer.addTo(map);
     productionMarkersLayer.addTo(map);
 
-    majorCommodities.forEach(commodity => {
-        renderArrivalFlows(commodity);
-        renderDispatchFlows(commodity);
+    const allCommodities = [...majorCommodities, ...locationOnlyCommodities];
+    allCommodities.forEach(commodity => {
+        if (currentFlowFilter === 'inbound' || currentFlowFilter === 'both') {
+            renderArrivalFlows(commodity);
+        }
+        if (currentFlowFilter === 'outbound' || currentFlowFilter === 'both') {
+            renderDispatchFlows(commodity);
+        }
     });
 }
 
@@ -2513,55 +2678,40 @@ function populateInterdependencyTables() {
 // Fixed upstream/downstream population to prevent layout shifts
 function populateUpstreamDownstream() {
     console.log("Populating upstream/downstream data...");
-    
-    const upstreamList = document.getElementById('list-upstream');
-    const downstreamList = document.getElementById('list-downstream');
-    
-    if (!upstreamList || !downstreamList) {
-        console.error("Lists not found");
+
+    const upstreamTable = document.querySelector('#tbl-upstream tbody');
+    const downstreamTable = document.querySelector('#tbl-downstream tbody');
+
+    if (!upstreamTable || !downstreamTable) {
+        console.error("Upstream/Downstream tables not found");
         return;
     }
-    
-    // Prevent layout shift by setting min-height immediately
-    upstreamList.style.minHeight = '300px';
-    downstreamList.style.minHeight = '300px';
-    
+
     // Clear and populate upstream
-    upstreamList.innerHTML = '';
-    applicationData.upstream_list.forEach((item, index) => {
-        const li = document.createElement('li');
-        li.innerHTML = `<strong>${index + 1}.</strong> ${item}`;
-        // Prevent flash of unstyled content
-        li.style.opacity = '0';
-        upstreamList.appendChild(li);
-        
-        // Fade in with delay to prevent jarring appearance
-        setTimeout(() => {
-            li.style.transition = 'opacity 0.3s ease';
-            li.style.opacity = '1';
-        }, index * 50);
+    upstreamTable.innerHTML = '';
+    applicationData.upstream_list.forEach(item => {
+        const [commodity, ...sources] = item.split(':');
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${sources.join(':')}</td>
+            <td>${commodity}</td>
+            <td>-</td>
+        `;
+        upstreamTable.appendChild(row);
     });
-    
+
     // Clear and populate downstream
-    downstreamList.innerHTML = '';
-    applicationData.downstream_list.forEach((item, index) => {
-        const li = document.createElement('li');
-        li.innerHTML = `<strong>${index + 1}.</strong> ${item}`;
-        // Prevent flash of unstyled content
-        li.style.opacity = '0';
-        downstreamList.appendChild(li);
-        
-        // Fade in with delay to prevent jarring appearance
-        setTimeout(() => {
-            li.style.transition = 'opacity 0.3s ease';
-            li.style.opacity = '1';
-        }, index * 50);
+    downstreamTable.innerHTML = '';
+    applicationData.downstream_list.forEach(item => {
+        const [commodity, ...destinations] = item.split(':');
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${destinations.join(':')}</td>
+            <td>${commodity}</td>
+            <td>-</td>
+        `;
+        downstreamTable.appendChild(row);
     });
-    
-    // Add search functionality only after content is loaded
-    setTimeout(() => {
-        addSimpleSearchOnceStable();
-    }, 100);
 }
 
 // Stable search function to prevent layout shifts
@@ -4574,31 +4724,141 @@ function initializeFlowVisibilityToggle() {
 }
 // Helper function to parse upstream/downstream data and get coordinates (a bit simplified)
 function getBasicUpstreamLocations(commodity) {
-    // This is a simplified parser. A more robust solution would use a predefined location mapping.
+    let commodityName = commodity.replace(/_/g, " ");
+    if (commodity === 'pomegranate')  commodityName = 'anar';
+    if (commodity === 'dragon_fruit') commodityName = 'dragon';
+    if (commodity === 'grapes_black') commodityName = 'grapes (black)';
+    if (commodity === 'grapes_white') commodityName = 'grapes (white)';
+
+    const entry = applicationData.upstream_list.find(item => item.toLowerCase().startsWith(commodityName));
+    if (!entry) return [];
+
     const locations = [];
-    const upstreamEntry = applicationData.upstream_list.find(item => item.toLowerCase().startsWith(commodity.replace(/_/g, " ")));
-    if (upstreamEntry) {
-        const parts = upstreamEntry.split(':')[1];
-        if (parts) {
-            const places = parts.split(',').map(p => p.trim());
-            // In a real app, you'd look up coordinates for these places. We'll use some dummy coordinates for now.
-            if (places.includes("Local")) locations.push({ source: "Local Production", coordinates: [17.8, 78.9] });
-            if (places.find(p => p.includes("Maharashtra"))) locations.push({ source: "Maharashtra", coordinates: [19.8762, 75.3433] });
-            if (places.find(p => p.includes("Karnataka"))) locations.push({ source: "Karnataka", coordinates: [15.3173, 75.7139] });
-            if (places.find(p => p.includes("Andhra Pradesh"))) locations.push({ source: "Andhra Pradesh", coordinates: [15.9129, 79.7400] });
+    const parts = entry.split(':')[1].split(/,|\(|\)/).map(p => p.trim()).filter(p => p);
+
+    parts.forEach(part => {
+        const lowerPart = part.toLowerCase();
+        if (lowerPart.includes("local")) locations.push({ source: "Local", coordinates: [17.3850, 78.4867] });
+        else if (lowerPart.includes("south africa")) locations.push({ source: "South Africa", coordinates: [-30.5595, 22.9375] });
+        else if (lowerPart.includes("chile")) locations.push({ source: "Chile", coordinates: [-35.6751, -71.5430] });
+        else if (lowerPart.includes("aurangabad")) locations.push({ source: "Aurangabad", coordinates: [19.8762, 75.3433] });
+        else if (lowerPart.includes("pune")) locations.push({ source: "Pune", coordinates: [18.5204, 73.8567] });
+        else if (lowerPart.includes("nagpur")) locations.push({ source: "Nagpur", coordinates: [21.1458, 79.0882] });
+        else if (lowerPart.includes("hingoli")) locations.push({ source: "Hingoli", coordinates: [19.7179, 77.1494] });
+        else if (lowerPart.includes("new zealand")) locations.push({ source: "New Zealand", coordinates: [-40.9006, 174.8860] });
+        else if (lowerPart.includes("washington")) locations.push({ source: "Washington (USA)", coordinates: [47.7511, -120.7401] });
+        else if (lowerPart.includes("iran")) locations.push({ source: "Iran", coordinates: [32.4279, 53.6880] });
+        else if (lowerPart.includes("delhi")) locations.push({ source: "Delhi", coordinates: [28.6139, 77.2090] });
+        else if (lowerPart.includes("shimla")) locations.push({ source: "Shimla", coordinates: [31.1048, 77.1734] });
+        else if (lowerPart.includes("kashmir")) locations.push({ source: "Kashmir", coordinates: [34.0837, 74.7973] });
+        else if (lowerPart.includes("solapur")) locations.push({ source: "Solapur", coordinates: [17.6599, 75.9064] });
+        else if (lowerPart.includes("pandaripur")) locations.push({ source: "Pandharpur", coordinates: [17.6805, 75.3305] });
+        else if (lowerPart.includes("sangli")) locations.push({ source: "Sangli", coordinates: [16.8524, 74.5815] });
+        else if (lowerPart.includes("karnataka")) locations.push({ source: "Karnataka", coordinates: [15.3173, 75.7139] });
+        else if (lowerPart.includes("medak")) locations.push({ source: "Medak", coordinates: [18.0460, 78.2699] });
+        else if (lowerPart.includes("bangalore")) locations.push({ source: "Bangalore", coordinates: [12.9716, 77.5946] });
+        else if (lowerPart.includes("tuljapur")) locations.push({ source: "Tuljapur", coordinates: [18.0061, 76.0695] });
+        else if (lowerPart.includes("osmanabad")) locations.push({ source: "Osmanabad", coordinates: [18.1719, 76.0411] });
+        else if (lowerPart.includes("australia")) locations.push({ source: "Australia", coordinates: [-25.2744, 133.7751] });
+        else if (lowerPart.includes("china")) locations.push({ source: "China", coordinates: [35.8617, 104.1954] });
+        else if (lowerPart.includes("kerala")) locations.push({ source: "Kerala", coordinates: [10.8505, 76.2711] });
+        else if (lowerPart.includes("mahaboob nagar") || lowerPart.includes("mahabubnagar")) locations.push({ source: "Mahabubnagar", coordinates: [16.7480, 78.0036] });
+        else if (lowerPart.includes("nalgonda")) locations.push({ source: "Nalgonda", coordinates: [17.0575, 79.2684] });
+        else if (lowerPart.includes("r.r. dist.")) locations.push({ source: "Ranga Reddy", coordinates: [17.3890, 78.0796] });
+        else if (lowerPart.includes("nizamabad")) locations.push({ source: "Nizamabad", coordinates: [18.6725, 78.0941] });
+        else if (lowerPart.includes("nagar kurnool")) locations.push({ source: "Nagar Kurnool", coordinates: [16.4827, 78.3247] });
+        else if (lowerPart.includes("gadwal")) locations.push({ source: "Gadwal", coordinates: [16.2335, 77.7950] });
+        else if (lowerPart.includes("nanded")) locations.push({ source: "Nanded", coordinates: [19.1383, 77.3210] });
+        else if (lowerPart.includes("rajamundry")) locations.push({ source: "Rajahmundry", coordinates: [17.0005, 81.8040] });
+        else if (lowerPart.includes("eluru")) locations.push({ source: "Eluru", coordinates: [16.7107, 81.0952] });
+        else if (lowerPart.includes("kakinada")) locations.push({ source: "Kakinada", coordinates: [16.9891, 82.2475] });
+        else if (lowerPart.includes("tanuku")) locations.push({ source: "Tanuku", coordinates: [16.7533, 81.6815] });
+        else if (lowerPart.includes("warangal")) locations.push({ source: "Warangal", coordinates: [17.9689, 79.5941] });
+        else if (lowerPart.includes("anantapur") || lowerPart.includes("ananthapur")) locations.push({ source: "Anantapur", coordinates: [14.6819, 77.6006] });
+        else if (lowerPart.includes("ulavapadu")) locations.push({ source: "Ulavapadu", coordinates: [15.1624, 80.0770] });
+        else if (lowerPart.includes("ibrahimpatnam")) locations.push({ source: "Ibrahimpatnam", coordinates: [17.2574, 78.7047] });
+        else if (lowerPart.includes("turkapalli")) locations.push({ source: "Turkapalli", coordinates: [17.6089, 78.6370] });
+        else if (lowerPart.includes("khammam")) locations.push({ source: "Khammam", coordinates: [17.2473, 80.1514] });
+        else if (lowerPart.includes("nuzvid")) locations.push({ source: "Nuzvid", coordinates: [16.7885, 80.8450] });
+        else if (lowerPart.includes("west godavari")) locations.push({ source: "West Godavari", coordinates: [16.7107, 81.0952] });
+        else if (lowerPart.includes("italy")) locations.push({ source: "Italy", coordinates: [41.8719, 12.5674] });
+        else if (lowerPart.includes("france")) locations.push({ source: "France", coordinates: [46.2276, 2.2137] });
+        else if (lowerPart.includes("spain")) locations.push({ source: "Spain", coordinates: [40.4637, -3.7492] });
+        else if (lowerPart.includes("usa")) locations.push({ source: "USA", coordinates: [37.0902, -95.7129] });
+        else if (lowerPart.includes("bhubaneshwar")) locations.push({ source: "Bhubaneswar", coordinates: [20.2961, 85.8245] });
+        else if (lowerPart.includes("mahabaleshwar")) locations.push({ source: "Mahabaleshwar", coordinates: [17.9307, 73.6477] });
+        else if (lowerPart.includes("punjab")) locations.push({ source: "Punjab", coordinates: [31.1471, 75.3412] });
+        else if (lowerPart.includes("haryana")) locations.push({ source: "Haryana", coordinates: [29.0588, 76.0856] });
+        else if (lowerPart.includes("lucknow")) locations.push({ source: "Lucknow", coordinates: [26.8467, 80.9462] });
+        else if (lowerPart.includes("vikarabad")) locations.push({ source: "Vikarabad", coordinates: [17.3383, 77.9048] });
+        else if (lowerPart.includes("visakhapatnam")) locations.push({ source: "Visakhapatnam", coordinates: [17.6868, 83.2185] });
+        else if (lowerPart.includes("bengal/bihar")) {
+            locations.push({ source: "West Bengal", coordinates: [22.9868, 87.8550] });
+            locations.push({ source: "Bihar", coordinates: [25.0961, 85.3131] });
         }
-    }
+        else if (lowerPart.includes("madanapalle")) locations.push({ source: "Madanapalle", coordinates: [13.5503, 78.5029] });
+        else if (lowerPart.includes("iran/saudi")) {
+            locations.push({ source: "Iran", coordinates: [32.4279, 53.6880] });
+            locations.push({ source: "Saudi Arabia", coordinates: [23.8859, 45.0792] });
+        }
+        else if (lowerPart.includes("karnataka/kerala/tamil nadu/burma")) {
+            locations.push({ source: "Karnataka", coordinates: [15.3173, 75.7139] });
+            locations.push({ source: "Kerala", coordinates: [10.8505, 76.2711] });
+            locations.push({ source: "Tamil Nadu", coordinates: [11.1271, 78.6569] });
+            locations.push({ source: "Myanmar", coordinates: [21.9162, 95.9560] });
+        }
+    });
     return locations;
 }
 
 function getBasicDownstreamLocations(commodity) {
+    let commodityName = commodity.replace(/_/g, " ");
+    if (commodity === 'pomegranate') commodityName = 'anar';
+    if (commodity === 'dragon_fruit') commodityName = 'dragon';
+    if (commodity === 'grapes_black') commodityName = 'grapes (black)';
+    if (commodity === 'grapes_white') commodityName = 'grapes (white)';
+
+    const entry = applicationData.downstream_list.find(item => item.toLowerCase().startsWith(commodityName));
+    if (!entry) return [];
+
     const locations = [];
-    const downstreamEntry = applicationData.downstream_list.find(item => item.toLowerCase().startsWith(commodity.replace(/_/g, " ")));
-    if (downstreamEntry && downstreamEntry.toLowerCase().includes("local sales")) {
-        // For "Others", most go to local sales, which we can represent as a flow within the state.
-        locations.push({ destination: "Telangana (Local)", coordinates: [18.1124, 79.0193] });
-    }
+    const parts = entry.split(':')[1].split(/,|\&/).map(p => p.trim()).filter(p => p && !p.toLowerCase().includes("etc."));
+
+    parts.forEach(part => {
+        const lowerPart = part.toLowerCase();
+        if (lowerPart.includes("local sales")) {
+            locations.push({ destination: "Telangana (Local)", coordinates: [17.3850, 78.4867] });
+        } else if (lowerPart.includes("delhi")) {
+            locations.push({ destination: "Delhi", coordinates: [28.6139, 77.2090] });
+        } else if (lowerPart.includes("uttar pradesh")) {
+            locations.push({ destination: "Uttar Pradesh", coordinates: [26.8467, 80.9462] });
+        } else if (lowerPart.includes("gujarat")) {
+            locations.push({ destination: "Gujarat", coordinates: [22.2587, 71.1924] });
+        } else if (lowerPart.includes("haryana")) {
+            locations.push({ destination: "Haryana", coordinates: [29.0588, 76.0856] });
+        } else if (lowerPart.includes("jaipur")) {
+            locations.push({ destination: "Jaipur", coordinates: [26.9124, 75.7873] });
+        } else if (lowerPart.includes("mathura")) {
+            locations.push({ destination: "Mathura", coordinates: [27.4924, 77.6737] });
+        } else if (lowerPart.includes("bhopal")) {
+            locations.push({ destination: "Bhopal", coordinates: [23.2599, 77.4126] });
+        } else if (lowerPart.includes("lucknow")) {
+            locations.push({ destination: "Lucknow", coordinates: [26.8467, 80.9462] });
+        } else if (lowerPart.includes("ujjain")) {
+            locations.push({ destination: "Ujjain", coordinates: [23.1765, 75.7885] });
+        } else if (lowerPart.includes("baroda")) {
+            locations.push({ destination: "Baroda (Vadodara)", coordinates: [22.3072, 73.1812] });
+        } else if (lowerPart.includes("maharashtra")) {
+            locations.push({ destination: "Maharashtra", coordinates: [19.7515, 75.7139] });
+        } else if (lowerPart.includes("punjab")) {
+            locations.push({ destination: "Punjab", coordinates: [31.1471, 75.3412] });
+        } else if (lowerPart.includes("bombay") || lowerPart.includes("mumbai")) {
+            locations.push({ destination: "Mumbai", coordinates: [19.0760, 72.8777] });
+        }
+    });
     return locations;
 }
 
 console.log("App.js loaded successfully");
+
+
