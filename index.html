@@ -18,6 +18,11 @@
     <h1>Telangana Commodity Flow Analysis</h1>
     <p>Digital mapping of commodity flows and inter‑market linkages — Gaddiannaram/Batasingaram Market</p>
     <div class="commodity-filter"></div>
+    <div class="flow-filter">
+        <button class="flow-btn active" data-flow="both">Both</button>
+        <button class="flow-btn" data-flow="inbound">Arrival</button>
+        <button class="flow-btn" data-flow="outbound">Dispatch</button>
+    </div>
   </div>
 </header>
 
@@ -71,10 +76,10 @@
         <span class="legend-marker primary-hub"></span> 🎯 Hub
       </div>
       <div class="legend-item">
-        <span class="legend-marker production"></span> 🌾 Source
+        <span class="legend-marker production"></span> 📍 Source
       </div>
       <div class="legend-item">
-        <span class="legend-marker destination"></span> 🏪 Destination
+        <span class="legend-marker destination"></span> 🎯 Destination
       </div>
     </div>
   </div>
@@ -431,12 +436,34 @@
   
   <div class="analysis-section">
     <h4>🔼 Upstream (Primary Sources)</h4>
-    <ul class="flat-list" id="list-upstream"></ul>
+    <div class="dependency-table">
+        <table id="tbl-upstream">
+            <thead>
+                <tr>
+                    <th>Source</th>
+                    <th>Commodity</th>
+                    <th>Volume (MT)</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
   </div>
 
   <div class="analysis-section">
     <h4>🔽 Downstream (Primary Destinations)</h4>
-    <ul class="flat-list" id="list-downstream"></ul>
+    <div class="dependency-table">
+        <table id="tbl-downstream">
+            <thead>
+                <tr>
+                    <th>Destination</th>
+                    <th>Commodity</th>
+                    <th>Volume (MT)</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
   </div>
 </div>
 
