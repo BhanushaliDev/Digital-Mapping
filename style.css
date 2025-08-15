@@ -1721,7 +1721,7 @@ p {
 .flat-list{list-style:none;padding:0;margin:0}
 .flat-list li{margin:6px 0;font-size:12px}
 .app-header {
-  background-color: var(--color-surface);
+  background-color: rgba(1, 50, 32, 0.8); /* Dark green fallback */
   background-image: url('assets/batasingaram-market.jpg'); /* Add your image path */
   background-size: cover;
   background-position: center;
@@ -7033,7 +7033,8 @@ html, body {
 
 .main-content {
   display: flex;
-  flex-grow: 1;
+  flex: 1; /* Use flex shorthand to allow grow and shrink */
+  overflow: hidden; /* Prevent overflow issues */
 }
 
 .map-container {
@@ -7056,7 +7057,3 @@ html, body {
 .side-panel {
   width: 30%;
 }
-
-
-
-
