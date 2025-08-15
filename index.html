@@ -10,22 +10,34 @@
               </script> 
               <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js">
               </script> 
+               <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script> 
               </head> 
               <body> 
                 <div class="app-container">
               <header class="app-header">
-  <div class="container">
-    <h1>Telangana Commodity Flow Analysis</h1>
-    <p>Digital mapping of commodity flows and inter‑market linkages — Gaddiannaram/Batasingaram Market</p>
-    <div class="commodity-filter"></div>
-    <div class="flow-filter">
-        <button class="flow-btn active" data-flow="both">Both</button>
-        <button class="flow-btn" data-flow="inbound">Arrival</button>
-        <button class="flow-btn" data-flow="outbound">Dispatch</button>
-    </div>
-  </div>
-</header>
-
+                <div class="header-container">
+                  <div class="header-left">
+                    <div class="header-title">
+                      <h1>Telangana Commodity Flow Analysis</h1>
+                      <p>Digital mapping of commodity flows and inter‑market linkages — Gaddiannaram/Batasingaram Market</p>
+                    </div>
+                    <div class="excel-upload-container">
+                        <label for="excel-file">Upload Excel Data:</label>
+                        <input type="file" id="excel-file" accept=".xlsx, .xls">
+                    </div>
+                  </div>
+                  <div class="header-right">
+                    <div class="header-controls">
+                      <div class="commodity-filter"></div>
+                      <div class="flow-filter">
+                          <button class="flow-btn active" data-flow="both">Both</button>
+                          <button class="flow-btn" data-flow="inbound">Arrival</button>
+                          <button class="flow-btn" data-flow="outbound">Dispatch</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </header>
 <div class="main-content">
   <section class="map-container">
     <div id="map" aria-label="Commodity Flow Map"></div>
@@ -103,6 +115,8 @@
     </button>
 </div>
   </section>
+
+  <div class="resizer" id="resizer"></div>
 
   <aside class="side-panel">
     <button id="exit-panel-fullscreen-btn" class="screen-control-btn" title="Exit Fullscreen Panel">
@@ -440,8 +454,8 @@
         <table id="tbl-upstream">
             <thead>
                 <tr>
-                    <th>Source</th>
                     <th>Commodity</th>
+                    <th>Source</th>
                     <th>Volume (MT)</th>
                 </tr>
             </thead>
@@ -456,8 +470,8 @@
         <table id="tbl-downstream">
             <thead>
                 <tr>
-                    <th>Destination</th>
                     <th>Commodity</th>
+                    <th>Destination</th>
                     <th>Volume (MT)</th>
                 </tr>
             </thead>
