@@ -1,4 +1,3 @@
-
 :root {
   /* Colors */
   --color-background: rgba(252, 252, 249, 1);
@@ -675,6 +674,7 @@ select.form-control {
   --color-warning: rgba(168, 75, 47, 1);
   --color-info: rgba(98, 108, 113, 1);
   --color-focus-ring: rgba(33, 128, 141, 0.4);
+  --color-focus-ring: rgba(33, 128, 141, 0.4);
   --color-select-caret: rgba(19, 52, 59, 0.8);
 
   /* Common style patterns */
@@ -906,7 +906,7 @@ p {
 .app-header {
   background-color: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
-  padding: var(--space-16) 0;
+  padding: var(--space-8) 0;
   box-shadow: var(--shadow-sm);
 }
 
@@ -1727,7 +1727,7 @@ p {
   background-position: center;
   background-repeat: no-repeat;
   border-bottom: 1px solid var(--color-border);
-  padding: var(--space-16) 0;
+  padding: 0;
   box-shadow: var(--shadow-sm);
   position: relative;
 }
@@ -1758,11 +1758,13 @@ p {
 .app-header h1 {
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   font-weight: var(--font-weight-bold);
+  color: var(--color-text); /* Explicitly set text color */
 }
 
 .app-header p {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   background: rgba(255, 255, 255, 0.2);
+  color: var(--color-text-secondary); /* Explicitly set text color */
   padding: var(--space-8) var(--space-12);
   border-radius: var(--radius-base);
   backdrop-filter: blur(2px);
@@ -5294,7 +5296,11 @@ p {
 
 /* Panel Fullscreen Mode */
 .main-content[data-layout="panel-fullscreen"] .map-container {
-    display: none;
+    flex: 0 0 0px !important; /* Collapse the map instead of hiding it */
+    width: 0 !important;
+    min-width: 0 !important;
+    padding: 0;
+    border: none;
 }
 
 .main-content[data-layout="panel-fullscreen"] .side-panel {
@@ -6925,6 +6931,132 @@ html, body {
     min-width: unset;
   }
 }
+.excel-upload-container {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.excel-upload-container label {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+}
+
+#excel-file {
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-sm);
+    padding: 5px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+}
+/* Header Layout */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Align items vertically */
+  padding: 8px 24px 8px 0; /* Remove left padding */
+  gap: 16px;
+}
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative; /* Add position relative */
+    z-index: 2; /* Ensure this is also above the overlay */
+    padding-left: 24px; /* Add padding to the left */
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.header-title {
+  flex: 1 1 auto;
+  text-align: left;
+}
+
+.header-title h1 {
+  font-size: 24px;
+  margin: 0 0 4px 0;
+}
+
+.header-title p {
+  font-size: 14px;
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.header-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  position: relative; /* Add position relative */
+  z-index: 2; /* Ensure controls are above the overlay */
+}
+
+.commodity-filter, .flow-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.flow-btn {
+    padding: 8px 12px;
+    font-size: 12px;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+    color: var(--color-text-secondary);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+#commodity-button-row .filter-btn {
+    padding: 4px 8px;
+    font-size: 11px;
+}
+
+.excel-upload-container label {
+    font-size: 12px;
+}
+
+#excel-file {
+    font-size: 12px;
+}
+
+.main-content {
+  display: flex;
+  flex-grow: 1;
+}
+
+.map-container {
+  width: 70%;
+  position: relative;
+}
+
+.resizer {
+  width: 8px;
+  cursor: ew-resize;
+  background-color: #e5e7eb;
+  transition: background-color 0.2s ease;
+}
+
+.resizer:hover {
+    background-color: var(--color-primary);
+}
+
+
+.side-panel {
+  width: 30%;
+}
+
 
 
 
