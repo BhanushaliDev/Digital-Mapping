@@ -987,6 +987,38 @@ complete_price_trends: {
     orange: { "2019_20": 26952, "2020_21": 28763, "2021_22": 19908, "2022_23": 29068, "2023_24": 46956, "2024_25": 39346 }
   },
 
+  complete_arrivals_data: [
+    { commodity: "Mosambi", arrivals: [41246, 34859, 46132, 62828, 64498, 64938] },
+    { commodity: "Mango", arrivals: [89508, 71079, 109680, 100248, 118769, 122160] },
+    { commodity: "Watermelon", arrivals: [63984, 33989, 32436, 67738, 67496, 63400] },
+    { commodity: "Musk Melon", arrivals: [6884, 7580, 7832, 16404, 16574, 18030] },
+    { commodity: "Papaya", arrivals: [8797, 11429, 15719, 20897, 25843, 28512] },
+    { commodity: "Pineapple", arrivals: [17634, 14703, 16078, 15253, 16193, 14231] },
+    { commodity: "Orange", arrivals: [26952, 28763, 19908, 29068, 46956, 39346] },
+    { commodity: "Apple", arrivals: [54634, 34397, 27186, 58640, 33887, 34437] },
+    { commodity: "Anar", arrivals: [13221, 11135, 16637, 20003, 28692, 22710] },
+    { commodity: "Grapes", arrivals: [4541, 6837, 7195, 7218, 5512, 6981] },
+    { commodity: "Grapes Black", arrivals: [6470, 5405, 2062, 4465, 5919, 2855] },
+    { commodity: "Ber", arrivals: [3558, 2163, 309, 4051, 2389, 1986] },
+    { commodity: "Guava", arrivals: [5468, 6207, 4688, 5404, 5518, 5961] },
+    { commodity: "Plums", arrivals: [4740, 1099, 4655, 3529, 4528, 4455] },
+    { commodity: "Naspathi", arrivals: [338, 218, 328, 560, 478, 583] },
+    { commodity: "Kiwi", arrivals: [2722, 3087, 1261, 1054, 679, 1007] },
+    { commodity: "Banana", arrivals: [356, 400, 80, 1, 0, -24] },
+    { commodity: "Dragon", arrivals: [956, 371, 319, 876, 1542, 1294] },
+    { commodity: "Fig", arrivals: [115, 45, 35, 2, 0, -12] },
+    { commodity: "Kinnow", arrivals: [5836, 6924, 1196, 5718, 11246, 7486] },
+    { commodity: "Custard Apple", arrivals: [2122, 1960, 441, 1847, 3930, 2173] },
+    { commodity: "Sapota", arrivals: [2313, 2746, 3214, 4357, 4274, 3256] },
+    { commodity: "Straw Berry", arrivals: [222, 69, 25, 599, 433, 157] },
+    { commodity: "Jack Fruit", arrivals: [688, 227, 893, 80, 109, 152] },
+    { commodity: "Cherry", arrivals: [0, 0, 0, 61, 41, 56] },
+    { commodity: "Lichi", arrivals: [0, 0, 0, 65, 7, 35] },
+    { commodity: "Cancer fruit", arrivals: [0, 0, 0, 11, 55, 42] },
+    { commodity: "Dates", arrivals: [0, 0, 0, 78, 57, 74] },
+    { commodity: "Total", arrivals: [363305, 363304, 285691, 318307, 431052, 446281], isTotal: true }
+  ],
+
 // Consolidated outbound dependencies with volume data integrated
 consolidated_outbound_dependencies: {
   mango: [
@@ -1165,6 +1197,8 @@ document.addEventListener("DOMContentLoaded", function() {
         populateUpstreamDownstream();
         initializeSeasonality();
         initializePriceAndTrends(); // Add this line
+        populateArrivalTrendsTable();
+        initializeArrivalTrends();
         
         setTimeout(() => {
             initializeCharts();
@@ -2983,71 +3017,33 @@ function populateUpstreamDownstream() {
     });
 }
 
-// Stable search function to prevent layout shifts
-function addSimpleSearchOnceStable() {
-    // Check if search already exists for upstream
-    if (!document.getElementById('upstream-search')) {
-        const upstreamContainer = document.getElementById('list-upstream').parentElement;
-        const upstreamSearch = document.createElement('div');
-        upstreamSearch.innerHTML = `
-            <input type="text" id="upstream-search" placeholder="🔍 Search upstream..." 
-                   class="simple-search-input">
-            <div class="search-count" id="upstream-count">${applicationData.upstream_list.length} items</div>
-        `;
-        upstreamSearch.className = 'simple-search-bar';
-        upstreamContainer.insertBefore(upstreamSearch, document.getElementById('list-upstream'));
-        
-        // Add search functionality
-        document.getElementById('upstream-search').addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            const items = document.getElementById('list-upstream').querySelectorAll('li');
-            let visibleCount = 0;
-            
-            items.forEach(item => {
-                if (item.textContent.toLowerCase().includes(searchTerm)) {
-                    item.style.display = 'list-item';
-                    visibleCount++;
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-            
-            document.getElementById('upstream-count').textContent = 
-                searchTerm === '' ? `${applicationData.upstream_list.length} items` : `${visibleCount} of ${applicationData.upstream_list.length} items`;
+function addSearchToTable(tableId, searchInputId, countElementId) {
+    const searchInput = document.getElementById(searchInputId);
+    const table = document.getElementById(tableId);
+    const countElement = document.getElementById(countElementId);
+
+    if (!searchInput || !table || !countElement) return;
+
+    const tableRows = table.querySelectorAll('tbody tr');
+    const initialCount = tableRows.length;
+    countElement.textContent = `${initialCount} items`;
+
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        let visibleCount = 0;
+
+        tableRows.forEach(row => {
+            const commodityCell = row.querySelector('td:first-child');
+            if (commodityCell && commodityCell.textContent.toLowerCase().includes(searchTerm)) {
+                row.style.display = '';
+                visibleCount++;
+            } else {
+                row.style.display = 'none';
+            }
         });
-    }
-    
-    // Check if search already exists for downstream
-    if (!document.getElementById('downstream-search')) {
-        const downstreamContainer = document.getElementById('list-downstream').parentElement;
-        const downstreamSearch = document.createElement('div');
-        downstreamSearch.innerHTML = `
-            <input type="text" id="downstream-search" placeholder="🔍 Search downstream..." 
-                   class="simple-search-input">
-            <div class="search-count" id="downstream-count">${applicationData.downstream_list.length} items</div>
-        `;
-        downstreamSearch.className = 'simple-search-bar';
-        downstreamContainer.insertBefore(downstreamSearch, document.getElementById('list-downstream'));
-        
-        // Add search functionality
-        document.getElementById('downstream-search').addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            const items = document.getElementById('list-downstream').querySelectorAll('li');
-            let visibleCount = 0;
-            
-            items.forEach(item => {
-                if (item.textContent.toLowerCase().includes(searchTerm)) {
-                    item.style.display = 'list-item';
-                    visibleCount++;
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-            
-            document.getElementById('downstream-count').textContent = 
-                searchTerm === '' ? `${applicationData.downstream_list.length} items` : `${visibleCount} of ${applicationData.downstream_list.length} items`;
-        });
-    }
+
+        countElement.textContent = searchTerm === '' ? `${initialCount} items` : `${visibleCount} of ${initialCount} items`;
+    });
 }
 
 // Enhanced price chart creation with WORKING transparent fill area - CORRECTED VERSION
@@ -3729,7 +3725,23 @@ function initializeSeasonality() {
   
   // Initialize the commodity selector
   const commoditySelector = document.getElementById('commodity-selector');
-  if (commoditySelector) {
+  const searchInput = document.getElementById('seasonality-search');
+  
+  if (commoditySelector && searchInput) {
+    const originalOptions = Array.from(commoditySelector.options);
+
+    searchInput.addEventListener('input', () => {
+      const searchTerm = searchInput.value.toLowerCase();
+      const filteredOptions = originalOptions.filter(option =>
+        option.textContent.toLowerCase().includes(searchTerm) || option.value === 'all'
+      );
+      
+      commoditySelector.innerHTML = '';
+      filteredOptions.forEach(option => {
+        commoditySelector.appendChild(option.cloneNode(true));
+      });
+    });
+
     commoditySelector.addEventListener('change', handleCommoditySelection);
     
     // Initialize with all commodities view
@@ -3932,6 +3944,25 @@ function populateSeasonalitySummaryTable() {
 function initializePriceAndTrends() {
     console.log("Initializing Price and Trends...");
     
+    const searchInput = document.getElementById('price-search');
+    const commoditySelect = document.getElementById('price-commodity-filter');
+
+    if (searchInput && commoditySelect) {
+        const originalOptions = Array.from(commoditySelect.options);
+        
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filteredOptions = originalOptions.filter(option =>
+                option.textContent.toLowerCase().includes(searchTerm) || option.value === 'all'
+            );
+
+            commoditySelect.innerHTML = '';
+            filteredOptions.forEach(option => {
+                commoditySelect.appendChild(option.cloneNode(true));
+            });
+        });
+    }
+
     // Validate that we have price data
     if (!applicationData.complete_price_trends || Object.keys(applicationData.complete_price_trends).length === 0) {
         console.error("Price trends data missing from applicationData");
@@ -5094,6 +5125,145 @@ function getBasicDownstreamLocations(commodity) {
         }
     });
     return locations;
+}
+
+function populateArrivalTrendsTable() {
+  const tbody = document.querySelector('#tbl-arrival-trends tbody');
+  if (!tbody) return;
+
+  tbody.innerHTML = '';
+  applicationData.complete_arrivals_data.forEach((item, index) => {
+    const row = document.createElement('tr');
+    if (item.isTotal) {
+      row.classList.add('footfall-total'); // Re-using style from another table
+    }
+    let cells = `<td>${item.isTotal ? '<strong>Total</strong>' : index + 1}</td><td><strong>${item.commodity}</strong></td>`;
+    item.arrivals.forEach(arrival => {
+      cells += `<td>${arrival.toLocaleString()}</td>`;
+    });
+    row.innerHTML = cells;
+    tbody.appendChild(row);
+  });
+}
+
+function initializeArrivalTrends() {
+  const commoditySelector = document.getElementById('arrival-commodity-selector');
+  const searchInput = document.getElementById('arrival-search');
+
+  if (commoditySelector && searchInput) {
+    // Populate selector
+    let originalOptions = [];
+    const allOption = document.createElement('option');
+    allOption.value = 'all';
+    allOption.textContent = 'All Major Commodities';
+    originalOptions.push(allOption);
+
+    applicationData.complete_arrivals_data.forEach((item, index) => {
+      if (!item.isTotal) {
+        const option = document.createElement('option');
+        option.value = index;
+        option.textContent = item.commodity;
+        originalOptions.push(option);
+      }
+    });
+
+    commoditySelector.innerHTML = '';
+    originalOptions.forEach(option => {
+      commoditySelector.appendChild(option.cloneNode(true));
+    });
+
+    searchInput.addEventListener('input', () => {
+      const searchTerm = searchInput.value.toLowerCase();
+      const filteredOptions = originalOptions.filter(option =>
+        option.textContent.toLowerCase().includes(searchTerm) || option.value === 'all'
+      );
+
+      commoditySelector.innerHTML = '';
+      filteredOptions.forEach(option => {
+        commoditySelector.appendChild(option.cloneNode(true));
+      });
+    });
+
+    commoditySelector.addEventListener('change', (e) => {
+      updateArrivalTrendsChart(e.target.value);
+    });
+
+    // Initial chart
+    updateArrivalTrendsChart('all');
+  }
+}
+
+function updateArrivalTrendsChart(selectedIndex) {
+  const canvas = document.getElementById('arrival-trends-chart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  
+  if (charts.arrivalTrends) {
+    charts.arrivalTrends.destroy();
+  }
+
+  const years = ["2019-20", "2020-21", "2021-22", "2022-23", "2023-24", "2024-25"];
+  let datasets = [];
+  let title = 'Year-wise Arrival of Fruits';
+
+  if (selectedIndex === 'all') {
+    // Show top 5 commodities for overview
+    const topCommodities = applicationData.complete_arrivals_data.slice(0, 5);
+    datasets = topCommodities.map((item, index) => {
+      const commodityKey = item.commodity.toLowerCase().replace(/ /g, '_');
+      return {
+        label: item.commodity,
+        data: item.arrivals,
+        borderColor: applicationData.colors[commodityKey] || Object.values(applicationData.colors)[index % Object.keys(applicationData.colors).length],
+        fill: false,
+        tension: 0.1
+      };
+    });
+    title = 'Year-wise Arrival of Top 5 Fruits';
+  } else {
+    const selectedData = applicationData.complete_arrivals_data[selectedIndex];
+    const commodityKey = selectedData.commodity.toLowerCase().replace(/ /g, '_');
+    datasets.push({
+      label: selectedData.commodity,
+      data: selectedData.arrivals,
+      borderColor: applicationData.colors[commodityKey] || '#3e95cd',
+      backgroundColor: (applicationData.colors[commodityKey] || '#3e95cd') + '30',
+      fill: true,
+      tension: 0.1
+    });
+    title = `Year-wise Arrival of ${selectedData.commodity}`;
+  }
+  
+  document.getElementById('arrival-chart-title').textContent = title;
+
+  charts.arrivalTrends = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: years,
+      datasets: datasets
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: false,
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: false,
+          title: {
+            display: true,
+            text: 'Arrivals in Tonne'
+          }
+        }
+      }
+    }
+  });
 }
 
 console.log("App.js loaded successfully");
