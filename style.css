@@ -1721,8 +1721,8 @@ p {
 .flat-list{list-style:none;padding:0;margin:0}
 .flat-list li{margin:6px 0;font-size:12px}
 .app-header {
-  background-color: rgba(1, 50, 32, 0.8); /* Dark green fallback */
-  background-image: url('assets/batasingaram-market.jpg'); /* Add your image path */
+  background-color: #f0f9ff; /* Fallback color */
+  background-image: url('assets/header/batasingaram-market.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -7056,4 +7056,112 @@ html, body {
 
 .side-panel {
   width: 30%;
+}
+
+.market-popup {
+  width: 300px;
+}
+
+.market-popup h3 {
+  margin-top: 0;
+  font-size: 1.2em;
+}
+
+.market-images {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.market-images img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.market-details p {
+  margin: 5px 0;
+}
+
+.app-header {
+  background-color: #f0f9ff; /* Fallback color */
+  background-image: url('assets/header/batasingaram-market.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.market-popup .compact-popup-content {
+min-width: 280px;
+}
+
+.market-popup .popup-grid {
+display: grid;
+grid-template-columns: 1.2fr 1.8fr;
+gap: 10px;
+}
+
+.market-popup .popup-stats p {
+margin: 4px 0;
+font-size: 12px;
+}
+
+.market-popup .popup-gallery {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 6px;
+align-content: start;
+}
+
+.market-popup .popup-image {
+width: 100%;
+aspect-ratio: 4 / 3;
+border-radius: 8px;
+overflow: hidden;
+border: 1px solid rgba(0,0,0,0.1);
+background: #f8fafc;
+}
+
+.market-popup .popup-image img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+display: block;
+}
+
+.market-popup .popup-image.empty {
+display: flex;
+align-items: center;
+justify-content: center;
+color: #6b7280;
+font-size: 12px;
+background: #f3f4f6;
+}
+
+@media (max-width: 768px) {
+.market-popup .popup-grid {
+grid-template-columns: 1fr;
+}
+.market-popup .popup-gallery {
+grid-template-columns: 1fr 1fr;
+}
+}
+
+.destination-marker-enhanced {
+  background: var(--color-surface);
+  border-radius: 50%;
+  border: 2px solid var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.destination-marker-enhanced:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+
+.dest-icon {
+  font-size: 24px;
 }
