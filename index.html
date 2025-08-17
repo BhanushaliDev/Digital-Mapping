@@ -129,9 +129,10 @@
       <button class="tab-btn" data-target="tab-inbound"data-priority="3">Inbound</button>
        <button class="tab-btn" data-tab="upstream-downstream"data-priority="4">Upstream/Downstream</button>
       <button class="tab-btn" data-target="tab-flows"data-priority="5">Flow Patterns</button>
-      <button class="tab-btn" data-target="tab-seasonality"data-priority="6">Seasonality</button>
-      <button class="tab-btn" data-tab="price"data-priority="7">Price & Trends</button>
-      <button class="tab-btn" data-target="tab-state"data-priority="8">State Area & Production</button>
+      <button class="tab-btn" data-target="tab-arrival-trends" data-priority="6">Arrival trends</button>
+      <button class="tab-btn" data-target="tab-seasonality"data-priority="7">Seasonality</button>
+      <button class="tab-btn" data-tab="price"data-priority="8">Price & Trends</button>
+      <button class="tab-btn" data-target="tab-state"data-priority="9">State Area & Production</button>
     </div>
     <div class="tab-navigation">
       <button id="prev-tab-btn" class="nav-button prev-btn" title="Previous Tab">
@@ -450,13 +451,16 @@
   
   <div class="analysis-section">
     <h4>🔼 Upstream (Primary Sources)</h4>
+    <div class="simple-search-bar">
+        <input type="text" id="upstream-search" placeholder="🔍 Search upstream..." class="simple-search-input">
+        <div class="search-count" id="upstream-count"></div>
+    </div>
     <div class="dependency-table">
         <table id="tbl-upstream">
             <thead>
                 <tr>
                     <th>Commodity</th>
                     <th>Source</th>
-                    <th>Volume (MT)</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -466,13 +470,16 @@
 
   <div class="analysis-section">
     <h4>🔽 Downstream (Primary Destinations)</h4>
+    <div class="simple-search-bar">
+        <input type="text" id="downstream-search" placeholder="🔍 Search downstream..." class="simple-search-input">
+        <div class="search-count" id="downstream-count"></div>
+    </div>
     <div class="dependency-table">
         <table id="tbl-downstream">
             <thead>
                 <tr>
                     <th>Commodity</th>
                     <th>Destination</th>
-                    <th>Volume (MT)</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -525,6 +532,45 @@
           </div>
         </div>
       </div>
+<div id="tab-arrival-trends" class="tab-content">
+  <h3>📈 Arrival Trends</h3>
+  <!-- Commodity Selector for charts -->
+  <div class="seasonality-controls">
+    <div class="form-group">
+      <label class="form-label" for="arrival-commodity-selector">Select Commodity for Trend Analysis:</label>
+      <input type="text" id="arrival-search" class="form-control search-input" placeholder="Search for a commodity...">
+      <select id="arrival-commodity-selector" class="form-control">
+        <!-- Options will be populated by JS -->
+      </select>
+    </div>
+  </div>
+  <!-- Dynamic Chart Container -->
+  <div class="seasonality-chart-section">
+    <h4 id="arrival-chart-title">Year-wise Arrival Pattern</h4>
+    <div class="seasonality-chart-container">
+      <canvas id="arrival-trends-chart"></canvas>
+    </div>
+  </div>
+  <h4>Year-wise Arrival of fruits from 2019-20 to 2024-25 in Batasingaram Market</h4>
+  <div class="dependency-table">
+    <table id="tbl-arrival-trends">
+      <thead>
+        <tr>
+          <th>S. No.</th>
+          <th>Name of the Commodity</th>
+          <th>2019-20</th>
+          <th>2020-21</th>
+          <th>2021-22</th>
+          <th>2022-23</th>
+          <th>2023-24</th>
+          <th>2024-25</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+</div>
 <div id="tab-seasonality" class="tab-content">
   <h3>📅 Seasonal Analysis</h3>
   
@@ -532,6 +578,7 @@
   <div class="seasonality-controls">
     <div class="form-group">
       <label class="form-label" for="commodity-selector">Select Commodity:</label>
+      <input type="text" id="seasonality-search" class="form-control search-input" placeholder="Search for a commodity...">
       <select id="commodity-selector" class="form-control">
         <option value="all">All Major Commodities (Overview)</option>
         <option value="mango">🥭 Mango</option>
@@ -592,6 +639,10 @@
   <!-- Seasonality Summary Table -->
   <div class="seasonality-summary">
     <h4>📊 Complete Seasonality Summary</h4>
+    <div class="simple-search-bar">
+        <input type="text" id="seasonality-table-search" placeholder="🔍 Search seasonality..." class="simple-search-input">
+        <div class="search-count" id="seasonality-count"></div>
+    </div>
     <div class="dependency-table">
       <table id="tbl-seasonality-summary">
         <thead>
@@ -615,6 +666,7 @@
 <div class="price-controls">
     <div class="form-group">
         <label class="form-label" for="price-commodity-filter">🍎 Select Commodity for Price Analysis:</label>
+        <input type="text" id="price-search" class="form-control search-input" placeholder="Search for a commodity...">
         <select id="price-commodity-filter" class="form-control">
             <option value="all">🍇 All Commodities (Overview)</option>
             <option value="mango">🥭 Mango</option>
@@ -677,6 +729,10 @@
     <!-- Price Summary (same structure as seasonality) -->
     <div class="price-summary">
         <h4>Comprehensive Price Summary - All Commodities</h4>
+        <div class="simple-search-bar">
+            <input type="text" id="price-summary-search" placeholder="🔍 Search price summary..." class="simple-search-input">
+            <div class="search-count" id="price-summary-count"></div>
+        </div>
         <div id="price-summary-table-container">
             <!-- Price summary table for ALL commodities will be populated here -->
         </div>
