@@ -1722,7 +1722,7 @@ p {
 .flat-list li{margin:6px 0;font-size:12px}
 .app-header {
   background-color: #f0f9ff; /* Fallback color */
-  background-image: url('assets/header/batasingaram-market.jpg');
+  background-image: url('assets/header/batasingaram-market.jpg'), linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
