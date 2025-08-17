@@ -22,7 +22,12 @@ const applicationData = {
     state_grapes_share: 69.69,
     state_dragon_share: 21.08,
     state_apple_share: 0,
-    state_orange_share: 0
+    state_orange_share: 0,
+    images: [
+      "assets/batasingaram/batasingaram1.jpg",
+      "assets/batasingaram/batasingaram2.jpg",
+      "assets/batasingaram/batasingaram3.jpg"
+    ]
   },
 
   // Commodity colors for visualization
@@ -1128,6 +1133,8 @@ downstream_list: [
 };
 // Global variables
 let map;
+let telanganaDistrictsLayer = L.layerGroup();
+let telanganaBlocksLayer = L.layerGroup();
 let currentCommodityFilter = "all";
 let majorCommodities = ["mango", "mosambi", "watermelon", "apple", "orange"];
 let locationOnlyCommodities = [
@@ -1329,17 +1336,61 @@ function initializeMap() {
   }).addTo(map);
   
   // Add hub marker
-  const hubMarker = L.marker(applicationData.market.coordinates, {
-    icon: L.divIcon({
-      className: "market-marker",
-      html: "",
-      iconSize: [20, 20],
-      iconAnchor: [10, 10]
-    })
-  }).addTo(map);
+  const hubIcon = L.divIcon({
+      className: 'destination-marker-enhanced',
+      html: `<div class="dest-icon">🏛️</div>`,
+      iconSize: [32, 32],
+      iconAnchor: [16, 16]
+  });
+
+  const hubMarker = L.marker(applicationData.market.coordinates, { icon: hubIcon }).addTo(map);
   
-  hubMarker.bindPopup(buildHubPopup());
+const imageGallery = (applicationData.market.images || [])
+.map((src, idx) => {
+// Defensive: ensure string path
+const safeSrc = String(src);
+return `<div class="popup-image"> <img src="${safeSrc}" alt="Batasingaram Market ${idx+1}" loading="lazy" /> </div>`;
+})
+.join('');
+
+const popupContent = `
+    <div class="compact-popup-content">
+        <div class="popup-header" style="background: #8e44ad;">
+            🏛️ ${applicationData.market.name}
+        </div>
+        <div class="popup-body">
+            <div class="popup-grid">
+                <div class="popup-stats">
+                    <p><strong>Area:</strong> ${applicationData.market.area_acres} acres</p>
+                    <p><strong>Commission Agents:</strong> ${applicationData.market.commission_agents}</p>
+                    <p><strong>Daily Footfall:</strong> ${applicationData.market.daily_footfall}</p>
+                    <p><strong>Cold Storage (On-site):</strong> ${applicationData.market.cold_storage_onsite} MT</p>
+                    <p><strong>Cold Storage (Nearby):</strong> ${applicationData.market.cold_storage_nearby} MT</p>
+                    <p><em>Tip: Double-click map for animated flows</em></p>
+                </div>
+                <div class="popup-gallery">
+                    ${imageGallery || '<div class="popup-image empty">No images</div>'}
+                </div>
+            </div>
+        </div>
+    </div>
+`;
+hubMarker.bindPopup(popupContent, {
+    maxWidth: 420,
+    className: 'compact-popup market-popup'
+});
   hubMarker.on("click", () => renderFlows());
+
+  loadTelanganaDistricts();
+  loadTelanganaBlocks();
+
+  const overlayMaps = {
+    "Districts": telanganaDistrictsLayer,
+    "Blocks": telanganaBlocksLayer
+  };
+
+  L.control.layers(null, overlayMaps).addTo(map);
+  telanganaDistrictsLayer.addTo(map);
 // Ensure map resizes correctly on mobile after layout/rotation
 window.addEventListener('resize', () => {
   try { map && map.invalidateSize(); } catch (e) {}
@@ -5238,4 +5289,95 @@ document.addEventListener('DOMContentLoaded', function () {
 
     resizer.addEventListener('mousedown', mouseDownHandler);
 });
+
+function loadTelanganaDistricts() {
+  fetch('https://raw.githubusercontent.com/datameet/maps/master/taluks/2019/IN-TG.json')
+    .then(response => response.json())
+    .then(data => {
+      console.log("Telangana Districts GeoJSON data loaded:", data);
+      const geoJsonLayer = L.geoJSON(data, {
+        style: function(feature) {
+          return {
+            color: "#0000ff",
+            weight: 2,
+            opacity: 0.5,
+            fillColor: "#ffffff",
+            fillOpacity: 0.1
+          };
+        },
+        onEachFeature: function(feature, layer) {
+          layer.on({
+            mouseover: function(e) {
+              const layer = e.target;
+              layer.setStyle({
+                weight: 4,
+                color: '#ff7800',
+                dashArray: '',
+                fillOpacity: 0.7
+              });
+              if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+                layer.bringToFront();
+              }
+            },
+            mouseout: function(e) {
+              geoJsonLayer.resetStyle(e.target);
+            },
+            click: function(e) {
+              const properties = e.target.feature.properties;
+              const popupContent = `<b>District:</b> ${properties.district}<br><b>Taluk:</b> ${properties.taluk}`;
+              layer.bindPopup(popupContent).openPopup();
+            }
+          });
+        }
+      }).addTo(telanganaDistrictsLayer);
+      telanganaDistrictsLayer.addTo(map);
+      console.log("Telangana districts layer added to map.");
+    })
+    .catch(error => console.error('Error loading Telangana GeoJSON:', error));
+}
+
+function loadTelanganaBlocks() {
+  fetch('https://raw.githubusercontent.com/datameet/maps/master/blocks/2019/IN-TG.json')
+    .then(response => response.json())
+    .then(data => {
+      console.log("Telangana Blocks GeoJSON data loaded:", data);
+      const geoJsonLayer = L.geoJSON(data, {
+        style: function(feature) {
+          return {
+            color: "#008000",
+            weight: 1,
+            opacity: 0.6,
+            fillColor: "#ffffff",
+            fillOpacity: 0.1
+          };
+        },
+        onEachFeature: function(feature, layer) {
+          layer.on({
+            mouseover: function(e) {
+              const layer = e.target;
+              layer.setStyle({
+                weight: 3,
+                color: '#006400',
+                dashArray: '',
+                fillOpacity: 0.5
+              });
+              if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+                layer.bringToFront();
+              }
+            },
+            mouseout: function(e) {
+              geoJsonLayer.resetStyle(e.target);
+            },
+            click: function(e) {
+              const properties = e.target.feature.properties;
+              const popupContent = `<b>Block:</b> ${properties.block}<br><b>District:</b> ${properties.district}`;
+              layer.bindPopup(popupContent).openPopup();
+            }
+          });
+        }
+      }).addTo(telanganaBlocksLayer);
+      console.log("Telangana blocks layer added to map.");
+    })
+    .catch(error => console.error('Error loading Telangana Blocks GeoJSON:', error));
+}
 
