@@ -1338,10 +1338,10 @@ function initializeMap() {
   
   // Add hub marker
   const hubIcon = L.divIcon({
-      className: 'destination-marker-enhanced',
-      html: `<div class="dest-icon">🏛️</div>`,
-      iconSize: [32, 32],
-      iconAnchor: [16, 16]
+      className: 'hub-marker-enhanced gaddiannaram-marker',
+      html: `<div class="hub-icon">🏛️</div>`,
+      iconSize: [28, 28],
+      iconAnchor: [14, 14]
   });
 
   const hubMarker = L.marker(applicationData.market.coordinates, { icon: hubIcon }).addTo(map);
@@ -1355,8 +1355,8 @@ return `<div class="popup-image"> <img src="${safeSrc}" alt="Batasingaram Market
 .join('');
 
 const popupContent = `
-    <div class="compact-popup-content">
-        <div class="popup-header" style="background: #8e44ad;">
+    <div class="gaddiannaram-popup-content">
+        <div class="popup-header">
             🏛️ ${applicationData.market.name}
         </div>
         <div class="popup-body">
@@ -1378,7 +1378,7 @@ const popupContent = `
 `;
 hubMarker.bindPopup(popupContent, {
     maxWidth: 420,
-    className: 'compact-popup market-popup'
+    className: 'gaddiannaram-popup'
 });
   hubMarker.on("click", () => renderFlows());
 
@@ -1479,8 +1479,8 @@ function addDestinationMarkers() {
                     icon: L.divIcon({
                         className: 'destination-marker-enhanced',
                         html: `<div class="dest-icon">${commodityEmojis[commodity] || '🏪'}</div>`,
-                        iconSize: [28, 28],
-                        iconAnchor: [14, 14]
+                        iconSize: [24, 24],
+                        iconAnchor: [12, 12]
                     })
                 });
                 marker.marketData = { name: market.market, type: 'Destination', commodities: [commodity] };
