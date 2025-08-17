@@ -942,7 +942,7 @@ p {
 }
 
 .map-container {
-  flex: 2;
+  flex: 1.5;
   position: relative;
   background-color: var(--color-surface);
 }
@@ -1027,7 +1027,7 @@ p {
 }
 
 .side-panel {
-  flex: 1;
+  flex: 1.5;
   background-color: var(--color-surface);
   border-left: 1px solid var(--color-border);
   display: flex;
@@ -3315,7 +3315,7 @@ p {
 .yearwise-price-section .dependency-table {
     margin: 0;
     border-radius: var(--radius-lg);
-    overflow: hidden;
+    overflow-x: auto;
     box-shadow: var(--shadow-md);
     background: var(--color-surface);
 }
@@ -3326,6 +3326,7 @@ p {
     margin: 0;
     font-size: var(--font-size-sm);
     background: transparent;
+    table-layout: auto; /* Let the browser handle column widths */
 }
 
 .yearwise-price-section .dependency-table thead {
@@ -3334,13 +3335,13 @@ p {
 }
 
 .yearwise-price-section .dependency-table th {
-    padding: var(--space-16) var(--space-12);
+    padding: var(--space-12) var(--space-8);
     text-align: center;
     font-weight: var(--font-weight-semibold);
-    font-size: var(--font-size-sm);
-    letter-spacing: 0.5px;
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.2px;
     border: none;
-    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .yearwise-price-section .dependency-table th:last-child {
@@ -3349,7 +3350,7 @@ p {
 
 .yearwise-price-section .commodity-header {
     text-align: left !important;
-    min-width: 140px;
+    width: 20%; /* Use percentage for flexible width */
     background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%) !important;
 }
 
@@ -3368,7 +3369,7 @@ p {
 }
 
 .yearwise-price-section .trend-header {
-    min-width: 100px;
+    width: 16%; /* Use percentage for flexible width */
     background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%) !important;
 }
 
@@ -3406,13 +3407,14 @@ p {
 }
 
 .yearwise-price-section .price-cell {
-    padding: var(--space-12);
+    padding: var(--space-4);
     text-align: center;
     font-family: var(--font-family-mono);
-    font-size: var(--font-size-sm);
+    font-size: 11px;
     color: var(--color-text);
     border: none;
     vertical-align: middle;
+    width: 12%; /* Use percentage for flexible width */
 }
 
 .yearwise-price-section .min-price {
@@ -3435,10 +3437,10 @@ p {
 }
 
 .yearwise-price-section .trend-cell {
-    padding: var(--space-12);
+    padding: var(--space-8);
     text-align: center;
     color: var(--color-text);
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-xs);
     border: none;
     vertical-align: middle;
 }
@@ -3560,27 +3562,49 @@ p {
 }
 
 /* Responsive design for professional tables */
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
     .yearwise-price-section .dependency-table {
-        font-size: var(--font-size-xs);
+        font-size: 11px; /* Slightly smaller font for medium screens */
     }
-    
     .yearwise-price-section .dependency-table th,
     .yearwise-price-section .dependency-table td {
-        padding: var(--space-8) var(--space-6);
+        padding: var(--space-8) var(--space-4);
     }
-    
+    .yearwise-price-section .price-variation {
+        display: none; /* Hide variation on smaller screens to save space */
+    }
+}
+
+@media (max-width: 992px) {
+    .yearwise-price-section .dependency-table {
+        font-size: 10px; /* Even smaller font for tablets */
+    }
+    .yearwise-price-section .commodity-header {
+        min-width: 90px;
+    }
+    .yearwise-price-section .trend-header {
+        min-width: 90px;
+    }
+    .yearwise-price-section .dependency-table th,
+    .yearwise-price-section .dependency-table td {
+        padding: var(--space-6) var(--space-2);
+    }
+}
+
+@media (max-width: 768px) {
+    .yearwise-price-section .dependency-table {
+        display: block;
+        overflow-x: auto;
+    }
     .insights-grid {
         grid-template-columns: 1fr;
         gap: var(--space-8);
     }
-    
     .yearwise-price-section {
-        padding: var(--space-16);
-    }
-    
-    .yearwise-price-header {
         padding: var(--space-12);
+    }
+    .yearwise-price-header {
+        padding: var(--space-10);
     }
 }
 
@@ -7155,4 +7179,273 @@ html, body {
 .gaddiannaram-marker .hub-icon {
   font-size: 28px;
   line-height: 1;
+}
+/* =================================== */
+/* Professional Seasonality Tab Styles */
+/* =================================== */
+
+#tab-seasonality {
+    background: linear-gradient(135deg, #f0fff4 0%, #dcfce7 100%);
+}
+
+.seasonality-controls {
+    margin-bottom: var(--space-24);
+    background: rgba(255, 255, 255, 0.8);
+    padding: var(--space-16);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+
+.seasonality-chart-section {
+    margin-bottom: var(--space-32);
+}
+
+.seasonality-chart-section h4 {
+    margin-bottom: var(--space-16);
+    text-align: center;
+    color: var(--color-text);
+    padding: var(--space-12);
+    background: rgba(255,255,255,0.9);
+    border-radius: var(--radius-base);
+    border-bottom: 2px solid var(--color-primary);
+}
+
+.seasonality-chart-container {
+    height: 400px;
+    background: rgba(255,255,255,0.95);
+    border-radius: var(--radius-lg);
+    padding: var(--space-16);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--color-border);
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-16);
+    margin-bottom: var(--space-24);
+}
+
+.detail-card {
+    background: rgba(255,255,255,0.9);
+    border-radius: var(--radius-base);
+    padding: var(--space-16);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+}
+
+.detail-card h5 {
+    margin-bottom: var(--space-12);
+    color: var(--color-primary);
+    font-size: var(--font-size-md);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: var(--space-8);
+}
+
+.seasonality-summary h4 {
+    margin-bottom: var(--space-16);
+    color: var(--color-btn-primary-text);
+    text-align: center;
+    padding: var(--space-12);
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
+    border-radius: var(--radius-base);
+}
+
+#tbl-seasonality-summary thead {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    color: white;
+}
+
+#tbl-seasonality-summary th {
+    padding: var(--space-16) var(--space-12);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: var(--font-size-sm);
+    text-align: left;
+}
+
+#tbl-seasonality-summary tbody tr:nth-child(even) {
+    background-color: rgba(0,0,0,0.02);
+}
+
+#tbl-seasonality-summary tbody tr:hover {
+    background-color: rgba(var(--color-primary-rgb), 0.1);
+}
+
+#tbl-seasonality-summary td {
+    padding: var(--space-12);
+    border-bottom: 1px solid var(--color-border);
+    font-size: var(--font-size-sm);
+    vertical-align: middle;
+}
+
+.pattern-badge {
+    padding: var(--space-4) var(--space-8);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 1px solid;
+}
+
+.pattern-badge.highly-seasonal {
+    background: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+    border-color: rgba(231, 76, 60, 0.3);
+}
+
+.pattern-badge.moderately-seasonal {
+    background: rgba(243, 156, 18, 0.1);
+    color: #f39c12;
+    border-color: rgba(243, 156, 18, 0.3);
+}
+
+.pattern-badge.year-round-availability {
+    background: rgba(39, 174, 96, 0.1);
+    color: #27ae60;
+    border-color: rgba(39, 174, 96, 0.3);
+}
+/* ============================================ */
+/* Professional Price & Trends Tab Styles     */
+/* ============================================ */
+
+#tab-price {
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+}
+
+.price-controls {
+    margin-bottom: var(--space-24);
+    background: rgba(255, 255, 255, 0.8);
+    padding: var(--space-16);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+
+.price-chart-section {
+    margin-bottom: var(--space-32);
+}
+
+.price-chart-section h4 {
+    margin-bottom: var(--space-16);
+    text-align: center;
+    color: var(--color-text);
+    padding: var(--space-12);
+    background: rgba(255,255,255,0.9);
+    border-radius: var(--radius-base);
+    border-bottom: 2px solid var(--color-primary);
+}
+
+.price-chart-container {
+    height: 400px;
+    background: rgba(255,255,255,0.95);
+    border-radius: var(--radius-lg);
+    padding: var(--space-16);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--color-border);
+}
+
+.price-details h4,
+.price-summary h4 {
+    margin-bottom: var(--space-16);
+    color: var(--color-btn-primary-text);
+    text-align: center;
+    padding: var(--space-12);
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
+    border-radius: var(--radius-base);
+}
+
+#price-summary-table-container .dependency-table thead,
+#yearwise-price-table-container .dependency-table thead {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    color: white;
+}
+
+#price-summary-table-container .dependency-table th,
+#yearwise-price-table-container .dependency-table th {
+    padding: var(--space-16) var(--space-12);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: var(--font-size-sm);
+    text-align: left;
+}
+
+#price-summary-table-container .dependency-table tbody tr:nth-child(even),
+#yearwise-price-table-container .dependency-table tbody tr:nth-child(even) {
+    background-color: rgba(0,0,0,0.02);
+}
+
+#price-summary-table-container .dependency-table tbody tr:hover,
+#yearwise-price-table-container .dependency-table tbody tr:hover {
+    background-color: rgba(var(--color-primary-rgb), 0.1);
+}
+
+#price-summary-table-container .dependency-table td,
+#yearwise-price-table-container .dependency-table td {
+    padding: var(--space-12);
+    border-bottom: 1px solid var(--color-border);
+    font-size: var(--font-size-sm);
+    vertical-align: middle;
+}
+
+.price-range {
+    font-family: var(--font-family-mono);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary);
+}
+
+.trend-badge, .volatility-badge, .category-badge {
+    padding: var(--space-4) var(--space-8);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 1px solid;
+}
+
+.trend-badge.trend-increasing, .trend-badge.premium_increasing {
+    background: rgba(39, 174, 96, 0.1); color: #27ae60; border-color: rgba(39, 174, 96, 0.3);
+}
+.trend-badge.trend-stable, .trend-badge.premium_stable {
+    background: rgba(52, 152, 219, 0.1); color: #3498db; border-color: rgba(52, 152, 219, 0.3);
+}
+.trend-badge.trend-volatile, .trend-badge.premium_volatile, .trend-badge.seasonal_volatile {
+    background: rgba(243, 156, 18, 0.1); color: #f39c12; border-color: rgba(243, 156, 18, 0.3);
+}
+.trend-badge.trend-declining {
+    background: rgba(231, 76, 60, 0.1); color: #e74c3c; border-color: rgba(231, 76, 60, 0.3);
+}
+.trend-badge.trend-new_entry, .trend-badge.exotic_extreme, .trend-badge.premium_extreme {
+     background: rgba(155, 89, 182, 0.1); color: #9b59b6; border-color: rgba(155, 89, 182, 0.3);
+}
+
+.volatility-badge.volatility-moderate {
+    background: rgba(39, 174, 96, 0.1); color: #27ae60; border-color: rgba(39, 174, 96, 0.3);
+}
+.volatility-badge.volatility-high {
+    background: rgba(243, 156, 18, 0.1); color: #f39c12; border-color: rgba(243, 156, 18, 0.3);
+}
+.volatility-badge.volatility-very_high {
+    background: rgba(230, 126, 34, 0.1); color: #e67e22; border-color: rgba(230, 126, 34, 0.3);
+}
+.volatility-badge.volatility-extreme {
+    background: rgba(231, 76, 60, 0.1); color: #e74c3c; border-color: rgba(231, 76, 60, 0.3);
+}
+
+.category-badge.category-major {
+    background: rgba(52, 152, 219, 0.1); color: #3498db; border-color: rgba(52, 152, 219, 0.3);
+}
+.category-badge.category-premium {
+    background: rgba(155, 89, 182, 0.1); color: #9b59b6; border-color: rgba(155, 89, 182, 0.3);
+}
+.category-badge.category-exotic {
+    background: rgba(231, 76, 60, 0.1); color: #e74c3c; border-color: rgba(231, 76, 60, 0.3);
+}
+.category-badge.category-standard {
+    background: rgba(46, 204, 113, 0.1); color: #2ecc71; border-color: rgba(46, 204, 113, 0.3);
 }
