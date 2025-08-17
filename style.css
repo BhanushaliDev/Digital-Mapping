@@ -1721,11 +1721,8 @@ p {
 .flat-list{list-style:none;padding:0;margin:0}
 .flat-list li{margin:6px 0;font-size:12px}
 .app-header {
+  background-color: #f0f9ff; /* Fallback color */
   background-image: url('assets/header/batasingaram-market.jpg');
-}
-
-.app-header.no-bg-image {
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -7061,8 +7058,15 @@ html, body {
   width: 30%;
 }
 
-.market-popup {
-  width: 300px;
+/* Batasingaram/Gaddiannaram Market Popup Styles */
+.gaddiannaram-popup .leaflet-popup-content-wrapper {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.gaddiannaram-popup .leaflet-popup-content {
+    margin: 0;
+    padding: 0;
 }
 
 .market-popup h3 {
@@ -7093,78 +7097,71 @@ html, body {
   background-position: center;
 }
 
-.market-popup .compact-popup-content {
-min-width: 280px;
-}
+/* This style is no longer needed as it's handled by the gaddiannaram-popup styles below */
 
-.market-popup .popup-grid {
-display: grid;
-grid-template-columns: 1.2fr 1.8fr;
-gap: 10px;
-}
-
-.market-popup .popup-stats p {
-margin: 4px 0;
-font-size: 12px;
-}
-
-.market-popup .popup-gallery {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 6px;
-align-content: start;
-}
-
-.market-popup .popup-image {
-width: 100%;
-aspect-ratio: 4 / 3;
-border-radius: 8px;
-overflow: hidden;
-border: 1px solid rgba(0,0,0,0.1);
-background: #f8fafc;
-}
-
-.market-popup .popup-image img {
-width: 100%;
-height: 100%;
-object-fit: cover;
-display: block;
-}
-
-.market-popup .popup-image.empty {
-display: flex;
-align-items: center;
-justify-content: center;
-color: #6b7280;
-font-size: 12px;
-background: #f3f4f6;
-}
-
-@media (max-width: 768px) {
-.market-popup .popup-grid {
-grid-template-columns: 1fr;
-}
-.market-popup .popup-gallery {
-grid-template-columns: 1fr 1fr;
-}
-}
-
-.destination-marker-enhanced {
+/* Gaddiannaram Market Popup and Marker Styles */
+.gaddiannaram-popup .leaflet-popup-content-wrapper {
   background: var(--color-surface);
-  border-radius: 50%;
-  border: 2px solid var(--color-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  transition: all 0.3s ease;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
 }
 
-.destination-marker-enhanced:hover {
-  transform: scale(1.1);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+.gaddiannaram-popup .leaflet-popup-content {
+  margin: 0;
+  padding: 0;
+  font-size: var(--font-size-sm);
 }
 
-.dest-icon {
-  font-size: 24px;
+.gaddiannaram-popup-content .popup-header {
+  background: var(--color-primary);
+  color: var(--color-btn-primary-text);
+  padding: var(--space-12) var(--space-16);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-md);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.gaddiannaram-popup-content .popup-body {
+  padding: var(--space-16);
+}
+
+.gaddiannaram-popup-content .popup-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: var(--space-12);
+}
+
+.gaddiannaram-popup-content .popup-stats p {
+  margin: 0 0 var(--space-6) 0;
+}
+
+.gaddiannaram-popup-content .popup-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8);
+}
+
+.gaddiannaram-popup-content .popup-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-base);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.gaddiannaram-popup-content .popup-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.2s ease-in-out;
+}
+
+.gaddiannaram-popup-content .popup-image img:hover {
+    transform: scale(1.05);
+}
+
+.gaddiannaram-marker .hub-icon {
+  font-size: 28px;
+  line-height: 1;
 }
