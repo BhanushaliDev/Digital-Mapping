@@ -4739,107 +4739,68 @@ function createYearwisePriceTable() {
         
         let tableHTML = `
             <div class="yearwise-price-header">
-                <h4>📊 Complete Historical Price Analysis - All Commodities (₹/quintal)</h4>
-                <p>Comprehensive year-wise minimum & maximum price data for ALL 28 commodities at Batasingaram Market (2020-21 to 2022-23)</p>
+                <h4>📊 Historical Price Analysis (₹/quintal)</h4>
+                <p>Price data for all commodities at Batasingaram Market (2020-21 to 2022-23)</p>
             </div>
             <table class="dependency-table">
                 <thead>
                     <tr>
-                        <th rowspan="2" class="commodity-header">Commodity</th>
-                        <th colspan="2" class="year-header">2020-21</th>
-                        <th colspan="2" class="year-header">2021-22</th>
-                        <th colspan="2" class="year-header">2022-23</th>
-                        <th rowspan="2" class="trend-header">Market Status</th>
-                    </tr>
-                    <tr>
-                        <th class="price-type-header">Min (₹)</th>
-                        <th class="price-type-header">Max (₹)</th>
-                        <th class="price-type-header">Min (₹)</th>
-                        <th class="price-type-header">Max (₹)</th>
-                        <th class="price-type-header">Min (₹)</th>
-                        <th class="price-type-header">Max (₹)</th>
+                        <th class="commodity-header">Commodity</th>
+                        <th class="year-header">2020-21</th>
+                        <th class="year-header">2021-22</th>
+                        <th class="year-header">2022-23</th>
+                        <th class="trend-header">Market Status</th>
                     </tr>
                 </thead>
                 <tbody>
         `;
         
-        // Add rows for ALL commodities with corrected trend logic
         Object.keys(yearwisePriceData).forEach(commodity => {
             const data = yearwisePriceData[commodity];
-            
-            // Check if this is a new commodity (started only in 2022-23)
             let trendDisplay = '';
-            let statusIcon = '';
-            let statusLabel = '';
-            
+
             if (data.isNewCommodity) {
-                // For new commodities, don't show misleading trends
-                statusIcon = '🆕';
-                statusLabel = 'NEW ENTRY';
                 trendDisplay = `
-                    <div class="trend-indicator trend-new">
-                        ${statusIcon} ${statusLabel}
-                    </div>
-                    <div class="trend-label">2022-23 Debut</div>
-                `;
+                    <div class="trend-indicator trend-new">🆕 NEW ENTRY</div>
+                    <div class="trend-label">2022-23 Debut</div>`;
             } else {
-                // For established commodities, calculate proper trends
                 const firstYearMax = data.data[0].max || 1;
                 const lastYearMax = data.data[data.data.length - 1].max || 1;
-                
-                let trendDirection = 'stable';
                 let trendPercentage = 0;
-                
                 if (firstYearMax > 0 && lastYearMax > 0) {
-                    trendPercentage = ((lastYearMax - firstYearMax) / firstYearMax * 100).toFixed(1);
-                    trendDirection = lastYearMax > firstYearMax ? 'increasing' : 
-                                     lastYearMax < firstYearMax ? 'decreasing' : 'stable';
+                    trendPercentage = ((lastYearMax - firstYearMax) / firstYearMax * 100);
                 }
-                
-                const trendIcon = trendDirection === 'increasing' ? '📈' : 
-                                 trendDirection === 'decreasing' ? '📉' : '➡️';
-                
+                const trendIcon = trendPercentage > 5 ? '📈' : trendPercentage < -5 ? '📉' : '➡️';
+                const trendDirection = trendPercentage > 5 ? 'increasing' : trendPercentage < -5 ? 'decreasing' : 'stable';
+
                 trendDisplay = `
                     <div class="trend-indicator trend-${trendDirection}">
-                        ${trendIcon} ${Math.abs(trendPercentage)}%
+                        ${trendIcon} ${Math.abs(trendPercentage).toFixed(1)}%
                     </div>
-                    <div class="trend-label">${trendDirection.toUpperCase()}</div>
-                `;
+                    <div class="trend-label">${trendDirection.toUpperCase()}</div>`;
             }
-            
+
             tableHTML += `
                 <tr style="border-left: 4px solid ${data.color};">
                     <td class="commodity-name-cell">
                         <strong style="color: ${data.color};">${data.name}</strong>
                     </td>
             `;
-            
-            // Add price data for each year
+
             data.data.forEach(yearData => {
                 const minDisplay = yearData.min === 0 ? 'N/A' : `₹${yearData.min.toLocaleString()}`;
                 const maxDisplay = yearData.max === 0 ? 'N/A' : `₹${yearData.max.toLocaleString()}`;
-                
-                // Only show price variation if data is available
                 let variationDisplay = '';
                 if (yearData.min > 0 && yearData.max > 0) {
-                    const priceVariation = ((yearData.max - yearData.min) / yearData.min * 100).toFixed(1);
+                    const priceVariation = ((yearData.max - yearData.min) / yearData.min * 100).toFixed(0);
                     variationDisplay = `<div class="price-variation">±${priceVariation}%</div>`;
                 }
                 
-                tableHTML += `
-                    <td class="price-cell min-price">${minDisplay}</td>
-                    <td class="price-cell max-price">
-                        ${maxDisplay}
-                        ${variationDisplay}
-                    </td>
-                `;
+                tableHTML += `<td class="price-cell">${minDisplay} - ${maxDisplay}${variationDisplay}</td>`;
             });
-            
-            // Add trend/status indicator
+
             tableHTML += `
-                    <td class="trend-cell">
-                        ${trendDisplay}
-                    </td>
+                    <td class="trend-cell">${trendDisplay}</td>
                 </tr>
             `;
         });
