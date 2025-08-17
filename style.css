@@ -447,6 +447,11 @@ select.form-control {
 
 .form-group {
   margin-bottom: var(--space-16);
+  position: relative;
+}
+
+.search-input {
+  margin-bottom: 8px;
 }
 
 /* Card component */
