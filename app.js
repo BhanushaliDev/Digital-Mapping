@@ -5395,3 +5395,5 @@ function loadTelanganaBlocks() {
     .catch(error => console.error('Error loading Telangana Blocks GeoJSON:', error));
 }
 
+
+
