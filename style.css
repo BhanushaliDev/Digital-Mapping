@@ -1721,11 +1721,8 @@ p {
 .flat-list{list-style:none;padding:0;margin:0}
 .flat-list li{margin:6px 0;font-size:12px}
 .app-header {
-  background-color: #f0f9ff; /* Fallback color */
-  background-image: url('assets/header/batasingaram-market.jpg');
+  background: #f0f9ff url('assets/header/batasingaram-market.jpg') no-repeat center center;
   background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   border-bottom: 1px solid var(--color-border);
   padding: 0;
   box-shadow: var(--shadow-sm);
@@ -7090,12 +7087,6 @@ html, body {
   margin: 5px 0;
 }
 
-.app-header {
-  background-color: #f0f9ff; /* Fallback color */
-  background-image: url('assets/header/batasingaram-market.jpg');
-  background-size: cover;
-  background-position: center;
-}
 
 /* This style is no longer needed as it's handled by the gaddiannaram-popup styles below */
 
