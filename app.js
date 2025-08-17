@@ -1176,6 +1176,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     initializeExcelUpload();
     initializeTabNavigation();
+    setHeaderFallback();
 });
 
 function initializeTabNavigation() {
@@ -5363,6 +5364,19 @@ function loadTelanganaBlocks() {
               });
               if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
                 layer.bringToFront();
+              }
+              
+              function setHeaderFallback() {
+                  const header = document.querySelector('.app-header');
+                  if (!header) return;
+              
+                  const imageUrl = 'assets/header/batasingaram-market.jpg';
+                  const img = new Image();
+                  img.src = imageUrl;
+              
+                  img.onerror = function() {
+                      header.classList.add('no-bg-image');
+                  };
               }
             },
             mouseout: function(e) {
