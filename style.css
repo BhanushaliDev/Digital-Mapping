@@ -998,7 +998,9 @@ p {
 .legend-marker.destination {
   background-color: #3498db;
 }
-
+.legend-marker.Source {
+  background-color: #3498db;
+}
 .legend-marker.production {
   background-color: #27ae60;
 }
@@ -1917,8 +1919,8 @@ p {
 }
 
 @keyframes flowAnimationOutbound {
-  0% { stroke-dashoffset: 0; }
-  100% { stroke-dashoffset: 36; }
+  100% { stroke-dashoffset: 0; }
+  0% { stroke-dashoffset: 36; }
 }
 
 /* Enhanced Tooltips */
@@ -5967,6 +5969,7 @@ p {
 .legend-marker {
   width: 10px;
   height: 10px;
+  gap: 8px;
   border-radius: 50%;
   border: 1px solid rgba(0,0,0,0.15);
   box-shadow: none;
@@ -5975,6 +5978,7 @@ p {
 .legend-marker.primary-hub { background-color: #c0392b; }
 .legend-marker.destination { background-color: #2f80ed; }
 .legend-marker.production  { background-color: #27ae60; }
+.legend-marker.source { background-color: #27ae60; }
 
 .legend-line {
   width: 22px;
@@ -6560,6 +6564,7 @@ html, body, .app-container {
 .legend-marker.primary-hub { background:#c0392b; }
 .legend-marker.production { background:#27ae60; }
 .legend-marker.destination { background:#2f80ed; }
+.legend-marker.source { background-color: #27ae60; }
 
 .legend-note {
   font-size: 10.5px;
