@@ -1485,17 +1485,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-
-// Add all market markers
-addDestinationMarkers();
-addSourceMarkers();
-// addProductionMarkers();
-
-  
- setTimeout(() => {
-    refreshMapSize();
-    renderFlows();
-}, 120);
   
   console.log("Map initialized successfully");
 }
@@ -1946,12 +1935,86 @@ function getCommodityIcon(commodity) {
 
 function addCommodityProductionMarkers(commodity) {
     const districts = [
-        { name: "Nalgonda", coordinates: [17.0574, 79.2686], commodities: ["watermelon", "papaya", "custard_apple"] },
-        { name: "Ranga Reddy", coordinates: [17.385, 78.4867], commodities: ["papaya", "custard_apple"] },
-        { name: "Mahbubnagar", coordinates: [16.7496, 77.9981], commodities: ["watermelon", "muskmelon", "papaya", "custard_apple"] },
-        { name: "Khammam", coordinates: [17.2473, 80.1514], commodities: ["guava"] },
-        { name: "Warangal", coordinates: [17.9689, 79.5941], commodities: ["watermelon", "muskmelon"] }
-    ];
+       // Telangana primary sources (by commodity from inbound lists)
+  { name: "Mahabubnagar", coordinates: [16.7480, 78.0036], commodities: ["watermelon","muskmelon","papaya","custard_apple"] }, // inbound shares listed for all four [1][3]
+  { name: "Warangal", coordinates: [17.9689, 79.5941], commodities: ["watermelon","muskmelon"] }, // strong inbound for both melons [1][3]
+  { name: "Nalgonda", coordinates: [17.0575, 79.2684], commodities: ["watermelon","papaya","custard_apple"] }, // listed in inbound and custard apple cluster [1][3]
+  { name: "Ranga Reddy", coordinates: [17.3890, 78.0796], commodities: ["papaya","custard_apple"] }, // inbound papaya and custard apple cluster [1][3]
+  { name: "Medak", coordinates: [18.0460, 78.2699], commodities: ["papaya","pomegranate"] }, // inbound papaya; pomegranate source [1][3]
+  { name: "Nizamabad", coordinates: [18.6725, 78.0941], commodities: ["papaya","watermelon"] }, // inbound papaya; outbound sinks list includes Nizamabad for apples; keep to papaya/watermelon for sources [1][3]
+  { name: "Nagar Kurnool", coordinates: [16.4827, 78.3247], commodities: ["papaya"] }, // inbound papaya list [1][3]
+  { name: "Gadwal", coordinates: [16.2335, 77.7950], commodities: ["papaya"] }, // inbound papaya list [1][3]
+  { name: "Ibrahimpatnam (Ranga Reddy)", coordinates: [17.2574, 78.7047], commodities: ["guava"] }, // guava inbound sub-district [1][3]
+  { name: "Turkapalli (Medchal–Malkajgiri)", coordinates: [17.6089, 78.6370], commodities: ["guava"] }, // guava inbound sub-district [1][3]
+  { name: "Khammam", coordinates: [17.2473, 80.1514], commodities: ["guava","watermelon"] }, // guava inbound; also listed as watermelon sink but include for local flow context [1][3]
+  { name: "Vikarabad", coordinates: [17.3383, 77.9048], commodities: ["custard_apple"] }, // custard apple cluster [1][3]
+
+  // Maharashtra
+  { name: "Maharashtra (State)", coordinates: [19.7515, 75.7139], commodities: ["watermelon","muskmelon","sapota","guava","banana","grapes_black","grapes_white","orange","pomegranate","jamun"] }, // statewide sources shown [1][3]
+  { name: "Nagpur (MH)", coordinates: [21.1458, 79.0882], commodities: ["orange"] }, // key orange source [1][3]
+  { name: "Hingoli (MH)", coordinates: [19.7179, 77.1494], commodities: ["orange"] }, // orange source [1][3]
+  { name: "Nashik (MH)", coordinates: [19.9975, 73.7898], commodities: ["orange","grapes_white","grapes_black"] }, // oranges; grapes state-level, include Nashik as major [1][3]
+  { name: "Aurangabad (MH)", coordinates: [19.8762, 75.3433], commodities: ["orange"] }, // orange source [1][3]
+  { name: "Pune (MH)", coordinates: [18.5204, 73.8567], commodities: ["orange","grapes_black","grapes_white"] }, // orange and grapes corridor [1][3]
+  { name: "Solapur (MH)", coordinates: [17.6599, 75.9064], commodities: ["pomegranate","grapes_black"] }, // strong sources [1][3]
+  { name: "Pandharpur (MH)", coordinates: [17.6805, 75.3305], commodities: ["pomegranate","grapes_black"] }, // listed for both [1][3]
+  { name: "Sangli (MH)", coordinates: [16.8524, 74.5815], commodities: ["pomegranate"] }, // pomegranate source [1][3]
+  { name: "Tuljapur (MH)", coordinates: [18.0061, 76.0695], commodities: ["grapes_black"] }, // grapes black source [1][3]
+  { name: "Osmanabad (MH)", coordinates: [18.1719, 76.0411], commodities: ["grapes_black"] }, // grapes black source [1][3]
+  { name: "Nanded (MH)", coordinates: [19.1383, 77.3210], commodities: ["banana"] }, // banana source [1][3]
+  { name: "Mahabaleshwar (MH)", coordinates: [17.9307, 73.6477], commodities: ["strawberry"] }, // strawberry source [1][3]
+
+  // Karnataka
+  { name: "Karnataka (State)", coordinates: [15.3173, 75.7139], commodities: ["watermelon","muskmelon","pomegranate","grapes_black","grapes_white","fig","ber","cancer_fruit","jack_fruit"] }, // statewide inbound [1][3]
+  { name: "Bangalore (KA)", coordinates: [12.9716, 77.5946], commodities: ["grapes_black","orange"] }, // grapes black source; orange outbound sink also present [1][3]
+  { name: "Raichur (KA)", coordinates: [16.2066, 77.3463], commodities: ["watermelon"] }, // inbound share [1][3]
+  { name: "Gulbarga (Kalaburagi, KA)", coordinates: [17.3297, 76.8343], commodities: ["watermelon"] }, // inbound share [1][3]
+
+  // Andhra Pradesh
+  { name: "Andhra Pradesh (State)", coordinates: [15.9129, 79.7400], commodities: ["mango","mosambi","watermelon","muskmelon","banana","sapota","guava"] }, // inbound shares [1][3]
+  { name: "Anantapur (AP)", coordinates: [14.6819, 77.6006], commodities: ["watermelon","muskmelon","sapota"] }, // listed for all three [1][3]
+  { name: "Ulavapadu (AP)", coordinates: [15.1624, 80.0770], commodities: ["sapota"] }, // sapota major [1][3]
+  { name: "Nuzvid (AP)", coordinates: [16.7885, 80.8450], commodities: ["guava"] }, // guava source [1][3]
+  { name: "West Godavari (AP)", coordinates: [16.7107, 81.0952], commodities: ["guava","banana"] }, // guava/banana corridor [1][3]
+  { name: "Rajahmundry (AP)", coordinates: [17.0005, 81.8040], commodities: ["banana"] }, // banana cluster [1][3]
+  { name: "Eluru (AP)", coordinates: [16.7107, 81.0952], commodities: ["banana"] }, // banana cluster [1][3]
+  { name: "Kakinada (AP)", coordinates: [16.9891, 82.2475], commodities: ["banana"] }, // banana cluster [1][3]
+  { name: "Tanuku (AP)", coordinates: [16.7533, 81.6815], commodities: ["banana"] }, // banana cluster [1][3]
+  { name: "Madanapalle (AP)", coordinates: [13.5503, 78.5029], commodities: ["jamun"] }, // jamun source [1][3]
+  { name: "Visakhapatnam (AP)", coordinates: [17.6868, 83.2185], commodities: ["jack_fruit"] }, // jack fruit source [1][3]
+
+  // Kerala
+  { name: "Kerala (State)", coordinates: [10.8505, 76.2711], commodities: ["pineapple","cancer_fruit"] }, // pineapple primary; cancer fruit listed [1][3]
+
+  // Punjab/Haryana/UP (Kinnow belt)
+  { name: "Punjab (State)", coordinates: [31.1471, 75.3412], commodities: ["kinnow"] }, // kinnow source [1][3]
+  { name: "Haryana (State)", coordinates: [29.0588, 76.0856], commodities: ["kinnow"] }, // kinnow source [1][3]
+  { name: "Lucknow (UP)", coordinates: [26.8467, 80.9462], commodities: ["kinnow"] }, // listed in kinnow sources; also a mango sink [1][3]
+
+  // North India and imports for apples, pears, kiwis, cherries, plums
+  { name: "Shimla (HP)", coordinates: [31.1048, 77.1734], commodities: ["apple"] }, // major apple source [1][3]
+  { name: "Kashmir (J&K)", coordinates: [34.0837, 74.7973], commodities: ["apple"] }, // major apple source [1][3]
+  { name: "Delhi (NCR)", coordinates: [28.6139, 77.2090], commodities: ["apple","plum","pear"] }, // consolidation node for apples/stone fruits [1][3]
+
+  // International sources (imports)
+  { name: "Chile (Imports)", coordinates: [-33.4489, -70.6693], commodities: ["apple","orange"] }, // listed as import sources [1][3]
+  { name: "Washington (USA)", coordinates: [47.7511, -120.7401], commodities: ["apple"] }, // import [1][3]
+  { name: "New Zealand", coordinates: [-41.2866, 174.7756], commodities: ["apple","kiwi","dragon_fruit"] }, // apple & kiwi imports; dragon listed [1][3]
+  { name: "Australia", coordinates: [-25.2744, 133.7751], commodities: ["grapes_white"] }, // import [1][3]
+  { name: "China", coordinates: [35.8617, 104.1954], commodities: ["grapes_white","plum","pear"] }, // imports [1][3]
+  { name: "South Africa", coordinates: [-30.5595, 22.9375], commodities: ["plum","pear"] }, // imports [1][3]
+  { name: "Iran", coordinates: [32.4279, 53.6880], commodities: ["kiwi","dates","dragon_fruit"] }, // imports [1][3]
+  { name: "Saudi Arabia", coordinates: [23.8859, 45.0792], commodities: ["dates"] }, // import [1][3]
+  { name: "Italy", coordinates: [41.8719, 12.5674], commodities: ["kiwi","dragon_fruit"] }, // imports [1][3]
+  { name: "France", coordinates: [46.2276, 2.2137], commodities: ["kiwi","dragon_fruit"] }, // imports [1][3]
+  { name: "Spain", coordinates: [40.4637, -3.7492], commodities: ["plum"] }, // imports [1][3]
+  { name: "USA (General)", coordinates: [37.0902, -95.7129], commodities: ["plum","pear"] }, // imports [1][3]
+  { name: "West Bengal", coordinates: [22.9868, 87.8550], commodities: ["lichi"] }, // domestic source [1][3]
+  { name: "Bihar", coordinates: [25.0961, 85.3131], commodities: ["lichi"] }, // domestic source [1][3]
+  { name: "Odisha (Bhubaneswar)", coordinates: [20.2961, 85.8245], commodities: ["strawberry"] }, // domestic source [1][3]
+  { name: "Tamil Nadu", coordinates: [11.1271, 78.6569], commodities: ["cancer_fruit"] }, // listed [1][3]
+  { name: "Myanmar", coordinates: [21.9162, 95.9560], commodities: ["cancer_fruit"] } // listed [1][3]
+];
 
     districts.forEach(district => {
         if (district.commodities.includes(commodity)) {
@@ -1959,8 +2022,8 @@ function addCommodityProductionMarkers(commodity) {
                 icon: L.divIcon({
                     className: 'source-marker-enhanced',
                     html: `<div class="source-icon">🌱</div>`,
-                    iconSize: [28, 28],
-                    iconAnchor: [14, 14]
+                    iconSize: [18, 18],
+                    iconAnchor: [7, 7]
                 })
             }).addTo(productionMarkersLayer);
 
@@ -2198,20 +2261,94 @@ function buildCompactMarkerTooltip(data, role = 'source') {
 
 function addProductionMarkers() {
   const districts = [
-    { name: "Nalgonda", coordinates: [17.0574, 79.2686], commodities: "Watermelon, Papaya, Custard Apple" },
-    { name: "Ranga Reddy", coordinates: [17.385, 78.4867], commodities: "Papaya, Custard Apple" },
-    { name: "Mahbubnagar", coordinates: [16.7496, 77.9981], commodities: "Watermelon, Muskmelon, Papaya, Custard Apple" },
-    { name: "Khammam", coordinates: [17.2473, 80.1514], commodities: "Guava" },
-    { name: "Warangal", coordinates: [17.9689, 79.5941], commodities: "Watermelon, Muskmelon" }
-  ];
-  
+
+  // Telangana primary sources (by commodity from inbound lists)
+  { name: "Mahabubnagar", coordinates: [16.7480, 78.0036], commodities: ["watermelon","muskmelon","papaya","custard_apple"] }, // inbound shares listed for all four [1][3]
+  { name: "Warangal", coordinates: [17.9689, 79.5941], commodities: ["watermelon","muskmelon"] }, // strong inbound for both melons [1][3]
+  { name: "Nalgonda", coordinates: [17.0575, 79.2684], commodities: ["watermelon","papaya","custard_apple"] }, // listed in inbound and custard apple cluster [1][3]
+  { name: "Ranga Reddy", coordinates: [17.3890, 78.0796], commodities: ["papaya","custard_apple"] }, // inbound papaya and custard apple cluster [1][3]
+  { name: "Medak", coordinates: [18.0460, 78.2699], commodities: ["papaya","pomegranate"] }, // inbound papaya; pomegranate source [1][3]
+  { name: "Nizamabad", coordinates: [18.6725, 78.0941], commodities: ["papaya","watermelon"] }, // inbound papaya; outbound sinks list includes Nizamabad for apples; keep to papaya/watermelon for sources [1][3]
+  { name: "Nagar Kurnool", coordinates: [16.4827, 78.3247], commodities: ["papaya"] }, // inbound papaya list [1][3]
+  { name: "Gadwal", coordinates: [16.2335, 77.7950], commodities: ["papaya"] }, // inbound papaya list [1][3]
+  { name: "Ibrahimpatnam (Ranga Reddy)", coordinates: [17.2574, 78.7047], commodities: ["guava"] }, // guava inbound sub-district [1][3]
+  { name: "Turkapalli (Medchal–Malkajgiri)", coordinates: [17.6089, 78.6370], commodities: ["guava"] }, // guava inbound sub-district [1][3]
+  { name: "Khammam", coordinates: [17.2473, 80.1514], commodities: ["guava","watermelon"] }, // guava inbound; also listed as watermelon sink but include for local flow context [1][3]
+  { name: "Vikarabad", coordinates: [17.3383, 77.9048], commodities: ["custard_apple"] }, // custard apple cluster [1][3]
+
+  // Maharashtra
+  { name: "Maharashtra (State)", coordinates: [19.7515, 75.7139], commodities: ["watermelon","muskmelon","sapota","guava","banana","grapes_black","grapes_white","orange","pomegranate","jamun"] }, // statewide sources shown [1][3]
+  { name: "Nagpur (MH)", coordinates: [21.1458, 79.0882], commodities: ["orange"] }, // key orange source [1][3]
+  { name: "Hingoli (MH)", coordinates: [19.7179, 77.1494], commodities: ["orange"] }, // orange source [1][3]
+  { name: "Nashik (MH)", coordinates: [19.9975, 73.7898], commodities: ["orange","grapes_white","grapes_black"] }, // oranges; grapes state-level, include Nashik as major [1][3]
+  { name: "Aurangabad (MH)", coordinates: [19.8762, 75.3433], commodities: ["orange"] }, // orange source [1][3]
+  { name: "Pune (MH)", coordinates: [18.5204, 73.8567], commodities: ["orange","grapes_black","grapes_white"] }, // orange and grapes corridor [1][3]
+  { name: "Solapur (MH)", coordinates: [17.6599, 75.9064], commodities: ["pomegranate","grapes_black"] }, // strong sources [1][3]
+  { name: "Pandharpur (MH)", coordinates: [17.6805, 75.3305], commodities: ["pomegranate","grapes_black"] }, // listed for both [1][3]
+  { name: "Sangli (MH)", coordinates: [16.8524, 74.5815], commodities: ["pomegranate"] }, // pomegranate source [1][3]
+  { name: "Tuljapur (MH)", coordinates: [18.0061, 76.0695], commodities: ["grapes_black"] }, // grapes black source [1][3]
+  { name: "Osmanabad (MH)", coordinates: [18.1719, 76.0411], commodities: ["grapes_black"] }, // grapes black source [1][3]
+  { name: "Nanded (MH)", coordinates: [19.1383, 77.3210], commodities: ["banana"] }, // banana source [1][3]
+  { name: "Mahabaleshwar (MH)", coordinates: [17.9307, 73.6477], commodities: ["strawberry"] }, // strawberry source [1][3]
+
+  // Karnataka
+  { name: "Karnataka (State)", coordinates: [15.3173, 75.7139], commodities: ["watermelon","muskmelon","pomegranate","grapes_black","grapes_white","fig","ber","cancer_fruit","jack_fruit"] }, // statewide inbound [1][3]
+  { name: "Bangalore (KA)", coordinates: [12.9716, 77.5946], commodities: ["grapes_black","orange"] }, // grapes black source; orange outbound sink also present [1][3]
+  { name: "Raichur (KA)", coordinates: [16.2066, 77.3463], commodities: ["watermelon"] }, // inbound share [1][3]
+  { name: "Gulbarga (Kalaburagi, KA)", coordinates: [17.3297, 76.8343], commodities: ["watermelon"] }, // inbound share [1][3]
+
+  // Andhra Pradesh
+  { name: "Andhra Pradesh (State)", coordinates: [15.9129, 79.7400], commodities: ["mango","mosambi","watermelon","muskmelon","banana","sapota","guava"] }, // inbound shares [1][3]
+  { name: "Anantapur (AP)", coordinates: [14.6819, 77.6006], commodities: ["watermelon","muskmelon","sapota"] }, // listed for all three [1][3]
+  { name: "Ulavapadu (AP)", coordinates: [15.1624, 80.0770], commodities: ["sapota"] }, // sapota major [1][3]
+  { name: "Nuzvid (AP)", coordinates: [16.7885, 80.8450], commodities: ["guava"] }, // guava source [1][3]
+  { name: "West Godavari (AP)", coordinates: [16.7107, 81.0952], commodities: ["guava","banana"] }, // guava/banana corridor [1][3]
+  { name: "Rajahmundry (AP)", coordinates: [17.0005, 81.8040], commodities: ["banana"] }, // banana cluster [1][3]
+  { name: "Eluru (AP)", coordinates: [16.7107, 81.0952], commodities: ["banana"] }, // banana cluster [1][3]
+  { name: "Kakinada (AP)", coordinates: [16.9891, 82.2475], commodities: ["banana"] }, // banana cluster [1][3]
+  { name: "Tanuku (AP)", coordinates: [16.7533, 81.6815], commodities: ["banana"] }, // banana cluster [1][3]
+  { name: "Madanapalle (AP)", coordinates: [13.5503, 78.5029], commodities: ["jamun"] }, // jamun source [1][3]
+  { name: "Visakhapatnam (AP)", coordinates: [17.6868, 83.2185], commodities: ["jack_fruit"] }, // jack fruit source [1][3]
+
+  // Kerala
+  { name: "Kerala (State)", coordinates: [10.8505, 76.2711], commodities: ["pineapple","cancer_fruit"] }, // pineapple primary; cancer fruit listed [1][3]
+
+  // Punjab/Haryana/UP (Kinnow belt)
+  { name: "Punjab (State)", coordinates: [31.1471, 75.3412], commodities: ["kinnow"] }, // kinnow source [1][3]
+  { name: "Haryana (State)", coordinates: [29.0588, 76.0856], commodities: ["kinnow"] }, // kinnow source [1][3]
+  { name: "Lucknow (UP)", coordinates: [26.8467, 80.9462], commodities: ["kinnow"] }, // listed in kinnow sources; also a mango sink [1][3]
+
+  // North India and imports for apples, pears, kiwis, cherries, plums
+  { name: "Shimla (HP)", coordinates: [31.1048, 77.1734], commodities: ["apple"] }, // major apple source [1][3]
+  { name: "Kashmir (J&K)", coordinates: [34.0837, 74.7973], commodities: ["apple"] }, // major apple source [1][3]
+  { name: "Delhi (NCR)", coordinates: [28.6139, 77.2090], commodities: ["apple","plum","pear"] }, // consolidation node for apples/stone fruits [1][3]
+
+  // International sources (imports)
+  { name: "Chile (Imports)", coordinates: [-33.4489, -70.6693], commodities: ["apple","orange"] }, // listed as import sources [1][3]
+  { name: "Washington (USA)", coordinates: [47.7511, -120.7401], commodities: ["apple"] }, // import [1][3]
+  { name: "New Zealand", coordinates: [-41.2866, 174.7756], commodities: ["apple","kiwi","dragon_fruit"] }, // apple & kiwi imports; dragon listed [1][3]
+  { name: "Australia", coordinates: [-25.2744, 133.7751], commodities: ["grapes_white"] }, // import [1][3]
+  { name: "China", coordinates: [35.8617, 104.1954], commodities: ["grapes_white","plum","pear"] }, // imports [1][3]
+  { name: "South Africa", coordinates: [-30.5595, 22.9375], commodities: ["plum","pear"] }, // imports [1][3]
+  { name: "Iran", coordinates: [32.4279, 53.6880], commodities: ["kiwi","dates","dragon_fruit"] }, // imports [1][3]
+  { name: "Saudi Arabia", coordinates: [23.8859, 45.0792], commodities: ["dates"] }, // import [1][3]
+  { name: "Italy", coordinates: [41.8719, 12.5674], commodities: ["kiwi","dragon_fruit"] }, // imports [1][3]
+  { name: "France", coordinates: [46.2276, 2.2137], commodities: ["kiwi","dragon_fruit"] }, // imports [1][3]
+  { name: "Spain", coordinates: [40.4637, -3.7492], commodities: ["plum"] }, // imports [1][3]
+  { name: "USA (General)", coordinates: [37.0902, -95.7129], commodities: ["plum","pear"] }, // imports [1][3]
+  { name: "West Bengal", coordinates: [22.9868, 87.8550], commodities: ["lichi"] }, // domestic source [1][3]
+  { name: "Bihar", coordinates: [25.0961, 85.3131], commodities: ["lichi"] }, // domestic source [1][3]
+  { name: "Odisha (Bhubaneswar)", coordinates: [20.2961, 85.8245], commodities: ["strawberry"] }, // domestic source [1][3]
+  { name: "Tamil Nadu", coordinates: [11.1271, 78.6569], commodities: ["cancer_fruit"] }, // listed [1][3]
+  { name: "Myanmar", coordinates: [21.9162, 95.9560], commodities: ["cancer_fruit"] } // listed [1][3]
+];
   districts.forEach(district => {
     const marker = L.marker(district.coordinates, {
         icon: L.divIcon({
             className: 'source-marker-enhanced',
             html: '<div class="source-icon">🌱</div>',
-            iconSize: [28, 28],
-            iconAnchor: [14, 14]
+            iconSize: [18, 18],
+            iconAnchor: [9, 9]
         })
     }).addTo(productionMarkersLayer);
 
@@ -2242,6 +2379,55 @@ function addProductionMarkers() {
         className: 'compact-popup'
     });
   });
+}
+// Build production markers strictly from inbound (sources), not from market coords
+function renderProductionMarkers() {
+  productionMarkersLayer.clearLayers();
+
+  const inbound = applicationData.inbound_dependencies || {};
+  Object.keys(inbound).forEach((commodity) => {
+    const sources = inbound[commodity];
+    if (!Array.isArray(sources)) return;
+
+    const seen = new Set();
+
+    sources.forEach((s) => {
+      const coords = s.coordinates;
+      const label = s.source || s.state || s.name || "Unknown";
+      // Skip if no coords or already placed
+      if (!coords || coords.length !== 2) return;
+      const key = `${label}|${coords.toFixed(4)},${coords[1].toFixed(4)}|${commodity}`;
+      if (seen.has(key)) return;
+      seen.add(key);
+
+      // Optional: skip broad aggregates if district-level entries exist
+      const isAggregate = /Local Production|Telangana \(?Local\)?/i.test(label);
+      if (isAggregate && sources.some(x => x.state === "Telangana" || (x.source && !/Local Production/i.test(x.source)))) {
+        return; // prefer district rows over aggregate
+      }
+
+      const icon = L.divIcon({
+        className: 'source-marker-enhanced',
+        html: `<span class="source-icon">📍</span>`,
+        iconSize: [24, 24],
+        iconAnchor: [12, 12]
+      });
+
+      const popupHtml = `
+        <div class="compact-popup-content">
+          <strong>${label}</strong><br/>
+          <span>${commodity.replace(/_/g,' ')}</span>
+          ${s.dependency != null ? `<br/><small>Share: ${s.dependency}%</small>` : ``}
+          ${s.volume != null ? `<br/><small>Volume: ${s.volume.toLocaleString()} MT</small>` : ``}
+        </div>
+      `;
+
+      L.marker(coords, { icon })
+        .bindPopup(popupHtml)
+        .addTo(productionMarkersLayer);
+    });
+  });
+
 }
 
 function renderFlows() {
