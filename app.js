@@ -3,7 +3,7 @@
 const applicationData = {
   market: {
     name: "Gaddiannaram/Batasingaram Fruit Market",
-    coordinates: [17.3850, 78.4867],
+    coordinates: [17.30477, 78.739388],
     area_acres: 31.05,
     mango_area_acres: 12.18,
     commission_agents: 341,
